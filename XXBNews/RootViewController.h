@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "REMenu.h"
 
-@interface ViewController : UIViewController
+@interface RootViewController : UIViewController
 
 
 @end

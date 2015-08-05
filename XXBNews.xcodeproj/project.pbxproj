@@ -20,7 +20,7 @@
 		CE8659851B71FE7000ADD92A /* REMenuContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86597E1B71FE7000ADD92A /* REMenuContainerView.m */; };
 		CE8659861B71FE7000ADD92A /* REMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659801B71FE7000ADD92A /* REMenuItem.m */; };
 		CE8659871B71FE7000ADD92A /* REMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659821B71FE7000ADD92A /* REMenuItemView.m */; };
-		CE8659AD1B72082900ADD92A /* ViewController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AB1B72082900ADD92A /* ViewController .m */; };
+		CE8659AD1B72082900ADD92A /* RootViewController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AB1B72082900ADD92A /* RootViewController .m */; };
 		CE8659B01B72091600ADD92A /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AF1B72091600ADD92A /* NavigationViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -58,8 +58,8 @@
 		CE8659801B71FE7000ADD92A /* REMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuItem.m; sourceTree = "<group>"; };
 		CE8659811B71FE7000ADD92A /* REMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenuItemView.h; sourceTree = "<group>"; };
 		CE8659821B71FE7000ADD92A /* REMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuItemView.m; sourceTree = "<group>"; };
-		CE8659AB1B72082900ADD92A /* ViewController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController .m"; sourceTree = "<group>"; };
-		CE8659AC1B72082900ADD92A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CE8659AB1B72082900ADD92A /* RootViewController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RootViewController .m"; sourceTree = "<group>"; };
+		CE8659AC1B72082900ADD92A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		CE8659AE1B72091600ADD92A /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		CE8659AF1B72091600ADD92A /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		CE8659B11B720BD100ADD92A /* XXBNews-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XXBNews-Prefix.pch"; sourceTree = "<group>"; };
@@ -109,8 +109,8 @@
 		CE8659271B71EE9300ADD92A /* XXBNews */ = {
 			isa = PBXGroup;
 			children = (
-				CE8659AB1B72082900ADD92A /* ViewController .m */,
-				CE8659AC1B72082900ADD92A /* ViewController.h */,
+				CE8659AB1B72082900ADD92A /* RootViewController .m */,
+				CE8659AC1B72082900ADD92A /* RootViewController.h */,
 				CE8659AE1B72091600ADD92A /* NavigationViewController.h */,
 				CE8659AF1B72091600ADD92A /* NavigationViewController.m */,
 				CE86592C1B71EE9300ADD92A /* AppDelegate.h */,
@@ -278,7 +278,7 @@
 				CE8659871B71FE7000ADD92A /* REMenuItemView.m in Sources */,
 				CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */,
 				CE8659851B71FE7000ADD92A /* REMenuContainerView.m in Sources */,
-				CE8659AD1B72082900ADD92A /* ViewController .m in Sources */,
+				CE8659AD1B72082900ADD92A /* RootViewController .m in Sources */,
 				CE8659841B71FE7000ADD92A /* REMenu.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
 				CE8659861B71FE7000ADD92A /* REMenuItem.m in Sources */,

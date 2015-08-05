@@ -6,13 +6,14 @@
 //  Copyright (c) 2015年 xuxubin. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "RootViewController.h"
 
 
-@interface ViewController ()
+@interface RootViewController ()
 
 @property (nonatomic, strong) REMenu *menu;
 @property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) UIActivityIndicatorView *indicator;
 
 @end
 
@@ -22,24 +23,23 @@
 #define tencenNewUrl @"http://info.3g.qq.com"
 #define wangyiNewUrl @"http://3g.163.com"
 
-@implementation ViewController
+@implementation RootViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:@"More" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(selectMoreView) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationController.title = @"新闻";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self action:@selector(selectMoreView)];
+    self.title = @"新闻";
     
     // 设置menuview
     [self setupMenuView];
     
     // 添加webview
     [self setupWebview];
+    
+    [self setupActivityIndicator];
     
     // 加载网页
     [self loadWebViewUrl:baiduNewUrl];
@@ -112,6 +112,32 @@
     self.webView.delegate = self;
 }
 
+- (void)setupActivityIndicator
+{
+    //初始化:
+    UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+    
+    //设置显示样式,见UIActivityIndicatorViewStyle的定义
+    indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    //设置显示位置
+    [indicator setCenter:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2)];
+    
+    //设置背景色
+    indicator.backgroundColor = [UIColor grayColor];
+    
+    //设置背景透明
+    indicator.alpha = 0.5;
+    
+    //设置背景为圆角矩形
+    indicator.layer.cornerRadius = 6;
+    indicator.layer.masksToBounds = YES;
+    
+    [self.view addSubview:indicator];
+    self.indicator = indicator;
+    self.indicator.hidden = YES;
+}
+
 - (void)loadWebViewUrl:(NSString *)strUrl
 {
     NSURL *url = [NSURL URLWithString:strUrl];
@@ -133,5 +159,20 @@
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     NSLog(@"KLNewsViewController dealloc");
 }
+
+#pragma mark UIWebViewDelegate
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self.indicator startAnimating];
+    self.indicator.hidden = NO;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
+{
+    [self.indicator stopAnimating];
+    self.indicator.hidden = YES;
+    
+}
+
 
 @end
