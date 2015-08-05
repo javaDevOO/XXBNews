@@ -24,7 +24,6 @@
 //
 
 #import "RECommonFunctions.h"
-#import <UIKit/UIKit.h>
 
 BOOL REUIKitIsFlatMode()
 {
