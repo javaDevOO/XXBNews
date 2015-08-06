@@ -20,8 +20,14 @@
 		CE8659851B71FE7000ADD92A /* REMenuContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86597E1B71FE7000ADD92A /* REMenuContainerView.m */; };
 		CE8659861B71FE7000ADD92A /* REMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659801B71FE7000ADD92A /* REMenuItem.m */; };
 		CE8659871B71FE7000ADD92A /* REMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659821B71FE7000ADD92A /* REMenuItemView.m */; };
-		CE8659AD1B72082900ADD92A /* RootViewController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AB1B72082900ADD92A /* RootViewController .m */; };
+		CE8659AD1B72082900ADD92A /* NewsPageViewController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AB1B72082900ADD92A /* NewsPageViewController .m */; };
 		CE8659B01B72091600ADD92A /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AF1B72091600ADD92A /* NavigationViewController.m */; };
+		CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */; };
+		CE8659BC1B72387200ADD92A /* FirstPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659BB1B72387200ADD92A /* FirstPageViewController.m */; };
+		CE8659BF1B7238AE00ADD92A /* MoreInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659BE1B7238AE00ADD92A /* MoreInfoViewController.m */; };
+		CE8659C21B723C1400ADD92A /* XXBMainTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659C11B723C1400ADD92A /* XXBMainTabBarView.m */; };
+		CE8659C51B723C7300ADD92A /* XXBMainTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659C41B723C7300ADD92A /* XXBMainTabBarButton.m */; };
+		CE8659C81B72423E00ADD92A /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659C71B72423E00ADD92A /* UIDevice+Resolutions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,11 +64,23 @@
 		CE8659801B71FE7000ADD92A /* REMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuItem.m; sourceTree = "<group>"; };
 		CE8659811B71FE7000ADD92A /* REMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenuItemView.h; sourceTree = "<group>"; };
 		CE8659821B71FE7000ADD92A /* REMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuItemView.m; sourceTree = "<group>"; };
-		CE8659AB1B72082900ADD92A /* RootViewController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RootViewController .m"; sourceTree = "<group>"; };
-		CE8659AC1B72082900ADD92A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		CE8659AB1B72082900ADD92A /* NewsPageViewController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NewsPageViewController .m"; sourceTree = "<group>"; };
+		CE8659AC1B72082900ADD92A /* NewsPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPageViewController.h; sourceTree = "<group>"; };
 		CE8659AE1B72091600ADD92A /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		CE8659AF1B72091600ADD92A /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		CE8659B11B720BD100ADD92A /* XXBNews-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XXBNews-Prefix.pch"; sourceTree = "<group>"; };
+		CE8659B71B72353300ADD92A /* XXBMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarController.h; sourceTree = "<group>"; };
+		CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarController.m; sourceTree = "<group>"; };
+		CE8659BA1B72387200ADD92A /* FirstPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageViewController.h; sourceTree = "<group>"; };
+		CE8659BB1B72387200ADD92A /* FirstPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageViewController.m; sourceTree = "<group>"; };
+		CE8659BD1B7238AD00ADD92A /* MoreInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreInfoViewController.h; sourceTree = "<group>"; };
+		CE8659BE1B7238AE00ADD92A /* MoreInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreInfoViewController.m; sourceTree = "<group>"; };
+		CE8659C01B723C1400ADD92A /* XXBMainTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarView.h; sourceTree = "<group>"; };
+		CE8659C11B723C1400ADD92A /* XXBMainTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarView.m; sourceTree = "<group>"; };
+		CE8659C31B723C7300ADD92A /* XXBMainTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarButton.h; sourceTree = "<group>"; };
+		CE8659C41B723C7300ADD92A /* XXBMainTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarButton.m; sourceTree = "<group>"; };
+		CE8659C61B72423E00ADD92A /* UIDevice+Resolutions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Resolutions.h"; sourceTree = "<group>"; };
+		CE8659C71B72423E00ADD92A /* UIDevice+Resolutions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Resolutions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +104,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE7EF6AC1B72F7DE00FE7AA4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE8659C01B723C1400ADD92A /* XXBMainTabBarView.h */,
+				CE8659C11B723C1400ADD92A /* XXBMainTabBarView.m */,
+				CE8659C31B723C7300ADD92A /* XXBMainTabBarButton.h */,
+				CE8659C41B723C7300ADD92A /* XXBMainTabBarButton.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		CE86591C1B71EE9300ADD92A = {
 			isa = PBXGroup;
 			children = (
@@ -109,10 +138,19 @@
 		CE8659271B71EE9300ADD92A /* XXBNews */ = {
 			isa = PBXGroup;
 			children = (
-				CE8659AB1B72082900ADD92A /* RootViewController .m */,
-				CE8659AC1B72082900ADD92A /* RootViewController.h */,
+				CE7EF6AC1B72F7DE00FE7AA4 /* View */,
+				CE8659C61B72423E00ADD92A /* UIDevice+Resolutions.h */,
+				CE8659C71B72423E00ADD92A /* UIDevice+Resolutions.m */,
+				CE8659AB1B72082900ADD92A /* NewsPageViewController .m */,
+				CE8659AC1B72082900ADD92A /* NewsPageViewController.h */,
 				CE8659AE1B72091600ADD92A /* NavigationViewController.h */,
 				CE8659AF1B72091600ADD92A /* NavigationViewController.m */,
+				CE8659B71B72353300ADD92A /* XXBMainTabBarController.h */,
+				CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */,
+				CE8659BA1B72387200ADD92A /* FirstPageViewController.h */,
+				CE8659BB1B72387200ADD92A /* FirstPageViewController.m */,
+				CE8659BD1B7238AD00ADD92A /* MoreInfoViewController.h */,
+				CE8659BE1B7238AE00ADD92A /* MoreInfoViewController.m */,
 				CE86592C1B71EE9300ADD92A /* AppDelegate.h */,
 				CE86592D1B71EE9300ADD92A /* AppDelegate.m */,
 				CE8659371B71EE9300ADD92A /* LaunchScreen.xib */,
@@ -276,14 +314,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8659871B71FE7000ADD92A /* REMenuItemView.m in Sources */,
+				CE8659C21B723C1400ADD92A /* XXBMainTabBarView.m in Sources */,
 				CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */,
+				CE8659C81B72423E00ADD92A /* UIDevice+Resolutions.m in Sources */,
+				CE8659C51B723C7300ADD92A /* XXBMainTabBarButton.m in Sources */,
 				CE8659851B71FE7000ADD92A /* REMenuContainerView.m in Sources */,
-				CE8659AD1B72082900ADD92A /* RootViewController .m in Sources */,
+				CE8659AD1B72082900ADD92A /* NewsPageViewController .m in Sources */,
 				CE8659841B71FE7000ADD92A /* REMenu.m in Sources */,
+				CE8659BF1B7238AE00ADD92A /* MoreInfoViewController.m in Sources */,
+				CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
 				CE8659861B71FE7000ADD92A /* REMenuItem.m in Sources */,
 				CE8659831B71FE7000ADD92A /* RECommonFunctions.m in Sources */,
 				CE8659B01B72091600ADD92A /* NavigationViewController.m in Sources */,
+				CE8659BC1B72387200ADD92A /* FirstPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

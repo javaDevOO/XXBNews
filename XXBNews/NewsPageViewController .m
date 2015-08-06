@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 xuxubin. All rights reserved.
 //
 
-#import "RootViewController.h"
+#import "NewsPageViewController.h"
 
 
-@interface RootViewController ()
+@interface NewsPageViewController  ()
 
 @property (nonatomic, strong) REMenu *menu;
 @property (nonatomic, strong) UIWebView *webView;
@@ -23,7 +23,7 @@
 #define tencenNewUrl @"http://info.3g.qq.com"
 #define wangyiNewUrl @"http://3g.163.com"
 
-@implementation RootViewController
+@implementation NewsPageViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];

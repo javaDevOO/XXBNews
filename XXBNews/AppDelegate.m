@@ -7,16 +7,20 @@
 //
 
 #import "AppDelegate.h"
-#import "NavigationViewController.h"
-#import "RootViewController.h"
+#import "XXBMainTabBarController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[NavigationViewController alloc] initWithRootViewController:[[RootViewController alloc] init]];
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    XXBMainTabBarController *tab = [[XXBMainTabBarController alloc] init];
+    
+    
+    self.window.rootViewController = tab;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MoreInfoViewController.h
 //  XXBNews
 //
 //  Created by xuxubin on 15/8/5.
@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMenu.h"
 
-@interface RootViewController : UIViewController
-
+@interface MoreInfoViewController : UIViewController
 
 @end
-
