@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 xuxubin. All rights reserved.
 //
 
-#import "NewsPageViewController.h"
+#import "XXBNewsTabController.h"
 
 
-@interface NewsPageViewController  ()
+@interface XXBNewsTabController  ()
 
 @property (nonatomic, strong) REMenu *menu;
 @property (nonatomic, strong) UIWebView *webView;
@@ -23,7 +23,17 @@
 #define tencenNewUrl @"http://info.3g.qq.com"
 #define wangyiNewUrl @"http://3g.163.com"
 
-@implementation NewsPageViewController 
+@implementation XXBNewsTabController
+
+- (id) init
+{
+    self = [super init];
+    if(self)
+    {
+        [self initTabbarItemWithTitle:@"新闻" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +41,6 @@
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self action:@selector(selectMoreView)];
-    self.title = @"新闻";
     
     // 设置menuview
     [self setupMenuView];

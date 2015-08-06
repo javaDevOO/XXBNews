@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */; };
+		CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */; };
+		CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BE1B73476100FE7AA4 /* XXBToolsTabController.m */; };
+		CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */; };
+		CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C41B73476100FE7AA4 /* XXBMainTabBarButton.m */; };
+		CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C61B73476100FE7AA4 /* XXBMainTabBarView.m */; };
+		CE7EF6D01B73476100FE7AA4 /* XXBWeatherTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C91B73476100FE7AA4 /* XXBWeatherTabController.m */; };
+		CE7EF6D31B734ACC00FE7AA4 /* XXBBaseTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6D21B734ACC00FE7AA4 /* XXBBaseTabViewController.m */; };
 		CE86592B1B71EE9300ADD92A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86592A1B71EE9300ADD92A /* main.m */; };
 		CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86592D1B71EE9300ADD92A /* AppDelegate.m */; };
 		CE8659361B71EE9300ADD92A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8659351B71EE9300ADD92A /* Images.xcassets */; };
@@ -20,14 +28,8 @@
 		CE8659851B71FE7000ADD92A /* REMenuContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86597E1B71FE7000ADD92A /* REMenuContainerView.m */; };
 		CE8659861B71FE7000ADD92A /* REMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659801B71FE7000ADD92A /* REMenuItem.m */; };
 		CE8659871B71FE7000ADD92A /* REMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659821B71FE7000ADD92A /* REMenuItemView.m */; };
-		CE8659AD1B72082900ADD92A /* NewsPageViewController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AB1B72082900ADD92A /* NewsPageViewController .m */; };
-		CE8659B01B72091600ADD92A /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AF1B72091600ADD92A /* NavigationViewController.m */; };
+		CE8659B01B72091600ADD92A /* XXBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AF1B72091600ADD92A /* XXBNavigationViewController.m */; };
 		CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */; };
-		CE8659BC1B72387200ADD92A /* FirstPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659BB1B72387200ADD92A /* FirstPageViewController.m */; };
-		CE8659BF1B7238AE00ADD92A /* MoreInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659BE1B7238AE00ADD92A /* MoreInfoViewController.m */; };
-		CE8659C21B723C1400ADD92A /* XXBMainTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659C11B723C1400ADD92A /* XXBMainTabBarView.m */; };
-		CE8659C51B723C7300ADD92A /* XXBMainTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659C41B723C7300ADD92A /* XXBMainTabBarButton.m */; };
-		CE8659C81B72423E00ADD92A /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659C71B72423E00ADD92A /* UIDevice+Resolutions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE7EF6B71B73476100FE7AA4 /* XXBMoreInfoTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMoreInfoTabController.h; sourceTree = "<group>"; };
+		CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMoreInfoTabController.m; sourceTree = "<group>"; };
+		CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XXBNewsTabController .m"; sourceTree = "<group>"; };
+		CE7EF6BB1B73476100FE7AA4 /* XXBNewsTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBNewsTabController.h; sourceTree = "<group>"; };
+		CE7EF6BD1B73476100FE7AA4 /* XXBToolsTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBToolsTabController.h; sourceTree = "<group>"; };
+		CE7EF6BE1B73476100FE7AA4 /* XXBToolsTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBToolsTabController.m; sourceTree = "<group>"; };
+		CE7EF6C01B73476100FE7AA4 /* UIDevice+Resolutions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Resolutions.h"; sourceTree = "<group>"; };
+		CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Resolutions.m"; sourceTree = "<group>"; };
+		CE7EF6C31B73476100FE7AA4 /* XXBMainTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarButton.h; sourceTree = "<group>"; };
+		CE7EF6C41B73476100FE7AA4 /* XXBMainTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarButton.m; sourceTree = "<group>"; };
+		CE7EF6C51B73476100FE7AA4 /* XXBMainTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarView.h; sourceTree = "<group>"; };
+		CE7EF6C61B73476100FE7AA4 /* XXBMainTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarView.m; sourceTree = "<group>"; };
+		CE7EF6C81B73476100FE7AA4 /* XXBWeatherTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherTabController.h; sourceTree = "<group>"; };
+		CE7EF6C91B73476100FE7AA4 /* XXBWeatherTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherTabController.m; sourceTree = "<group>"; };
+		CE7EF6D11B734ACC00FE7AA4 /* XXBBaseTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBBaseTabViewController.h; sourceTree = "<group>"; };
+		CE7EF6D21B734ACC00FE7AA4 /* XXBBaseTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBBaseTabViewController.m; sourceTree = "<group>"; };
 		CE8659251B71EE9300ADD92A /* XXBNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XXBNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8659291B71EE9300ADD92A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE86592A1B71EE9300ADD92A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -64,23 +82,11 @@
 		CE8659801B71FE7000ADD92A /* REMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuItem.m; sourceTree = "<group>"; };
 		CE8659811B71FE7000ADD92A /* REMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenuItemView.h; sourceTree = "<group>"; };
 		CE8659821B71FE7000ADD92A /* REMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuItemView.m; sourceTree = "<group>"; };
-		CE8659AB1B72082900ADD92A /* NewsPageViewController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NewsPageViewController .m"; sourceTree = "<group>"; };
-		CE8659AC1B72082900ADD92A /* NewsPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPageViewController.h; sourceTree = "<group>"; };
-		CE8659AE1B72091600ADD92A /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
-		CE8659AF1B72091600ADD92A /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		CE8659AE1B72091600ADD92A /* XXBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBNavigationViewController.h; sourceTree = "<group>"; };
+		CE8659AF1B72091600ADD92A /* XXBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBNavigationViewController.m; sourceTree = "<group>"; };
 		CE8659B11B720BD100ADD92A /* XXBNews-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XXBNews-Prefix.pch"; sourceTree = "<group>"; };
 		CE8659B71B72353300ADD92A /* XXBMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarController.h; sourceTree = "<group>"; };
 		CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarController.m; sourceTree = "<group>"; };
-		CE8659BA1B72387200ADD92A /* FirstPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageViewController.h; sourceTree = "<group>"; };
-		CE8659BB1B72387200ADD92A /* FirstPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageViewController.m; sourceTree = "<group>"; };
-		CE8659BD1B7238AD00ADD92A /* MoreInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreInfoViewController.h; sourceTree = "<group>"; };
-		CE8659BE1B7238AE00ADD92A /* MoreInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreInfoViewController.m; sourceTree = "<group>"; };
-		CE8659C01B723C1400ADD92A /* XXBMainTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarView.h; sourceTree = "<group>"; };
-		CE8659C11B723C1400ADD92A /* XXBMainTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarView.m; sourceTree = "<group>"; };
-		CE8659C31B723C7300ADD92A /* XXBMainTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarButton.h; sourceTree = "<group>"; };
-		CE8659C41B723C7300ADD92A /* XXBMainTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarButton.m; sourceTree = "<group>"; };
-		CE8659C61B72423E00ADD92A /* UIDevice+Resolutions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Resolutions.h"; sourceTree = "<group>"; };
-		CE8659C71B72423E00ADD92A /* UIDevice+Resolutions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Resolutions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,15 +110,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE7EF6AC1B72F7DE00FE7AA4 /* View */ = {
+		CE7EF6B61B73476100FE7AA4 /* MoreInfoTab */ = {
 			isa = PBXGroup;
 			children = (
-				CE8659C01B723C1400ADD92A /* XXBMainTabBarView.h */,
-				CE8659C11B723C1400ADD92A /* XXBMainTabBarView.m */,
-				CE8659C31B723C7300ADD92A /* XXBMainTabBarButton.h */,
-				CE8659C41B723C7300ADD92A /* XXBMainTabBarButton.m */,
+				CE7EF6B71B73476100FE7AA4 /* XXBMoreInfoTabController.h */,
+				CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */,
 			);
-			name = View;
+			path = MoreInfoTab;
+			sourceTree = "<group>";
+		};
+		CE7EF6B91B73476100FE7AA4 /* NewsTab */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */,
+				CE7EF6BB1B73476100FE7AA4 /* XXBNewsTabController.h */,
+			);
+			path = NewsTab;
+			sourceTree = "<group>";
+		};
+		CE7EF6BC1B73476100FE7AA4 /* ToolsTab */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EF6BD1B73476100FE7AA4 /* XXBToolsTabController.h */,
+				CE7EF6BE1B73476100FE7AA4 /* XXBToolsTabController.m */,
+			);
+			path = ToolsTab;
+			sourceTree = "<group>";
+		};
+		CE7EF6BF1B73476100FE7AA4 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EF6C01B73476100FE7AA4 /* UIDevice+Resolutions.h */,
+				CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		CE7EF6C21B73476100FE7AA4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EF6C31B73476100FE7AA4 /* XXBMainTabBarButton.h */,
+				CE7EF6C41B73476100FE7AA4 /* XXBMainTabBarButton.m */,
+				CE7EF6C51B73476100FE7AA4 /* XXBMainTabBarView.h */,
+				CE7EF6C61B73476100FE7AA4 /* XXBMainTabBarView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE7EF6C71B73476100FE7AA4 /* WeatherTab */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EF6C81B73476100FE7AA4 /* XXBWeatherTabController.h */,
+				CE7EF6C91B73476100FE7AA4 /* XXBWeatherTabController.m */,
+			);
+			path = WeatherTab;
 			sourceTree = "<group>";
 		};
 		CE86591C1B71EE9300ADD92A = {
@@ -138,19 +189,18 @@
 		CE8659271B71EE9300ADD92A /* XXBNews */ = {
 			isa = PBXGroup;
 			children = (
-				CE7EF6AC1B72F7DE00FE7AA4 /* View */,
-				CE8659C61B72423E00ADD92A /* UIDevice+Resolutions.h */,
-				CE8659C71B72423E00ADD92A /* UIDevice+Resolutions.m */,
-				CE8659AB1B72082900ADD92A /* NewsPageViewController .m */,
-				CE8659AC1B72082900ADD92A /* NewsPageViewController.h */,
-				CE8659AE1B72091600ADD92A /* NavigationViewController.h */,
-				CE8659AF1B72091600ADD92A /* NavigationViewController.m */,
+				CE7EF6C71B73476100FE7AA4 /* WeatherTab */,
+				CE7EF6B91B73476100FE7AA4 /* NewsTab */,
+				CE7EF6BC1B73476100FE7AA4 /* ToolsTab */,
+				CE7EF6B61B73476100FE7AA4 /* MoreInfoTab */,
+				CE7EF6BF1B73476100FE7AA4 /* Utilities */,
+				CE7EF6C21B73476100FE7AA4 /* View */,
+				CE7EF6D11B734ACC00FE7AA4 /* XXBBaseTabViewController.h */,
+				CE7EF6D21B734ACC00FE7AA4 /* XXBBaseTabViewController.m */,
+				CE8659AE1B72091600ADD92A /* XXBNavigationViewController.h */,
+				CE8659AF1B72091600ADD92A /* XXBNavigationViewController.m */,
 				CE8659B71B72353300ADD92A /* XXBMainTabBarController.h */,
 				CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */,
-				CE8659BA1B72387200ADD92A /* FirstPageViewController.h */,
-				CE8659BB1B72387200ADD92A /* FirstPageViewController.m */,
-				CE8659BD1B7238AD00ADD92A /* MoreInfoViewController.h */,
-				CE8659BE1B7238AE00ADD92A /* MoreInfoViewController.m */,
 				CE86592C1B71EE9300ADD92A /* AppDelegate.h */,
 				CE86592D1B71EE9300ADD92A /* AppDelegate.m */,
 				CE8659371B71EE9300ADD92A /* LaunchScreen.xib */,
@@ -313,21 +363,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */,
+				CE7EF6D01B73476100FE7AA4 /* XXBWeatherTabController.m in Sources */,
+				CE7EF6D31B734ACC00FE7AA4 /* XXBBaseTabViewController.m in Sources */,
 				CE8659871B71FE7000ADD92A /* REMenuItemView.m in Sources */,
-				CE8659C21B723C1400ADD92A /* XXBMainTabBarView.m in Sources */,
 				CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */,
-				CE8659C81B72423E00ADD92A /* UIDevice+Resolutions.m in Sources */,
-				CE8659C51B723C7300ADD92A /* XXBMainTabBarButton.m in Sources */,
+				CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */,
 				CE8659851B71FE7000ADD92A /* REMenuContainerView.m in Sources */,
-				CE8659AD1B72082900ADD92A /* NewsPageViewController .m in Sources */,
 				CE8659841B71FE7000ADD92A /* REMenu.m in Sources */,
-				CE8659BF1B7238AE00ADD92A /* MoreInfoViewController.m in Sources */,
+				CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */,
 				CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
+				CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */,
 				CE8659861B71FE7000ADD92A /* REMenuItem.m in Sources */,
+				CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */,
+				CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */,
 				CE8659831B71FE7000ADD92A /* RECommonFunctions.m in Sources */,
-				CE8659B01B72091600ADD92A /* NavigationViewController.m in Sources */,
-				CE8659BC1B72387200ADD92A /* FirstPageViewController.m in Sources */,
+				CE8659B01B72091600ADD92A /* XXBNavigationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

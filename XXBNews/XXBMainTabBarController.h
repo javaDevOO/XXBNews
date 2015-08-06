@@ -10,4 +10,6 @@
 
 @interface XXBMainTabBarController : UITabBarController<UITabBarDelegate>
 
+- (void)goToIndex:(NSInteger)to;
+
 @end

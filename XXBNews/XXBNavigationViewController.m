@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 xuxubin. All rights reserved.
 //
 
-#import "NavigationViewController.h"
+#import "XXBNavigationViewController.h"
 
-@implementation NavigationViewController
+@implementation XXBNavigationViewController
 
 @end

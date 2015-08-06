@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  NavigationViewController.h
 //  XXBNews
 //
 //  Created by xuxubin on 15/8/5.
@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REMenu.h"
 
-@interface NewsPageViewController  : UIViewController
-
+@interface XXBNavigationViewController : UINavigationController
 
 @end
-

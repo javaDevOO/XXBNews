@@ -7,15 +7,16 @@
 //
 
 #import "XXBMainTabBarController.h"
-#import "NavigationViewController.h"
-#import "NewsPageViewController.h"
-#import "XXBMainTabBarController.h"
-#import "FirstPageViewController.h"
-#import "MoreInfoViewController.h"
+#import "XXBNavigationViewController.h"
+
+#import "XXBWeatherTabController.h"
+#import "XXBNewsTabController.h"
+#import "XXBToolsTabController.h"
+#import "XXBMoreInfoTabController.h"
 
 @interface XXBMainTabBarController ()
 
-@property (nonatomic, weak) MoreInfoViewController *more;
+@property (nonatomic, weak) XXBMoreInfoTabController *more;
 @property (nonatomic) NSInteger lastIndex;
 
 @end
@@ -48,6 +49,9 @@
     // 设置每个tab对应的view
     [self initChildViewContent];
     
+    // 增加手势滑动
+    [self initGesture];
+    //self.selectedIndex = 1;
     
 }
 
@@ -66,57 +70,58 @@
 - (void)initChildViewContent
 {
     //创建和添加子控制器
-    FirstPageViewController *firstPage = [[FirstPageViewController alloc] init];
+    XXBWeatherTabController *weatherTab = [[XXBWeatherTabController alloc] init];
+    XXBNewsTabController *newsTab = [[XXBNewsTabController alloc] init];
+    XXBToolsTabController *toolsTab = [[XXBToolsTabController alloc] init];
+    XXBMoreInfoTabController *moreInfoTab = [[XXBMoreInfoTabController alloc] init];
+    self.more = moreInfoTab;
     
-    NewsPageViewController  *newsPage = [[NewsPageViewController alloc] init];
     
-    MoreInfoViewController *morePage = [[MoreInfoViewController alloc] init];
-    self.more = morePage;
-    
-    NSArray *viewControllerAry = @[firstPage,newsPage,morePage];
-    NSArray *titleAry = @[@"首页",@"新闻",@"更多"];
-    NSArray *normalImgAry = @[@"tabbar_home_normal",@"tabbar_home_normal",@"tabbar_more"];
-    NSArray *selectedImgAry = @[@"tabbar_home_selected",@"tabbar_home_selected",@"tabbar_more_selected"];
+    //各个子ViewController的tabbarItem的title等参数在各自的类中定义，减少耦合
+    NSArray *viewControllerAry = @[weatherTab, newsTab, toolsTab, moreInfoTab];
     
     //TODO: 增加图片资源
     for (int i=0; i< viewControllerAry.count; i++) {
-        [self addChildViewController:viewControllerAry[i] title:titleAry[i] normalImgName:normalImgAry[i]
-                     selectedImgName:selectedImgAry[i]];
+        [self addChildViewControllerWithNav:viewControllerAry[i]];
     }
 }
 
-- (void)addChildViewController:(UIViewController *)childVc title:(NSString *)title normalImgName:(NSString *)normalImgName selectedImgName:(NSString *)selectedImgName
-{
-    childVc.title = title;
-    childVc.tabBarItem.title = title;
-    childVc.tabBarItem.image = [UIImage imageNamed:normalImgName];
-    childVc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImgName];
-    
+- (void)addChildViewControllerWithNav:(UIViewController *)childVc{
     // 添加到导航控制器
-    NavigationViewController *childVcNav = [[NavigationViewController alloc]initWithRootViewController:childVc];
+    XXBNavigationViewController *childVcNav = [[XXBNavigationViewController alloc]initWithRootViewController:childVc];
     [self addChildViewController:childVcNav];
 }
 
+- (void)initGesture
+{
+    
+}
+
+// tarbar的代理
 - (void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     NSInteger selectedIndex = [tabBar.items indexOfObject:item];
-    NSLog([NSString stringWithFormat:@"select %d",selectedIndex]);
+    NSLog([NSString stringWithFormat:@"select %d",(int)selectedIndex]);
     if(self.lastIndex != selectedIndex)
     {
         NSLog(@"different index is select");
         self.lastIndex = selectedIndex;
+        if(selectedIndex == 3)
+            self.more.tabBarItem.badgeValue = nil;
+        else
+            self.more.tabBarItem.badgeValue = @"5";
     }
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)goToIndex:(NSInteger)to
+{
+    if(self.lastIndex != to)
+    {
+        NSLog([NSString stringWithFormat:@"go to index %d",(int)to]);
+        self.selectedIndex = to;
+        self.lastIndex = to;
+    }
 }
-*/
+
 
 @end

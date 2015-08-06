@@ -1,18 +1,28 @@
 //
-//  MoreInfoViewController.m
+//  XXBToolsTabViewController.m
 //  XXBNews
 //
-//  Created by xuxubin on 15/8/5.
+//  Created by xuxubin on 15/8/6.
 //  Copyright (c) 2015年 xuxubin. All rights reserved.
 //
 
-#import "MoreInfoViewController.h"
+#import "XXBToolsTabController.h"
 
-@interface MoreInfoViewController ()
+@interface XXBToolsTabController ()
 
 @end
 
-@implementation MoreInfoViewController
+@implementation XXBToolsTabController
+
+- (id) init
+{
+    self = [super init];
+    if(self)
+    {
+        [self initTabbarItemWithTitle:@"工具" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -17,12 +17,18 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     XXBMainTabBarController *tab = [[XXBMainTabBarController alloc] init];
-    
+    tab.delegate = self;
     
     self.window.rootViewController = tab;
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    //NSInteger selectedIndex = [tabBarController.viewControllers indexOfObject:viewController];
+    NSLog(@"delegate:view controller change");
 }
 
 @end

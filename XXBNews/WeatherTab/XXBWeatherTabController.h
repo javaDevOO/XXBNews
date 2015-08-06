@@ -1,5 +1,5 @@
 //
-//  MoreInfoViewController.h
+//  FirstPageViewController.h
 //  XXBNews
 //
 //  Created by xuxubin on 15/8/5.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XXBBaseTabViewController.h"
 
-@interface MoreInfoViewController : UIViewController
+@interface XXBWeatherTabController : XXBBaseTabViewController
 
 @end

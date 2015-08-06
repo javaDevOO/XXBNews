@@ -1,23 +1,32 @@
 //
-//  FirstPageViewController.m
+//  MoreInfoViewController.m
 //  XXBNews
 //
 //  Created by xuxubin on 15/8/5.
 //  Copyright (c) 2015年 xuxubin. All rights reserved.
 //
 
-#import "FirstPageViewController.h"
+#import "XXBMoreInfoTabController.h"
 
-@interface FirstPageViewController ()
+@interface XXBMoreInfoTabController ()
 
 @end
 
-@implementation FirstPageViewController
+@implementation XXBMoreInfoTabController
 
-- (void)viewDidLoad {
+- (id) init
+{
+    self = [super init];
+    if(self)
+    {
+        [self initTabbarItemWithTitle:@"更多" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
+    }
+    return self;
+}
+
+- (void) viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor blueColor];
 }
 
 - (void)didReceiveMemoryWarning {
