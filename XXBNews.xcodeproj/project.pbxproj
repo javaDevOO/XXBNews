@@ -23,13 +23,9 @@
 		CE8659601B71FC4B00ADD92A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE86595F1B71FC4B00ADD92A /* UIKit.framework */; };
 		CE8659621B71FC5500ADD92A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8659611B71FC5500ADD92A /* Foundation.framework */; };
 		CE8659641B71FC6A00ADD92A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8659631B71FC6A00ADD92A /* CoreGraphics.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		CE8659831B71FE7000ADD92A /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86597A1B71FE7000ADD92A /* RECommonFunctions.m */; };
-		CE8659841B71FE7000ADD92A /* REMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86597C1B71FE7000ADD92A /* REMenu.m */; };
-		CE8659851B71FE7000ADD92A /* REMenuContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86597E1B71FE7000ADD92A /* REMenuContainerView.m */; };
-		CE8659861B71FE7000ADD92A /* REMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659801B71FE7000ADD92A /* REMenuItem.m */; };
-		CE8659871B71FE7000ADD92A /* REMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659821B71FE7000ADD92A /* REMenuItemView.m */; };
 		CE8659B01B72091600ADD92A /* XXBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AF1B72091600ADD92A /* XXBNavigationViewController.m */; };
 		CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */; };
+		DD24807B0281F81CC6B0E4BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA1149B7651DE07DE1AE6FD /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2BA1149B7651DE07DE1AE6FD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE6FF2201B7493B2006727CF /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		CE7EF6B71B73476100FE7AA4 /* XXBMoreInfoTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMoreInfoTabController.h; sourceTree = "<group>"; };
 		CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMoreInfoTabController.m; sourceTree = "<group>"; };
 		CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XXBNewsTabController .m"; sourceTree = "<group>"; };
@@ -72,21 +70,13 @@
 		CE86595F1B71FC4B00ADD92A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE8659611B71FC5500ADD92A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CE8659631B71FC6A00ADD92A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		CE8659791B71FE7000ADD92A /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
-		CE86597A1B71FE7000ADD92A /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
-		CE86597B1B71FE7000ADD92A /* REMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenu.h; sourceTree = "<group>"; };
-		CE86597C1B71FE7000ADD92A /* REMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenu.m; sourceTree = "<group>"; };
-		CE86597D1B71FE7000ADD92A /* REMenuContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenuContainerView.h; sourceTree = "<group>"; };
-		CE86597E1B71FE7000ADD92A /* REMenuContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuContainerView.m; sourceTree = "<group>"; };
-		CE86597F1B71FE7000ADD92A /* REMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenuItem.h; sourceTree = "<group>"; };
-		CE8659801B71FE7000ADD92A /* REMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuItem.m; sourceTree = "<group>"; };
-		CE8659811B71FE7000ADD92A /* REMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMenuItemView.h; sourceTree = "<group>"; };
-		CE8659821B71FE7000ADD92A /* REMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMenuItemView.m; sourceTree = "<group>"; };
 		CE8659AE1B72091600ADD92A /* XXBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBNavigationViewController.h; sourceTree = "<group>"; };
 		CE8659AF1B72091600ADD92A /* XXBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBNavigationViewController.m; sourceTree = "<group>"; };
 		CE8659B11B720BD100ADD92A /* XXBNews-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XXBNews-Prefix.pch"; sourceTree = "<group>"; };
 		CE8659B71B72353300ADD92A /* XXBMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarController.h; sourceTree = "<group>"; };
 		CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarController.m; sourceTree = "<group>"; };
+		D2BB1B7B8257D6987849032C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EA95C4909267EB5A12248CB6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +87,7 @@
 				CE8659641B71FC6A00ADD92A /* CoreGraphics.framework in Frameworks */,
 				CE8659621B71FC5500ADD92A /* Foundation.framework in Frameworks */,
 				CE8659601B71FC4B00ADD92A /* UIKit.framework in Frameworks */,
+				DD24807B0281F81CC6B0E4BD /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +101,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C3A8E3E1719F1B38C00D64C3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB1B7B8257D6987849032C /* Pods.debug.xcconfig */,
+				EA95C4909267EB5A12248CB6 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CE7EF6B61B73476100FE7AA4 /* MoreInfoTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,11 +169,11 @@
 		CE86591C1B71EE9300ADD92A = {
 			isa = PBXGroup;
 			children = (
-				CE8659781B71FE7000ADD92A /* REMenu */,
 				CE8659271B71EE9300ADD92A /* XXBNews */,
 				CE8659411B71EE9300ADD92A /* XXBNewsTests */,
 				CE8659661B71FC7D00ADD92A /* Frameworks */,
 				CE8659261B71EE9300ADD92A /* Products */,
+				C3A8E3E1719F1B38C00D64C3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -203,6 +203,7 @@
 				CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */,
 				CE86592C1B71EE9300ADD92A /* AppDelegate.h */,
 				CE86592D1B71EE9300ADD92A /* AppDelegate.m */,
+				CE6FF2201B7493B2006727CF /* Common.h */,
 				CE8659371B71EE9300ADD92A /* LaunchScreen.xib */,
 				CE8659281B71EE9300ADD92A /* Supporting Files */,
 			);
@@ -243,25 +244,9 @@
 				CE86595F1B71FC4B00ADD92A /* UIKit.framework */,
 				CE8659611B71FC5500ADD92A /* Foundation.framework */,
 				CE8659631B71FC6A00ADD92A /* CoreGraphics.framework */,
+				2BA1149B7651DE07DE1AE6FD /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CE8659781B71FE7000ADD92A /* REMenu */ = {
-			isa = PBXGroup;
-			children = (
-				CE8659791B71FE7000ADD92A /* RECommonFunctions.h */,
-				CE86597A1B71FE7000ADD92A /* RECommonFunctions.m */,
-				CE86597B1B71FE7000ADD92A /* REMenu.h */,
-				CE86597C1B71FE7000ADD92A /* REMenu.m */,
-				CE86597D1B71FE7000ADD92A /* REMenuContainerView.h */,
-				CE86597E1B71FE7000ADD92A /* REMenuContainerView.m */,
-				CE86597F1B71FE7000ADD92A /* REMenuItem.h */,
-				CE8659801B71FE7000ADD92A /* REMenuItem.m */,
-				CE8659811B71FE7000ADD92A /* REMenuItemView.h */,
-				CE8659821B71FE7000ADD92A /* REMenuItemView.m */,
-			);
-			path = REMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,9 +256,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE8659481B71EE9300ADD92A /* Build configuration list for PBXNativeTarget "XXBNews" */;
 			buildPhases = (
+				A38A137B38B6115048FC9BE5 /* Check Pods Manifest.lock */,
 				CE8659211B71EE9300ADD92A /* Sources */,
 				CE8659221B71EE9300ADD92A /* Frameworks */,
 				CE8659231B71EE9300ADD92A /* Resources */,
+				1DBA85AFCE6E0BE4C96CD372 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -358,6 +345,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1DBA85AFCE6E0BE4C96CD372 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A38A137B38B6115048FC9BE5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CE8659211B71EE9300ADD92A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -366,19 +386,14 @@
 				CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */,
 				CE7EF6D01B73476100FE7AA4 /* XXBWeatherTabController.m in Sources */,
 				CE7EF6D31B734ACC00FE7AA4 /* XXBBaseTabViewController.m in Sources */,
-				CE8659871B71FE7000ADD92A /* REMenuItemView.m in Sources */,
 				CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */,
 				CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */,
-				CE8659851B71FE7000ADD92A /* REMenuContainerView.m in Sources */,
-				CE8659841B71FE7000ADD92A /* REMenu.m in Sources */,
 				CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */,
 				CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
 				CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */,
-				CE8659861B71FE7000ADD92A /* REMenuItem.m in Sources */,
 				CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */,
 				CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */,
-				CE8659831B71FE7000ADD92A /* RECommonFunctions.m in Sources */,
 				CE8659B01B72091600ADD92A /* XXBNavigationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,7 +510,9 @@
 		};
 		CE8659491B71EE9300ADD92A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2BB1B7B8257D6987849032C /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "./XXBNews/XXBNews-Prefix.pch";
 				INFOPLIST_FILE = XXBNews/Info.plist;
@@ -503,12 +520,15 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		CE86594A1B71EE9300ADD92A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA95C4909267EB5A12248CB6 /* Pods.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "./XXBNews/XXBNews-Prefix.pch";
 				INFOPLIST_FILE = XXBNews/Info.plist;
@@ -516,6 +536,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

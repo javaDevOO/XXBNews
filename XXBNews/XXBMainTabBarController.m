@@ -101,7 +101,7 @@
 - (void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     NSInteger selectedIndex = [tabBar.items indexOfObject:item];
-    NSLog([NSString stringWithFormat:@"select %d",(int)selectedIndex]);
+    DDLogDebug(@"select %d",(int)selectedIndex);
     if(self.lastIndex != selectedIndex)
     {
         NSLog(@"different index is select");
