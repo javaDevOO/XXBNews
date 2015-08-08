@@ -9,6 +9,8 @@
 #import "XXBWeatherTabController.h"
 #import "XXBMainTabBarController.h"
 
+#import "XXBWeatherManager.h"
+
 @interface XXBWeatherTabController ()
 
 @end
@@ -34,6 +36,8 @@
     UITapGestureRecognizer *recognizer;
     recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:recognizer];
+    
+    [self loadWeatherData:@"深圳"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +51,21 @@
     XXBMainTabBarController *tabBarController = (XXBMainTabBarController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
     [tabBarController goToIndex:2];
 }
+
+- (void) loadWeatherData:(NSString *)city
+{
+    [XXBWeatherManager getWeatherDataWithCity:city
+                                      success:^(id json)
+                                     {
+                                         DDLogDebug(@"get the weather successfully");
+                                     }
+                                      failure:^(NSError *error)
+                                     {
+                                         DDLogDebug(@"get weather info error");
+                                     }
+     ];
+}
+
 
 /*
 #pragma mark - Navigation

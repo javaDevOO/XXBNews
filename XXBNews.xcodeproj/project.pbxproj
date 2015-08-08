@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE5960F01B76011300541A47 /* XXBWeatherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */; };
+		CE5960F31B762A1C00541A47 /* XXBHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5960F21B762A1C00541A47 /* XXBHttpTool.m */; };
 		CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */; };
 		CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */; };
 		CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BE1B73476100FE7AA4 /* XXBToolsTabController.m */; };
@@ -25,6 +27,7 @@
 		CE8659641B71FC6A00ADD92A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8659631B71FC6A00ADD92A /* CoreGraphics.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		CE8659B01B72091600ADD92A /* XXBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659AF1B72091600ADD92A /* XXBNavigationViewController.m */; };
 		CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */; };
+		CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */; };
 		DD24807B0281F81CC6B0E4BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA1149B7651DE07DE1AE6FD /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +43,10 @@
 
 /* Begin PBXFileReference section */
 		2BA1149B7651DE07DE1AE6FD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE5960EE1B76011300541A47 /* XXBWeatherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherInfo.h; sourceTree = "<group>"; };
+		CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherInfo.m; sourceTree = "<group>"; };
+		CE5960F11B762A1C00541A47 /* XXBHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBHttpTool.h; sourceTree = "<group>"; };
+		CE5960F21B762A1C00541A47 /* XXBHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBHttpTool.m; sourceTree = "<group>"; };
 		CE6FF2201B7493B2006727CF /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		CE7EF6B71B73476100FE7AA4 /* XXBMoreInfoTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMoreInfoTabController.h; sourceTree = "<group>"; };
 		CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMoreInfoTabController.m; sourceTree = "<group>"; };
@@ -75,6 +82,8 @@
 		CE8659B11B720BD100ADD92A /* XXBNews-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XXBNews-Prefix.pch"; sourceTree = "<group>"; };
 		CE8659B71B72353300ADD92A /* XXBMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarController.h; sourceTree = "<group>"; };
 		CE8659B81B72353300ADD92A /* XXBMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarController.m; sourceTree = "<group>"; };
+		CEC5D6491B76307E00CCCF6E /* XXBWeatherManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherManager.h; sourceTree = "<group>"; };
+		CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherManager.m; sourceTree = "<group>"; };
 		D2BB1B7B8257D6987849032C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EA95C4909267EB5A12248CB6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +171,12 @@
 			children = (
 				CE7EF6C81B73476100FE7AA4 /* XXBWeatherTabController.h */,
 				CE7EF6C91B73476100FE7AA4 /* XXBWeatherTabController.m */,
+				CE5960EE1B76011300541A47 /* XXBWeatherInfo.h */,
+				CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */,
+				CE5960F11B762A1C00541A47 /* XXBHttpTool.h */,
+				CE5960F21B762A1C00541A47 /* XXBHttpTool.m */,
+				CEC5D6491B76307E00CCCF6E /* XXBWeatherManager.h */,
+				CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */,
 			);
 			path = WeatherTab;
 			sourceTree = "<group>";
@@ -385,13 +400,16 @@
 			files = (
 				CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */,
 				CE7EF6D01B73476100FE7AA4 /* XXBWeatherTabController.m in Sources */,
+				CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */,
 				CE7EF6D31B734ACC00FE7AA4 /* XXBBaseTabViewController.m in Sources */,
 				CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */,
+				CE5960F31B762A1C00541A47 /* XXBHttpTool.m in Sources */,
 				CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */,
 				CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */,
 				CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
 				CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */,
+				CE5960F01B76011300541A47 /* XXBWeatherInfo.m in Sources */,
 				CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */,
 				CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */,
 				CE8659B01B72091600ADD92A /* XXBNavigationViewController.m in Sources */,
