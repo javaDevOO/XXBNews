@@ -11,7 +11,14 @@
 
 #import "XXBWeatherManager.h"
 
+#import "XXBWeatherInfo.h"
+#import "MJExtension.h"
+
+#import "XXBSelectCityViewController.h"
+
 @interface XXBWeatherTabController ()
+
+@property (nonatomic, strong) XXBWeatherInfo *weatherInfo;
 
 @end
 
@@ -24,6 +31,8 @@
     {
         //设置tabbarItem最好放在init里面
         [self initTabbarItemWithTitle:@"天气" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(selectCity)];
     }
     return self;
     
@@ -37,7 +46,14 @@
     recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:recognizer];
     
-    [self loadWeatherData:@"深圳"];
+    //读取default中存储的城市
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *city = [defaults objectForKey:@"currentCity"];
+    if(city == nil)
+    {
+        city = @"珠海";
+    }
+    [self loadWeatherData:city];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,18 +71,40 @@
 - (void) loadWeatherData:(NSString *)city
 {
     [XXBWeatherManager getWeatherDataWithCity:city
-                                      success:^(id json)
-                                     {
-                                         DDLogDebug(@"get the weather successfully");
-                                     }
-                                      failure:^(NSError *error)
-                                     {
-                                         DDLogDebug(@"get weather info error");
-                                     }
+          success:^(id json)
+         {
+             DDLogDebug(@"get the weather successfully");
+             //MJExtention扩展可以将json数据变成model
+             //model的属性要和json的关键字对应上，否则会被置为nil
+             NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
+             self.weatherInfo = weatherInfos[0];
+             self.weatherInfo.date = json[@"date"];
+             
+             //TODO：获取数据成功了，接下来就要将数据显示在界面上
+         }
+          failure:^(NSError *error)
+         {
+             DDLogDebug(@"get weather info error");
+         }
      ];
+    
+    //最简单的数据持久化
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:city forKey:@"currentCity"];
 }
 
+- (void) selectCity
+{
+    XXBSelectCityViewController *selectController = [[XXBSelectCityViewController alloc] init];
+    selectController.citySelDelegate = self;
+    [self.navigationController pushViewController:selectController animated:YES];
+}
 
+#pragma citySelectDelegate
+- (void) selectCityViewDidSelectCity:(NSString *)city
+{
+    self.title = city;
+}
 /*
 #pragma mark - Navigation
 

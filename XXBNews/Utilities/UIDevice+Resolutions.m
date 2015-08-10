@@ -21,6 +21,13 @@
     return result.height;
 }
 
++ (NSUInteger) currentWidth
+{
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    result = CGSizeMake(result.width * [UIScreen mainScreen].scale, result.height * [UIScreen mainScreen].scale);
+    return result.width;
+}
+
 /******************************************************************************
  函数名称 : + (UIDeviceResolution) currentResolution
  函数描述 : 获取当前分辨率

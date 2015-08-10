@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +37,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2965E38DCEBC6E89D5362BA6561D3FBD</key>
+		<key>173ACCCC0791F0D512EE990F93DB2C27</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3915E82F9D36F4E8688BB1A78D68E121</key>
+		<key>2965E38DCEBC6E89D5362BA6561D3FBD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>658EE44742C99DBCF0017BF1F50D2ACB</key>
+		<key>543BB67794D3780C50AAA0BEA80933DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C3049D402043B78A1B431057AA951ABF</key>
+		<key>55C30674128D952CA8801F40948EEA3A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D18E9DC3108824EA4593D705C6799669</key>
 		<dict>
 			<key>primary</key>
 			<true/>

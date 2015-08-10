@@ -33,6 +33,8 @@ typedef NSUInteger UIDeviceResolution;
  */
 + (NSUInteger) currentHeight;
 
++ (NSUInteger) currentWidth;
+
 /******************************************************************************
  函数名称 : + (UIDeviceResolution) currentResolution
  函数描述 : 获取当前分辨率
