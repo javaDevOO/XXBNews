@@ -97,6 +97,8 @@
 {
     XXBSelectCityViewController *selectController = [[XXBSelectCityViewController alloc] init];
     selectController.citySelDelegate = self;
+    //隐藏tabbar,pop的时候tabbar会重新显示
+    selectController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:selectController animated:YES];
 }
 
