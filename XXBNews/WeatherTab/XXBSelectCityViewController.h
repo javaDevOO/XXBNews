@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CitySelectDelegate.h"
 
-@interface XXBSelectCityViewController : UISearchController<UITableViewDataSource,UITableViewDelegate>
+@interface XXBSelectCityViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate, UISearchResultsUpdating>
 
 @property(nonatomic, weak) id<CitySelectDelegate> citySelDelegate;
+@property(nonatomic, strong) UISearchController *searchController;
 
 @end
