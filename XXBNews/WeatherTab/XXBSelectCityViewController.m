@@ -163,6 +163,7 @@
 {
     [super viewWillDisappear:animated];
     //TODO: 当前页面消失的时候searchbar依然存在，不会自动消失。
+    self.searchController.searchBar.hidden = YES;
     self.searchController.active = NO;
 }
 

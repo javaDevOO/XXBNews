@@ -16,6 +16,8 @@
 
 #import "XXBSelectCityViewController.h"
 
+#import "XXBLocationTool.h"
+
 @interface XXBWeatherTabController ()
 
 @property (nonatomic, strong) XXBWeatherInfo *weatherInfo;
@@ -46,6 +48,11 @@
     recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:recognizer];
     
+    //调用了LocationTool的初始化方法
+    [XXBLocationTool sharedInstance];
+    //接收到定位成功的回调
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocCity) name:@"LocationCity" object:nil];
+    
     //读取default中存储的城市
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *city = [defaults objectForKey:@"currentCity"];
@@ -66,6 +73,16 @@
     NSLog(@"Tap");
     XXBMainTabBarController *tabBarController = (XXBMainTabBarController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
     [tabBarController goToIndex:2];
+}
+
+- (void) updateLocCity
+{
+    XXBCity *city = [XXBLocationTool sharedInstance].locationCity;
+    if(city && city.city)
+    {
+        DDLogDebug(@"定位到城市：%@",city.city);
+        [self loadWeatherData:city.city];
+    }
 }
 
 - (void) loadWeatherData:(NSString *)city
