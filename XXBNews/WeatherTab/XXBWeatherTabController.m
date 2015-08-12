@@ -18,6 +18,8 @@
 
 #import "XXBLocationTool.h"
 
+#import "XXBManageCityController.h"
+
 @interface XXBWeatherTabController ()
 
 @property (nonatomic, strong) XXBWeatherInfo *weatherInfo;
@@ -116,7 +118,11 @@
     selectController.citySelDelegate = self;
     //隐藏tabbar,pop的时候tabbar会重新显示
     selectController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:selectController animated:YES];
+    
+    XXBManageCityController *mgr = [[XXBManageCityController alloc] init];
+    [self.navigationController pushViewController:mgr animated:YES];
+
+//    [self.navigationController pushViewController:selectController animated:YES];
 }
 
 #pragma citySelectDelegate
