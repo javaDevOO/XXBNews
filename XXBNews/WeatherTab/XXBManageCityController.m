@@ -11,6 +11,8 @@
 
 #import "XXBCityCell.h"
 
+#import "XXBSelectCityViewController.h"
+
 @interface XXBManageCityController()
 
 @property (nonatomic, strong) NSMutableArray *cityArray;
@@ -24,9 +26,12 @@
     self = [super init];
     if(self)
     {
+        self.title = @"管理城市";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(selectCity)];
+        
         self.cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithContentsOfFile:[XXBFileUtilities getFilePathString:@"ProvincesAndCities.plist" ofType:nil]]];
         
-        UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc]init];
+        UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = CGSizeMake(100, 100);
         [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
         
@@ -38,9 +43,14 @@
         
         [self.view addSubview:self.collectionView];
 
-        
     }
     return self;
+}
+
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
 }
 
 
@@ -68,5 +78,22 @@
     
     return cell;
 }
+
+- (void) selectCity
+{
+    XXBSelectCityViewController *selectController = [[XXBSelectCityViewController alloc] init];
+    selectController.citySelDelegate = self;
+    //隐藏tabbar,pop的时候tabbar会重新显示
+    selectController.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:selectController animated:YES];
+}
+
+#pragma citySelectDelegate
+- (void) selectCityViewDidSelectCity:(NSString *)city
+{
+    self.title = city;
+}
+
 
 @end

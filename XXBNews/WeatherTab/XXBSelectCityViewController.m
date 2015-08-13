@@ -122,7 +122,7 @@
     NSString *city = cityInfoDic[@"city"];
 
     [self.citySelDelegate selectCityViewDidSelectCity:city];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

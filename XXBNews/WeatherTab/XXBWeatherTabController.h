@@ -10,6 +10,6 @@
 #import "XXBBaseTabViewController.h"
 #import "CitySelectDelegate.h"
 
-@interface XXBWeatherTabController : XXBBaseTabViewController<CitySelectDelegate>
+@interface XXBWeatherTabController : XXBBaseTabViewController
 
 @end

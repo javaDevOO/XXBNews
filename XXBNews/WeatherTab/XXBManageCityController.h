@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XXBManageCityController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+#import "CitySelectDelegate.h"
+
+@interface XXBManageCityController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CitySelectDelegate>
 
 @end

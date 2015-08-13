@@ -36,7 +36,7 @@
         //设置tabbarItem最好放在init里面
         [self initTabbarItemWithTitle:@"天气" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
         
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(selectCity)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
     }
     return self;
     
@@ -112,24 +112,13 @@
     [defaults setObject:city forKey:@"currentCity"];
 }
 
-- (void) selectCity
+- (void) manageCity
 {
-    XXBSelectCityViewController *selectController = [[XXBSelectCityViewController alloc] init];
-    selectController.citySelDelegate = self;
-    //隐藏tabbar,pop的时候tabbar会重新显示
-    selectController.hidesBottomBarWhenPushed = YES;
-    
-    XXBManageCityController *mgr = [[XXBManageCityController alloc] init];
-    [self.navigationController pushViewController:mgr animated:YES];
-
-//    [self.navigationController pushViewController:selectController animated:YES];
+    XXBManageCityController *manageCityController = [[XXBManageCityController alloc] init];
+    manageCityController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:manageCityController animated:YES];
 }
 
-#pragma citySelectDelegate
-- (void) selectCityViewDidSelectCity:(NSString *)city
-{
-    self.title = city;
-}
 /*
 #pragma mark - Navigation
 
