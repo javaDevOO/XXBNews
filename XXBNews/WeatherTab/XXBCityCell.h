@@ -14,4 +14,8 @@
 @interface XXBCityCell : UICollectionViewCell
 @property (nonatomic, strong) UILabel *label;
 
+- (void) hideDelBtn;
+
+- (void) showDelBtn;
+
 @end

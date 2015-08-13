@@ -27,6 +27,9 @@
 @end
 
 @implementation XXBWeatherTabController
+{
+    NSMutableArray *cityArray;
+}
 
 - (id) init
 {
@@ -37,6 +40,11 @@
         [self initTabbarItemWithTitle:@"天气" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:label];
+        cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+        label.text = [cityArray componentsJoinedByString:@"---"];
     }
     return self;
     

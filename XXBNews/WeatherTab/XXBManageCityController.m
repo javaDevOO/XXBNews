@@ -20,18 +20,28 @@
 @end
 
 @implementation XXBManageCityController
+{
+    BOOL isDeleteMode;  //是否处于删除模式下
+}
 
 - (id) init
 {
     self = [super init];
     if(self)
     {
+        isDeleteMode = NO;
         self.title = @"管理城市";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(selectCity)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleDeleteMode)];
         self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         
-        // TODO: 获取已选择的城市
-        self.cityArray = [NSMutableArray arrayWithObjects:@"深圳",@"珠海",@"汕头",@"厦门",nil];
+        // TODO: 从属性列表中获取已选择的城市
+        self.cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+        if(![[self.cityArray lastObject]  isEqual: @"+"])
+            [self.cityArray addObject:@"+"];
+        if([self.cityArray count] == 0)
+        {
+            self.cityArray = [NSMutableArray arrayWithObjects:@"深圳",nil];
+        }
         
         // 创建collection的时候要有layout属性
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -43,6 +53,8 @@
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
         
+        //允许多选
+        //self.collectionView.allowsMultipleSelection = YES;
         [self.view addSubview:self.collectionView];
 
     }
@@ -52,10 +64,9 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
 }
 
-// 一个section
+#pragma datasource委托
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     DDLogDebug(@"return the number of section");
@@ -65,26 +76,24 @@
 // 一个section有多少个cell，flowlayout中有多少列由cell的大小来决定
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.cityArray count]+1;
+    return [self.cityArray count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     XXBCityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCellIdentifier" forIndexPath:indexPath];
     // 注册过cell,不用再判断是否为nil，若为nil会自动创建
-    if(indexPath.item < [self.cityArray count])
+    if(indexPath.item < [self.cityArray count]-1)
         cell.label.text = [self.cityArray objectAtIndex:indexPath.item];
     else
         cell.label.text = @"添加城市";
-    cell.backgroundColor = [UIColor greenColor];
-    
-   return cell;
+    return cell;
 }
 
 //设置每个cell的大小
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(100, 100);
+    return CGSizeMake(100, 120);
 }
 
 // 设置每组cell的边距，实际上是每个section的边距
@@ -99,18 +108,67 @@
     return 20.0;
 }
 
-//设置行与行之间的间距，由于只有一个section，section没有用到
+//设置行与行之间的间距，由于只有一个section，section参数没有用到
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 20.0;
 }
 
+// 选择了某个cell
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.item == [self.cityArray count])
-        [self selectCity];
+    // 正常模式下跳回天气详情
+    if(isDeleteMode == NO)
+    {
+        if(indexPath.item == [self.cityArray count]-1)
+            [self selectCity];
+        else
+            [self.navigationController popViewControllerAnimated:YES];
+    }
+    // 否则直接删除
     else
-        [self.navigationController popViewControllerAnimated:YES];
+    {
+        [self deleteCityAtIndexPath:indexPath];
+        //将选择的城市存到属性列表当中
+        [self saveCityArrayToDefault];
+    }
+}
+
+#pragma citySelectDelegate
+// 在collection中添加cell
+- (void) selectCityViewDidSelectCity:(NSString *)city
+{
+    [self.collectionView performBatchUpdates:^{
+        // 先更改数据源
+        NSInteger oldCount = [self.cityArray count];
+        [self.cityArray insertObject:city atIndex:oldCount-1];
+        
+        NSArray *arrayWithIndexPaths = [NSArray arrayWithObjects:
+                                        [NSIndexPath indexPathForRow:oldCount-1 inSection:0], nil];
+        
+        [self.collectionView insertItemsAtIndexPaths:arrayWithIndexPaths];
+    } completion:nil];
+    
+    //将选择的城市存到属性列表当中
+    [self saveCityArrayToDefault];
+}
+
+/**
+ *  删除path对应的cell
+ *
+ *  @param path 要删除的cell的path
+ */
+- (void) deleteCityAtIndexPath:(NSIndexPath *)path
+{
+    [self.collectionView performBatchUpdates:^{
+        NSArray *itemPathsToDel = [NSArray arrayWithObjects:path, nil];
+        
+        for (NSIndexPath *path in itemPathsToDel) {
+            [self.cityArray removeObjectAtIndex:path.item];
+        }
+        
+        [self.collectionView deleteItemsAtIndexPaths:itemPathsToDel];
+    } completion:nil];
 }
 
 - (void) selectCity
@@ -123,26 +181,75 @@
     [self.navigationController pushViewController:selectController animated:YES];
 }
 
-#pragma citySelectDelegate
-// 在collection中添加cell
-- (void) selectCityViewDidSelectCity:(NSString *)city
+- (void) toggleDeleteMode
 {
-    NSArray *newData = [[NSArray alloc] initWithObjects:city, nil];
-    [self.collectionView performBatchUpdates:^{
-        NSInteger resultsSize = [self.cityArray count]; //data is the previous array of data
-        // 先更改数据源
-        [self.cityArray addObjectsFromArray:newData];
+    if(isDeleteMode == NO)
+    {
+        isDeleteMode = YES;
+        self.navigationItem.rightBarButtonItem.title = @"返回";
+        [self.collectionView performBatchUpdates:^{
+            NSArray *itemPathsToDel = [NSArray arrayWithObjects:
+                                       [NSIndexPath indexPathForItem:[self.cityArray count]-1 inSection:0], nil];
+            [self.cityArray removeLastObject];
+            
+            [self.collectionView deleteItemsAtIndexPaths:itemPathsToDel];
+        } completion:nil];
+        [self updateCellToMode:NO];
         
-        NSMutableArray *arrayWithIndexPaths = [NSMutableArray array];
-        
-        // 插入新cell的范围
-        for (int i = resultsSize; i < resultsSize + newData.count; i++) {
-            [arrayWithIndexPaths addObject:[NSIndexPath indexPathForRow:i
-                                                              inSection:0]];
-        }
-        [self.collectionView insertItemsAtIndexPaths:arrayWithIndexPaths];
-    } completion:nil];
+    }else
+    {
+        isDeleteMode = NO;
+        self.navigationItem.rightBarButtonItem.title = @"编辑";
+        [self.collectionView performBatchUpdates:^{
+            NSArray *itemPathsToAdd = [NSArray arrayWithObjects:
+                                       [NSIndexPath indexPathForItem:[self.cityArray count] inSection:0], nil];
+            [self.cityArray addObject:@"+"];
+            
+            [self.collectionView insertItemsAtIndexPaths:itemPathsToAdd];
+        } completion:nil];
+        [self updateCellToMode:YES];
+    }
 }
 
+/**
+ *  将城市存到属性列表中
+ */
+- (void) saveCityArrayToDefault
+{
+    [[NSUserDefaults standardUserDefaults] setObject:self.cityArray forKey:@"SelectedCities"];
+}
+
+
+/**
+ *  更新cell的内容，或许有更好的遍历cell的方式
+ *
+ *  @param isNormal <#isNormal description#>
+ */
+- (void) updateCellToMode:(BOOL)isNormal
+{
+    if(isNormal)
+    {
+        for(NSInteger i = 0; i < [self.cityArray count] ;i++)
+        {
+            XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+            [cell hideDelBtn];
+        }
+    }
+    else
+    {
+        for(NSInteger i = 0; i < [self.cityArray count] ;i++)
+        {
+            XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+            [cell showDelBtn];
+        }
+    }
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    DDLogDebug(@"the manage controller will disappear");
+    [self saveCityArrayToDefault];
+}
 
 @end
