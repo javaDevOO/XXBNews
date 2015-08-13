@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CitySelectDelegate.h"
 
+/**
+ *  选择城市页面
+ */
 @interface XXBSelectCityViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate, UISearchResultsUpdating>
 
 @property(nonatomic, weak) id<CitySelectDelegate> citySelDelegate;

@@ -32,7 +32,7 @@
     self.tabBarItem.title = title;
     self.tabBarItem.image = [UIImage imageNamed:imageName];
     self.tabBarItem.selectedImage = [UIImage imageNamed:selectedImageName];
-    self.tabBarItem.badgeValue = @"5";
+//    self.tabBarItem.badgeValue = @"5";
 }
 
 /*

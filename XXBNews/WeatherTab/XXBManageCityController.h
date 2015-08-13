@@ -10,6 +10,9 @@
 
 #import "CitySelectDelegate.h"
 
+/**
+ *  管理城市页面，利用FlowLayout布局可以实现最简单的gridview视图
+ */
 @interface XXBManageCityController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CitySelectDelegate>
 
 @end
