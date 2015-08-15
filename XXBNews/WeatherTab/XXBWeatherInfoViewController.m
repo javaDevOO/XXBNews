@@ -18,6 +18,7 @@
         self.label = [[UILabel alloc] initWithFrame:self.view.bounds];
         [self.view addSubview:self.label];
         self.label.text = @"city";
+        self.label.textAlignment = NSTextAlignmentCenter;
     }
     return self;
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CE5960F01B76011300541A47 /* XXBWeatherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */; };
+		CE73E4791B7B69B30006568C /* XXBLocationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E4781B7B69B30006568C /* XXBLocationTool.m */; };
+		CE73E47C1B7B79CE0006568C /* XXBManageCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */; };
+		CE73E47F1B7B7FB20006568C /* XXBCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E47E1B7B7FB20006568C /* XXBCityCell.m */; };
 		CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */; };
 		CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */; };
 		CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BE1B73476100FE7AA4 /* XXBToolsTabController.m */; };
@@ -31,6 +34,7 @@
 		CE86CF5D1B78D28E00DD54C1 /* XXBFileUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86CF5C1B78D28E00DD54C1 /* XXBFileUtilities.m */; };
 		CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */; };
 		CEC5D64E1B763CA600CCCF6E /* XXBHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64D1B763CA600CCCF6E /* XXBHttpTool.m */; };
+		CEDA81471B7F5550002FA940 /* XXBWeatherInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA81461B7F5550002FA940 /* XXBWeatherInfoViewController.m */; };
 		DD24807B0281F81CC6B0E4BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA1149B7651DE07DE1AE6FD /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +53,12 @@
 		CE5960EE1B76011300541A47 /* XXBWeatherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherInfo.h; sourceTree = "<group>"; };
 		CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherInfo.m; sourceTree = "<group>"; };
 		CE6FF2201B7493B2006727CF /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		CE73E4771B7B69B30006568C /* XXBLocationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBLocationTool.h; sourceTree = "<group>"; };
+		CE73E4781B7B69B30006568C /* XXBLocationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBLocationTool.m; sourceTree = "<group>"; };
+		CE73E47A1B7B79CE0006568C /* XXBManageCityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBManageCityController.h; sourceTree = "<group>"; };
+		CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBManageCityController.m; sourceTree = "<group>"; };
+		CE73E47D1B7B7FB20006568C /* XXBCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBCityCell.h; sourceTree = "<group>"; };
+		CE73E47E1B7B7FB20006568C /* XXBCityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBCityCell.m; sourceTree = "<group>"; };
 		CE7EF6B71B73476100FE7AA4 /* XXBMoreInfoTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMoreInfoTabController.h; sourceTree = "<group>"; };
 		CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMoreInfoTabController.m; sourceTree = "<group>"; };
 		CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XXBNewsTabController .m"; sourceTree = "<group>"; };
@@ -93,6 +103,8 @@
 		CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherManager.m; sourceTree = "<group>"; };
 		CEC5D64C1B763CA600CCCF6E /* XXBHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBHttpTool.h; sourceTree = "<group>"; };
 		CEC5D64D1B763CA600CCCF6E /* XXBHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBHttpTool.m; sourceTree = "<group>"; };
+		CEDA81451B7F5550002FA940 /* XXBWeatherInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherInfoViewController.h; sourceTree = "<group>"; };
+		CEDA81461B7F5550002FA940 /* XXBWeatherInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherInfoViewController.m; sourceTree = "<group>"; };
 		D2BB1B7B8257D6987849032C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EA95C4909267EB5A12248CB6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +173,8 @@
 				CE86CF591B78D1C100DD54C1 /* ProvincesAndCities.plist */,
 				CEC5D64C1B763CA600CCCF6E /* XXBHttpTool.h */,
 				CEC5D64D1B763CA600CCCF6E /* XXBHttpTool.m */,
+				CE73E4771B7B69B30006568C /* XXBLocationTool.h */,
+				CE73E4781B7B69B30006568C /* XXBLocationTool.m */,
 				CE86CF5B1B78D28E00DD54C1 /* XXBFileUtilities.h */,
 				CE86CF5C1B78D28E00DD54C1 /* XXBFileUtilities.m */,
 				CE7EF6C01B73476100FE7AA4 /* UIDevice+Resolutions.h */,
@@ -187,10 +201,16 @@
 				CE7EF6C91B73476100FE7AA4 /* XXBWeatherTabController.m */,
 				CE5960EE1B76011300541A47 /* XXBWeatherInfo.h */,
 				CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */,
+				CEDA81451B7F5550002FA940 /* XXBWeatherInfoViewController.h */,
+				CEDA81461B7F5550002FA940 /* XXBWeatherInfoViewController.m */,
 				CEC5D6491B76307E00CCCF6E /* XXBWeatherManager.h */,
 				CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */,
 				CE86CF561B78CE6500DD54C1 /* XXBSelectCityViewController.h */,
 				CE86CF571B78CE6500DD54C1 /* XXBSelectCityViewController.m */,
+				CE73E47A1B7B79CE0006568C /* XXBManageCityController.h */,
+				CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */,
+				CE73E47D1B7B7FB20006568C /* XXBCityCell.h */,
+				CE73E47E1B7B7FB20006568C /* XXBCityCell.m */,
 			);
 			path = WeatherTab;
 			sourceTree = "<group>";
@@ -433,9 +453,13 @@
 				CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */,
 				CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */,
 				CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */,
+				CEDA81471B7F5550002FA940 /* XXBWeatherInfoViewController.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
+				CE73E47F1B7B7FB20006568C /* XXBCityCell.m in Sources */,
 				CEC5D64E1B763CA600CCCF6E /* XXBHttpTool.m in Sources */,
+				CE73E47C1B7B79CE0006568C /* XXBManageCityController.m in Sources */,
 				CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */,
+				CE73E4791B7B69B30006568C /* XXBLocationTool.m in Sources */,
 				CE5960F01B76011300541A47 /* XXBWeatherInfo.m in Sources */,
 				CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */,
 				CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */,
