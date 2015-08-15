@@ -19,11 +19,6 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-        self.label = [[UILabel alloc] init];
-        self.label.frame = CGRectMake(0,0,self.frame.size.width, self.frame.size.height);
-        self.label.textAlignment = NSTextAlignmentCenter;
-        [self.contentView addSubview:self.label];
-        
         //设置两个backgroundview，一个是正常情况下显示，一个是被select时显示
         UIView *backgroundView = [[UIView alloc] initWithFrame:self.bounds];
         backgroundView.backgroundColor = [UIColor redColor];
@@ -36,6 +31,15 @@
         deleteView.backgroundColor = [UIColor blueColor];
         [self.contentView addSubview:deleteView];
         [self hideDelBtn];
+        
+        self.bgImage = [[UIImageView alloc] initWithFrame:self.bounds];
+        [self.contentView addSubview:self.bgImage];
+        self.bgImage.image = [UIImage imageNamed:@"tabbar_home_selected"];
+        
+        self.label = [[UILabel alloc] init];
+        self.label.frame = CGRectMake(0,0,self.frame.size.width, self.frame.size.height);
+        self.label.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:self.label];
     }
     return self;
 }

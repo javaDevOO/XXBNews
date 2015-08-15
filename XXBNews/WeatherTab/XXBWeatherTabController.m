@@ -20,15 +20,20 @@
 
 #import "XXBManageCityController.h"
 
+#import "XXBWeatherInfoViewController.h"
+
 @interface XXBWeatherTabController ()
 
-@property (nonatomic, strong) XXBWeatherInfo *weatherInfo;
+@property (nonatomic, strong) NSArray *weatherInfo;
+@property (nonatomic, strong) UIPageViewController *pageController;
 
 @end
 
 @implementation XXBWeatherTabController
 {
     NSMutableArray *cityArray;
+    UILabel *label;
+    __block dispatch_semaphore_t semaphore;
 }
 
 - (id) init
@@ -41,10 +46,7 @@
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:label];
-        cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
-        label.text = [cityArray componentsJoinedByString:@"---"];
+        semaphore = dispatch_semaphore_create(1);
     }
     return self;
     
@@ -64,14 +66,36 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocCity) name:@"LocationCity" object:nil];
     
     //读取default中存储的城市
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *city = [defaults objectForKey:@"currentCity"];
-    if(city == nil)
-    {
-        city = @"珠海";
-    }
-    [self loadWeatherData:city];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *city = [defaults objectForKey:@"currentCity"];
+//    if(city == nil)
+//    {
+//        city = @"珠海";
+//    }
+    cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+    label.text = [cityArray componentsJoinedByString:@"---"];
+    [self loadWeatherData:cityArray];
+    
+    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:UIPageViewControllerSpineLocationMin] forKey:UIPageViewControllerOptionSpineLocationKey];
+    
+    self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:options];
+    self.pageController.dataSource = self;
+    self.pageController.delegate = self;
+    self.pageController.view.frame = self.view.bounds;
+    [self.view addSubview:self.pageController.view];
+    
+    //此时weatherinfo的数据还没有返回，需要进行同步
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            XXBWeatherInfoViewController *initialViewController =[self viewControllerAtIndex:0];// 得到第一页
+            NSArray *viewControllers =[NSArray arrayWithObject:initialViewController];
+            [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+            dispatch_semaphore_signal(semaphore);
+        });
+    });
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -95,29 +119,34 @@
     }
 }
 
-- (void) loadWeatherData:(NSString *)city
+- (void) loadWeatherData:(NSArray *)cities
 {
-    [XXBWeatherManager getWeatherDataWithCity:city
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    [XXBWeatherManager getWeatherDataWithCity:cities
           success:^(id json)
          {
              DDLogDebug(@"get the weather successfully");
              //MJExtention扩展可以将json数据变成model
              //model的属性要和json的关键字对应上，否则会被置为nil
              NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
-             self.weatherInfo = weatherInfos[0];
-             self.weatherInfo.date = json[@"date"];
-             
+             self.weatherInfo = weatherInfos;
+             for(XXBWeatherInfo *info in self.weatherInfo)
+             {
+                 info.date = json[@"date"];
+             }
+             dispatch_semaphore_signal(semaphore);
              //TODO：获取数据成功了，接下来就要将数据显示在界面上
          }
           failure:^(NSError *error)
          {
              DDLogDebug(@"get weather info error");
+             dispatch_semaphore_signal(semaphore);
          }
      ];
     
     //最简单的数据持久化
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:city forKey:@"currentCity"];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:city forKey:@"currentCity"];
 }
 
 - (void) manageCity
@@ -125,6 +154,48 @@
     XXBManageCityController *manageCityController = [[XXBManageCityController alloc] init];
     manageCityController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:manageCityController animated:YES];
+}
+
+// 得到相应的VC对象
+- (XXBWeatherInfoViewController *)viewControllerAtIndex:(NSInteger)index {
+    if (([self.weatherInfo count] == 0) || (index >= [self.weatherInfo count])) {
+        return nil;
+    }
+    // 创建一个新的控制器类，并且分配给相应的数据
+    XXBWeatherInfoViewController *dataViewController =[[XXBWeatherInfoViewController alloc] init];
+    XXBWeatherInfo *info = [self.weatherInfo objectAtIndex:index];
+    dataViewController.weatherInfo = info;
+    [dataViewController refresh];
+    DDLogDebug(@"create new view controller");
+    return dataViewController;
+}
+// 根据数组元素值，得到下标值
+- (NSInteger)indexOfViewController:(XXBWeatherInfoViewController *)viewController {
+    return [self.weatherInfo indexOfObject:viewController.weatherInfo];
+}
+
+#pragma mark- UIPageViewControllerDataSource
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    NSUInteger index = [self indexOfViewController:(XXBWeatherInfoViewController *)viewController];
+    if ((index == 0) || (index == NSNotFound)) {
+        return nil;
+    }
+    index--;
+    return [self viewControllerAtIndex:index];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
+    
+    NSUInteger index = [self indexOfViewController:(XXBWeatherInfoViewController *)viewController];
+    if (index == NSNotFound) {
+        return nil;
+    }
+    index++;
+    if (index == [self.weatherInfo count]) {
+        return nil;
+    }
+    return [self viewControllerAtIndex:index];
 }
 
 /*

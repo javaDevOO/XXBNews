@@ -223,7 +223,7 @@
 /**
  *  更新cell的内容，或许有更好的遍历cell的方式
  *
- *  @param isNormal <#isNormal description#>
+ *  @param isNormal 是否为正常模式
  */
 - (void) updateCellToMode:(BOOL)isNormal
 {

@@ -10,6 +10,6 @@
 
 @interface XXBWeatherManager : NSObject
 
-+ (void)getWeatherDataWithCity:(NSString *)city success:(void (^)(id json))success failure:(void (^)(NSError *error))failure;
++ (void)getWeatherDataWithCity:(NSArray *)cities success:(void (^)(id json))success failure:(void (^)(NSError *error))failure;
 
 @end

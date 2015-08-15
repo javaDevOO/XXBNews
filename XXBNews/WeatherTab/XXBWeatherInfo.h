@@ -45,5 +45,9 @@
 @property (nonatomic, copy) NSString *wind;
 // 温度
 @property (nonatomic, copy) NSString *temperature;
+// 白天图片url
+@property (nonatomic, copy) NSString *dayPictureUrl;
+// 夜间图片url
+@property (nonatomic, copy) NSString *nightPictureUrl;
 @end
 

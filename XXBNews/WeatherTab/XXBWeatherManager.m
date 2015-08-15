@@ -13,12 +13,12 @@
 
 @implementation XXBWeatherManager
 
-+ (void)getWeatherDataWithCity:(NSString *)city success:(void (^)(id json))success failure:(void (^)(NSError *error))failure
++ (void)getWeatherDataWithCity:(NSArray *)cities success:(void (^)(id json))success failure:(void (^)(NSError *error))failure
 {
     // 请求参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     // 百度开放平台上的文档没写清楚，还需要一个mcode参数
-    params[@"location"] = city;
+    params[@"location"] = [cities componentsJoinedByString:@"|"];
     params[@"output"] = @"json";
     params[@"ak"] = baidukey;
     params[@"mcode"] = @"sysu.XXBNews";
