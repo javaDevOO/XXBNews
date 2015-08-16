@@ -19,6 +19,7 @@
 
 #import "UIImageView+WebCache.h"
 
+
 @interface XXBManageCityController()
 
 @property (nonatomic, strong) NSMutableArray *cityArray;
@@ -65,6 +66,7 @@
         
         //允许多选
         //self.collectionView.allowsMultipleSelection = YES;
+        
         [self.view addSubview:self.collectionView];
 
     }

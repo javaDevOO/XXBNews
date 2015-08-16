@@ -1,5 +1,5 @@
 //
-//  XXBToolsTabViewController.h
+//  XXBMemoTabViewController.h
 //  XXBNews
 //
 //  Created by xuxubin on 15/8/6.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "XXBBaseTabViewController.h"
 
-@interface XXBToolsTabController : XXBBaseTabViewController
+@interface XXBMemoTabController : XXBBaseTabViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @end

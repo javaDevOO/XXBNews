@@ -11,7 +11,7 @@
 
 #import "XXBWeatherTabController.h"
 #import "XXBNewsTabController.h"
-#import "XXBToolsTabController.h"
+#import "XXBMemoTabController.h"
 #import "XXBMoreInfoTabController.h"
 
 @interface XXBMainTabBarController ()
@@ -72,13 +72,13 @@
     //创建和添加子控制器
     XXBWeatherTabController *weatherTab = [[XXBWeatherTabController alloc] init];
     XXBNewsTabController *newsTab = [[XXBNewsTabController alloc] init];
-    XXBToolsTabController *toolsTab = [[XXBToolsTabController alloc] init];
+    XXBMemoTabController *memoTab = [[XXBMemoTabController alloc] init];
     XXBMoreInfoTabController *moreInfoTab = [[XXBMoreInfoTabController alloc] init];
     self.more = moreInfoTab;
     
     
     //各个子ViewController的tabbarItem的title等参数在各自的类中定义，减少耦合
-    NSArray *viewControllerAry = @[weatherTab, newsTab, toolsTab, moreInfoTab];
+    NSArray *viewControllerAry = @[weatherTab, newsTab, memoTab, moreInfoTab];
     
     //TODO: 增加图片资源
     for (int i=0; i< viewControllerAry.count; i++) {
