@@ -17,6 +17,8 @@
 
 #import "MJExtension.h"
 
+#import "UIImageView+WebCache.h"
+
 @interface XXBManageCityController()
 
 @property (nonatomic, strong) NSMutableArray *cityArray;
@@ -223,15 +225,16 @@
 - (void) refresh
 {
     DDLogDebug(@"refresh the weather");
+    //清除缓存
+    [[SDImageCache sharedImageCache] cleanDisk];
     for(NSInteger i = 0; i < [self.cityArray count]-1 ;i++)
     {
         XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         XXBWeatherInfo *weatherInfo = [self.weatherInfos objectAtIndex:i];
         XXBWeatherDetail *detailToday = [XXBWeatherDetail objectWithKeyValues:[weatherInfo.weather_data objectAtIndex:0]];
         NSString *urlStr = detailToday.dayPictureUrl;
-        NSURL *url = [NSURL URLWithString:urlStr];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        cell.bgImage.image = [UIImage imageWithData:data];
+        
+        [cell.bgImage sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"tabbar_home_selected"]];
     }
 }
 
