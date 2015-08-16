@@ -33,7 +33,7 @@
 {
     NSMutableArray *cityArray;
     UILabel *label;
-    __block dispatch_semaphore_t semaphore;
+    __block dispatch_semaphore_t getInfoFinishSemaphore;
 }
 
 - (id) init
@@ -46,7 +46,7 @@
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
         
-        semaphore = dispatch_semaphore_create(1);
+        getInfoFinishSemaphore = dispatch_semaphore_create(1);
     }
     return self;
     
@@ -86,12 +86,12 @@
     
     //此时weatherinfo的数据还没有返回，需要进行同步
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             XXBWeatherInfoViewController *initialViewController =[self viewControllerAtIndex:0];// 得到第一页
             NSArray *viewControllers =[NSArray arrayWithObject:initialViewController];
             [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-            dispatch_semaphore_signal(semaphore);
+            dispatch_semaphore_signal(getInfoFinishSemaphore);
         });
     });
 }
@@ -121,7 +121,7 @@
 
 - (void) loadWeatherData:(NSArray *)cities
 {
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
     [XXBWeatherManager getWeatherDataWithCity:cities
           success:^(id json)
          {
@@ -134,13 +134,13 @@
              {
                  info.date = json[@"date"];
              }
-             dispatch_semaphore_signal(semaphore);
+             dispatch_semaphore_signal(getInfoFinishSemaphore);
              //TODO：获取数据成功了，接下来就要将数据显示在界面上
          }
           failure:^(NSError *error)
          {
              DDLogDebug(@"get weather info error");
-             dispatch_semaphore_signal(semaphore);
+             dispatch_semaphore_signal(getInfoFinishSemaphore);
          }
      ];
     
@@ -153,6 +153,7 @@
 {
     XXBManageCityController *manageCityController = [[XXBManageCityController alloc] init];
     manageCityController.hidesBottomBarWhenPushed = YES;
+    manageCityController.weatherInfos = self.weatherInfo;
     [self.navigationController pushViewController:manageCityController animated:YES];
 }
 

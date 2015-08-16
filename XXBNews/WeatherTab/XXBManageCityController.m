@@ -13,6 +13,10 @@
 
 #import "XXBSelectCityViewController.h"
 
+#import "XXBWeatherInfo.h"
+
+#import "MJExtension.h"
+
 @interface XXBManageCityController()
 
 @property (nonatomic, strong) NSMutableArray *cityArray;
@@ -22,6 +26,8 @@
 @implementation XXBManageCityController
 {
     BOOL isDeleteMode;  //是否处于删除模式下
+    UIBarButtonItem *refreshBtn;
+    UIBarButtonItem *editBtn;
 }
 
 - (id) init
@@ -31,7 +37,9 @@
     {
         isDeleteMode = NO;
         self.title = @"管理城市";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleDeleteMode)];
+        refreshBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+        editBtn = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleDeleteMode)];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:editBtn,refreshBtn, nil];
         self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         
         // TODO: 从属性列表中获取已选择的城市
@@ -183,10 +191,11 @@
 
 - (void) toggleDeleteMode
 {
+    UIBarButtonItem *edit = self.navigationItem.rightBarButtonItems[0];
     if(isDeleteMode == NO)
     {
         isDeleteMode = YES;
-        self.navigationItem.rightBarButtonItem.title = @"返回";
+        edit.title = @"返回";
         [self.collectionView performBatchUpdates:^{
             NSArray *itemPathsToDel = [NSArray arrayWithObjects:
                                        [NSIndexPath indexPathForItem:[self.cityArray count]-1 inSection:0], nil];
@@ -199,7 +208,7 @@
     }else
     {
         isDeleteMode = NO;
-        self.navigationItem.rightBarButtonItem.title = @"编辑";
+        edit.title = @"编辑";
         [self.collectionView performBatchUpdates:^{
             NSArray *itemPathsToAdd = [NSArray arrayWithObjects:
                                        [NSIndexPath indexPathForItem:[self.cityArray count] inSection:0], nil];
@@ -208,6 +217,21 @@
             [self.collectionView insertItemsAtIndexPaths:itemPathsToAdd];
         } completion:nil];
         [self updateCellToMode:YES];
+    }
+}
+
+- (void) refresh
+{
+    DDLogDebug(@"refresh the weather");
+    for(NSInteger i = 0; i < [self.cityArray count]-1 ;i++)
+    {
+        XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        XXBWeatherInfo *weatherInfo = [self.weatherInfos objectAtIndex:i];
+        XXBWeatherDetail *detailToday = [XXBWeatherDetail objectWithKeyValues:[weatherInfo.weather_data objectAtIndex:0]];
+        NSString *urlStr = detailToday.dayPictureUrl;
+        NSURL *url = [NSURL URLWithString:urlStr];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        cell.bgImage.image = [UIImage imageWithData:data];
     }
 }
 
