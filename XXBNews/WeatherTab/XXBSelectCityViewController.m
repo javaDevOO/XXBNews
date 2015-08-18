@@ -130,7 +130,7 @@
 {
     NSString *searchString = [self.searchController.searchBar text];
     
-    NSPredicate *provincePreicate = [NSPredicate predicateWithFormat:@"State CONTAINS[c] %@", searchString];
+//    NSPredicate *provincePreicate = [NSPredicate predicateWithFormat:@"State CONTAINS[c] %@", searchString];
     
     NSPredicate *cityPredicate = [NSPredicate predicateWithFormat:@"city CONTAINS[c] %@",
                                   searchString];
