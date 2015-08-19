@@ -66,13 +66,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocCity) name:@"LocationCity" object:nil];
     
     //读取default中存储的城市
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSString *city = [defaults objectForKey:@"currentCity"];
-//    if(city == nil)
-//    {
-//        city = @"珠海";
-//    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *city = [defaults objectForKey:@"currentCity"];
+    if(city == nil)
+    {
+        city = @"珠海";
+    }
     cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+    if([cityArray count] == 0)
+    {
+        cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",nil]];
+    }
     label.text = [cityArray componentsJoinedByString:@"---"];
     [self loadWeatherData:cityArray];
     
@@ -115,7 +119,7 @@
     if(city && city.city)
     {
         DDLogDebug(@"定位到城市：%@",city.city);
-        [self loadWeatherData:city.city];
+        [self loadWeatherData:[NSArray arrayWithObject:city.city]];
     }
 }
 
@@ -128,6 +132,9 @@
              DDLogDebug(@"get the weather successfully");
              //MJExtention扩展可以将json数据变成model
              //model的属性要和json的关键字对应上，否则会被置为nil
+             [XXBWeatherInfo setupObjectClassInArray:^NSDictionary *{
+                 return [XXBWeatherInfo objectClassInArray];
+             }];
              NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
              self.weatherInfo = weatherInfos;
              for(XXBWeatherInfo *info in self.weatherInfo)

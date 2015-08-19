@@ -20,6 +20,8 @@
 // 天气详情
 @property (nonatomic, strong) NSArray *weather_data;
 
++ (NSDictionary *)objectClassInArray;
+
 @end
 
 // 细节信息

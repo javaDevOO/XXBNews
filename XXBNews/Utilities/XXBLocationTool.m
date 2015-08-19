@@ -45,6 +45,7 @@ static XXBLocationTool *sharedSingleton;
         self.locMgr = [[CLLocationManager alloc] init];
         self.locMgr.delegate = self;
         [self.locMgr startUpdatingLocation];
+        DDLogDebug(@"%@",@"start locating");
     }
     return self;
 }

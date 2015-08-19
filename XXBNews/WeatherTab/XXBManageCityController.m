@@ -233,7 +233,7 @@
     {
         XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         XXBWeatherInfo *weatherInfo = [self.weatherInfos objectAtIndex:i];
-        XXBWeatherDetail *detailToday = [XXBWeatherDetail objectWithKeyValues:[weatherInfo.weather_data objectAtIndex:0]];
+        XXBWeatherDetail *detailToday = [weatherInfo.weather_data objectAtIndex:0];
         NSString *urlStr = detailToday.dayPictureUrl;
         
         [cell.bgImage sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"tabbar_home_selected"]];

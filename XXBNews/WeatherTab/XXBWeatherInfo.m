@@ -8,7 +8,16 @@
 
 #import "XXBWeatherInfo.h"
 
+#import "MJExtension.h"
+
 @implementation XXBWeatherInfo
+
++ (NSDictionary *)objectClassInArray
+{
+    return @{@"index": [XXBIndexDetail class], @"weather_data": [XXBWeatherDetail class]};
+}
+
+
 @end
 
 
