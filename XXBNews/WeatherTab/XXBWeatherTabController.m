@@ -24,7 +24,7 @@
 
 @interface XXBWeatherTabController ()
 
-@property (nonatomic, strong) NSArray *weatherInfo;
+@property (nonatomic, strong) NSArray *weatherInfos;
 @property (nonatomic, strong) UIPageViewController *pageController;
 
 @end
@@ -54,11 +54,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //增加手势
-    UITapGestureRecognizer *recognizer;
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [self.view addGestureRecognizer:recognizer];
     
     //调用了LocationTool的初始化方法
     [XXBLocationTool sharedInstance];
@@ -106,13 +101,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) handleTap:(UITapGestureRecognizer *)recognizer
-{
-    NSLog(@"Tap");
-    XXBMainTabBarController *tabBarController = (XXBMainTabBarController *)[[[UIApplication sharedApplication] delegate] window].rootViewController;
-    [tabBarController goToIndex:2];
-}
-
 - (void) updateLocCity
 {
     XXBCity *city = [XXBLocationTool sharedInstance].locationCity;
@@ -136,8 +124,8 @@
                  return [XXBWeatherInfo objectClassInArray];
              }];
              NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
-             self.weatherInfo = weatherInfos;
-             for(XXBWeatherInfo *info in self.weatherInfo)
+             self.weatherInfos = weatherInfos;
+             for(XXBWeatherInfo *info in self.weatherInfos)
              {
                  info.date = json[@"date"];
              }
@@ -160,26 +148,24 @@
 {
     XXBManageCityController *manageCityController = [[XXBManageCityController alloc] init];
     manageCityController.hidesBottomBarWhenPushed = YES;
-    manageCityController.weatherInfos = self.weatherInfo;
+    manageCityController.weatherInfos = self.weatherInfos;
     [self.navigationController pushViewController:manageCityController animated:YES];
 }
 
 // 得到相应的VC对象
 - (XXBWeatherInfoViewController *)viewControllerAtIndex:(NSInteger)index {
-    if (([self.weatherInfo count] == 0) || (index >= [self.weatherInfo count])) {
+    if (([self.weatherInfos count] == 0) || (index >= [self.weatherInfos count])) {
         return nil;
     }
     // 创建一个新的控制器类，并且分配给相应的数据
-    XXBWeatherInfoViewController *dataViewController =[[XXBWeatherInfoViewController alloc] init];
-    XXBWeatherInfo *info = [self.weatherInfo objectAtIndex:index];
-    dataViewController.weatherInfo = info;
-    [dataViewController refresh];
+    XXBWeatherInfo *info = [self.weatherInfos objectAtIndex:index];
+    XXBWeatherInfoViewController *dataViewController =[[XXBWeatherInfoViewController alloc] initWithWeatherInfo:info];
     DDLogDebug(@"create new view controller");
     return dataViewController;
 }
 // 根据数组元素值，得到下标值
 - (NSInteger)indexOfViewController:(XXBWeatherInfoViewController *)viewController {
-    return [self.weatherInfo indexOfObject:viewController.weatherInfo];
+    return [self.weatherInfos indexOfObject:viewController.weatherInfo];
 }
 
 #pragma mark- UIPageViewControllerDataSource
@@ -200,20 +186,10 @@
         return nil;
     }
     index++;
-    if (index == [self.weatherInfo count]) {
+    if (index == [self.weatherInfos count]) {
         return nil;
     }
     return [self viewControllerAtIndex:index];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

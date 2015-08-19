@@ -183,6 +183,7 @@
     } completion:nil];
 }
 
+#pragma select city delegate
 - (void) selectCity
 {
     XXBSelectCityViewController *selectController = [[XXBSelectCityViewController alloc] init];

@@ -29,7 +29,7 @@
     
     [self.window makeKeyAndVisible];
     
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     return YES;
 }
 

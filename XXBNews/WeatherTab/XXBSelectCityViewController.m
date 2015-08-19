@@ -11,6 +11,7 @@
 
 #import "XXBFileUtilities.h"
 
+
 @interface XXBSelectCityViewController ()
 
 @property (nonatomic, strong) NSArray *provincesAndCities;
@@ -38,7 +39,6 @@
         self.searchController.searchBar.frame = CGRectMake(0,0, self.searchController.searchBar.frame.size.width, 44.0);
         self.tableView.tableHeaderView = self.searchController.searchBar;
         
-        self.tableView.frame = CGRectMake(0, 0, [UIDevice currentWidth],[UIDevice currentHeight]);
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         
