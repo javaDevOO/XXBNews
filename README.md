@@ -6,3 +6,6 @@ An APP demo to practice ios programming skill.Try to use different features of i
 1. CocoaLumberjack
 1. CocoaPods
 1. VVDocumenter
+1. ReTableViewManager
+1. PNChart
+1. SDWebImage

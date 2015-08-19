@@ -11,9 +11,14 @@
 		CE73E4791B7B69B30006568C /* XXBLocationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E4781B7B69B30006568C /* XXBLocationTool.m */; };
 		CE73E47C1B7B79CE0006568C /* XXBManageCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */; };
 		CE73E47F1B7B7FB20006568C /* XXBCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E47E1B7B7FB20006568C /* XXBCityCell.m */; };
+		CE7923531B80A1AE0076395A /* XXBMemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79234C1B80A1AE0076395A /* XXBMemoCell.m */; };
+		CE7923561B80A1AE0076395A /* XXBMemoTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7923521B80A1AE0076395A /* XXBMemoTabController.m */; };
+		CE7923591B80A2AD0076395A /* XXBMemoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7923581B80A2AD0076395A /* XXBMemoItem.m */; };
+		CE79235C1B80A2E30076395A /* XXBMemoSection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79235B1B80A2E30076395A /* XXBMemoSection.m */; };
+		CE79235F1B80A78C0076395A /* XXBMemoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79235E1B80A78C0076395A /* XXBMemoHeaderCell.m */; };
+		CE7A418D1B8322A8003CACF5 /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A418C1B8322A8003CACF5 /* UILabel+VerticalAlign.m */; };
 		CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */; };
 		CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */; };
-		CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BE1B73476100FE7AA4 /* XXBToolsTabController.m */; };
 		CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */; };
 		CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C41B73476100FE7AA4 /* XXBMainTabBarButton.m */; };
 		CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C61B73476100FE7AA4 /* XXBMainTabBarView.m */; };
@@ -59,12 +64,22 @@
 		CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBManageCityController.m; sourceTree = "<group>"; };
 		CE73E47D1B7B7FB20006568C /* XXBCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBCityCell.h; sourceTree = "<group>"; };
 		CE73E47E1B7B7FB20006568C /* XXBCityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBCityCell.m; sourceTree = "<group>"; };
+		CE79234B1B80A1AE0076395A /* XXBMemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBMemoCell.h; path = XXBNews/MemoTab/XXBMemoCell.h; sourceTree = SOURCE_ROOT; };
+		CE79234C1B80A1AE0076395A /* XXBMemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBMemoCell.m; path = XXBNews/MemoTab/XXBMemoCell.m; sourceTree = SOURCE_ROOT; };
+		CE7923511B80A1AE0076395A /* XXBMemoTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBMemoTabController.h; path = XXBNews/MemoTab/XXBMemoTabController.h; sourceTree = SOURCE_ROOT; };
+		CE7923521B80A1AE0076395A /* XXBMemoTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBMemoTabController.m; path = XXBNews/MemoTab/XXBMemoTabController.m; sourceTree = SOURCE_ROOT; };
+		CE7923571B80A2AD0076395A /* XXBMemoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBMemoItem.h; path = XXBNews/MemoTab/XXBMemoItem.h; sourceTree = SOURCE_ROOT; };
+		CE7923581B80A2AD0076395A /* XXBMemoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBMemoItem.m; path = XXBNews/MemoTab/XXBMemoItem.m; sourceTree = SOURCE_ROOT; };
+		CE79235A1B80A2E30076395A /* XXBMemoSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBMemoSection.h; path = XXBNews/MemoTab/XXBMemoSection.h; sourceTree = SOURCE_ROOT; };
+		CE79235B1B80A2E30076395A /* XXBMemoSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBMemoSection.m; path = XXBNews/MemoTab/XXBMemoSection.m; sourceTree = SOURCE_ROOT; };
+		CE79235D1B80A78C0076395A /* XXBMemoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBMemoHeaderCell.h; path = XXBNews/MemoTab/XXBMemoHeaderCell.h; sourceTree = SOURCE_ROOT; };
+		CE79235E1B80A78C0076395A /* XXBMemoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBMemoHeaderCell.m; path = XXBNews/MemoTab/XXBMemoHeaderCell.m; sourceTree = SOURCE_ROOT; };
+		CE7A418B1B8322A8003CACF5 /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
+		CE7A418C1B8322A8003CACF5 /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
 		CE7EF6B71B73476100FE7AA4 /* XXBMoreInfoTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMoreInfoTabController.h; sourceTree = "<group>"; };
 		CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMoreInfoTabController.m; sourceTree = "<group>"; };
 		CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XXBNewsTabController .m"; sourceTree = "<group>"; };
 		CE7EF6BB1B73476100FE7AA4 /* XXBNewsTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBNewsTabController.h; sourceTree = "<group>"; };
-		CE7EF6BD1B73476100FE7AA4 /* XXBToolsTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBToolsTabController.h; sourceTree = "<group>"; };
-		CE7EF6BE1B73476100FE7AA4 /* XXBToolsTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBToolsTabController.m; sourceTree = "<group>"; };
 		CE7EF6C01B73476100FE7AA4 /* UIDevice+Resolutions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Resolutions.h"; sourceTree = "<group>"; };
 		CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Resolutions.m"; sourceTree = "<group>"; };
 		CE7EF6C31B73476100FE7AA4 /* XXBMainTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarButton.h; sourceTree = "<group>"; };
@@ -158,12 +173,21 @@
 			path = NewsTab;
 			sourceTree = "<group>";
 		};
-		CE7EF6BC1B73476100FE7AA4 /* ToolsTab */ = {
+		CE7EF6BC1B73476100FE7AA4 /* MemoTab */ = {
 			isa = PBXGroup;
 			children = (
-				CE7EF6BD1B73476100FE7AA4 /* XXBToolsTabController.h */,
-				CE7EF6BE1B73476100FE7AA4 /* XXBToolsTabController.m */,
+				CE7923511B80A1AE0076395A /* XXBMemoTabController.h */,
+				CE7923521B80A1AE0076395A /* XXBMemoTabController.m */,
+				CE79234B1B80A1AE0076395A /* XXBMemoCell.h */,
+				CE79234C1B80A1AE0076395A /* XXBMemoCell.m */,
+				CE7923571B80A2AD0076395A /* XXBMemoItem.h */,
+				CE7923581B80A2AD0076395A /* XXBMemoItem.m */,
+				CE79235A1B80A2E30076395A /* XXBMemoSection.h */,
+				CE79235B1B80A2E30076395A /* XXBMemoSection.m */,
+				CE79235D1B80A78C0076395A /* XXBMemoHeaderCell.h */,
+				CE79235E1B80A78C0076395A /* XXBMemoHeaderCell.m */,
 			);
+			name = MemoTab;
 			path = ToolsTab;
 			sourceTree = "<group>";
 		};
@@ -179,6 +203,8 @@
 				CE86CF5C1B78D28E00DD54C1 /* XXBFileUtilities.m */,
 				CE7EF6C01B73476100FE7AA4 /* UIDevice+Resolutions.h */,
 				CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */,
+				CE7A418B1B8322A8003CACF5 /* UILabel+VerticalAlign.h */,
+				CE7A418C1B8322A8003CACF5 /* UILabel+VerticalAlign.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -240,7 +266,7 @@
 			children = (
 				CE7EF6C71B73476100FE7AA4 /* WeatherTab */,
 				CE7EF6B91B73476100FE7AA4 /* NewsTab */,
-				CE7EF6BC1B73476100FE7AA4 /* ToolsTab */,
+				CE7EF6BC1B73476100FE7AA4 /* MemoTab */,
 				CE7EF6B61B73476100FE7AA4 /* MoreInfoTab */,
 				CE7EF6BF1B73476100FE7AA4 /* Utilities */,
 				CE7EF6C21B73476100FE7AA4 /* View */,
@@ -449,17 +475,22 @@
 				CE86CF5D1B78D28E00DD54C1 /* XXBFileUtilities.m in Sources */,
 				CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */,
 				CE7EF6D31B734ACC00FE7AA4 /* XXBBaseTabViewController.m in Sources */,
+				CE79235F1B80A78C0076395A /* XXBMemoHeaderCell.m in Sources */,
 				CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */,
+				CE7923561B80A1AE0076395A /* XXBMemoTabController.m in Sources */,
+				CE79235C1B80A2E30076395A /* XXBMemoSection.m in Sources */,
 				CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */,
 				CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */,
+				CE7A418D1B8322A8003CACF5 /* UILabel+VerticalAlign.m in Sources */,
 				CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */,
+				CE7923591B80A2AD0076395A /* XXBMemoItem.m in Sources */,
 				CEDA81471B7F5550002FA940 /* XXBWeatherInfoViewController.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
 				CE73E47F1B7B7FB20006568C /* XXBCityCell.m in Sources */,
 				CEC5D64E1B763CA600CCCF6E /* XXBHttpTool.m in Sources */,
 				CE73E47C1B7B79CE0006568C /* XXBManageCityController.m in Sources */,
-				CE7EF6CC1B73476100FE7AA4 /* XXBToolsTabController.m in Sources */,
 				CE73E4791B7B69B30006568C /* XXBLocationTool.m in Sources */,
+				CE7923531B80A1AE0076395A /* XXBMemoCell.m in Sources */,
 				CE5960F01B76011300541A47 /* XXBWeatherInfo.m in Sources */,
 				CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */,
 				CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */,
