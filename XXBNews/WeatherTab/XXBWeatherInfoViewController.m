@@ -19,14 +19,12 @@
     if(self)
     {
         self.weatherInfo = info;
-        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 88, [UIDevice currentWidth]/2, 30)];
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 88, [UIDevice currentWidth], 30)];
         [self.view addSubview:self.label];
         self.label.text = self.weatherInfo.currentCity;
         self.label.textAlignment = NSTextAlignmentCenter;
         
-        //注册KVC
-//        [self.weatherInfo addObserver:self forKeyPath:@"currentCity" options:NSKeyValueObservingOptionNew context:nil];
-        [self addObserver:self forKeyPath:@"weatherInfo" options:NSKeyValueObservingOptionNew context:nil];
+        [info addObserver:self forKeyPath:@"currentCity" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }
@@ -36,7 +34,7 @@
 {
     [super viewDidLoad];
     
-    // 初识话chart
+    // 初始化chart
     [self setupChart];
     DDLogDebug(@"%f",self.view.bounds.size.width);
     
@@ -46,7 +44,7 @@
 // 设置曲线图
 - (void) setupChart
 {
-    PNLineChart *lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135, [UIDevice currentWidth]/2, 200)];
+    PNLineChart *lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135, [UIDevice currentWidth], 200)];
     //两条数据曲线的数据
     DDLogDebug(@"the width of the device is%lu",(unsigned long)[UIDevice currentWidth]);
     NSMutableArray *highTempData = [NSMutableArray array];
@@ -92,11 +90,16 @@
 //一旦weatherinfo属性的值发生改变，就会调用这个方法
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if([keyPath isEqualToString:@"weatherInfo"] && object==self)
+    if([keyPath isEqualToString:@"currentCity"] && object==self.weatherInfo)
     {
         DDLogDebug(@"%@",@"the value of weather info has changed");
         self.label.text = self.weatherInfo.currentCity;
     }
+}
+
+- (void)dealloc
+{
+    [self.weatherInfo removeObserver:self forKeyPath:@"currentCity"];
 }
 
 @end

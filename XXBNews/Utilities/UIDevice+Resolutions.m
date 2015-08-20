@@ -17,14 +17,14 @@
 + (NSUInteger) currentHeight
 {
     CGSize result = [[UIScreen mainScreen] bounds].size;
-    result = CGSizeMake(result.width * [UIScreen mainScreen].scale, result.height * [UIScreen mainScreen].scale);
+//    result = CGSizeMake(result.width * [UIScreen mainScreen].scale, result.height * [UIScreen mainScreen].scale);
     return result.height;
 }
 
 + (NSUInteger) currentWidth
 {
     CGSize result = [[UIScreen mainScreen] bounds].size;
-    result = CGSizeMake(result.width * [UIScreen mainScreen].scale, result.height * [UIScreen mainScreen].scale);
+//    result = CGSizeMake(result.width * [UIScreen mainScreen].scale, result.height * [UIScreen mainScreen].scale);
     return result.width;
 }
 

@@ -10,7 +10,7 @@
 
 @implementation XXBCityCell
 {
-    UIView *deleteView;
+    UIImageView *deleteView;
 }
 
 //自定义cell的时候一定要重写这个方法
@@ -23,12 +23,14 @@
         UIView *backgroundView = [[UIView alloc] initWithFrame:self.bounds];
         backgroundView.backgroundColor = [UIColor redColor];
         self.backgroundView = backgroundView;
+        
 //        UIView* selectedBGView = [[UIView alloc] initWithFrame:self.bounds];
 //        selectedBGView.backgroundColor = [UIColor greenColor];
 //        self.selectedBackgroundView = selectedBGView;
         // TODO: 找一张删除的图片换上
-        deleteView = [[UIView alloc] initWithFrame:CGRectMake(self.bounds.size.width*7/8, 0, self.bounds.size.width/8, self.bounds.size.width/8)];
-        deleteView.backgroundColor = [UIColor blueColor];
+        deleteView = [[UIImageView alloc] initWithFrame:CGRectMake(self.bounds.size.width*7/8, 0, self.bounds.size.width/6, self.bounds.size.width/6)];
+        deleteView.center = CGPointMake(self.bounds.size.width-5, 5);
+        deleteView.image = [UIImage imageNamed:@"delete_city_btn"];
         [self.contentView addSubview:deleteView];
         [self hideDelBtn];
         

@@ -29,7 +29,7 @@ typedef NSUInteger UIDeviceResolution;
 
 /**
  *  get cureent screen height;
- @return     height
+ @return     单位时point
  */
 + (NSUInteger) currentHeight;
 
