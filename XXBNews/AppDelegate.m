@@ -29,7 +29,6 @@
     
     [self.window makeKeyAndVisible];
     
-    //NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     return YES;
 }
 
@@ -37,12 +36,6 @@
 {
     //NSInteger selectedIndex = [tabBarController.viewControllers indexOfObject:viewController];
     NSLog(@"delegate:view controller change");
-}
-
-void uncaughtExceptionHandler(NSException *exception) {
-    NSLog(@"CRASH: %@", exception);
-    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-    // Internal error reporting
 }
 
 @end

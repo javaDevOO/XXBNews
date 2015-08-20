@@ -44,10 +44,12 @@
     return self;
 }
 
+
 - (void) hideDelBtn
 {
     deleteView.hidden = YES;
 }
+
 
 - (void) showDelBtn
 {

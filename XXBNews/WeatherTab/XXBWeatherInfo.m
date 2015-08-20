@@ -17,14 +17,11 @@
     return @{@"index": [XXBIndexDetail class], @"weather_data": [XXBWeatherDetail class]};
 }
 
-
-
 @end
 
 
 @implementation XXBIndexDetail
 @end
-
 
 
 @implementation XXBWeatherDetail
@@ -42,6 +39,5 @@
     NSNumber *low = [NSNumber numberWithInt:[stringList[1] intValue]];
     return low;
 }
-
 
 @end

@@ -15,6 +15,5 @@
 @property (nonatomic, strong) XXBWeatherInfo *weatherInfo;
 
 - (id) initWithWeatherInfo:(XXBWeatherInfo *)info;
-- (void) refresh;
 
 @end

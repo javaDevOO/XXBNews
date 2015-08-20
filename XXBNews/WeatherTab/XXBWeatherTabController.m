@@ -8,26 +8,21 @@
 
 #import "XXBWeatherTabController.h"
 #import "XXBMainTabBarController.h"
-
 #import "XXBWeatherManager.h"
-
 #import "XXBWeatherInfo.h"
 #import "MJExtension.h"
-
 #import "XXBSelectCityViewController.h"
-
 #import "XXBLocationTool.h"
-
 #import "XXBManageCityController.h"
-
 #import "XXBWeatherInfoViewController.h"
 
 @interface XXBWeatherTabController ()
 
-@property (nonatomic, strong) NSArray *weatherInfos;
+@property (nonatomic, strong) NSArray *weatherInfos; // 天气信息的数组
 @property (nonatomic, strong) UIPageViewController *pageController;
 
 @end
+
 
 @implementation XXBWeatherTabController
 {
@@ -35,6 +30,7 @@
     UILabel *label;
     __block dispatch_semaphore_t getInfoFinishSemaphore;
 }
+
 
 - (id) init
 {
@@ -49,8 +45,8 @@
         getInfoFinishSemaphore = dispatch_semaphore_create(1);
     }
     return self;
-    
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,11 +59,14 @@
     //读取default中存储的城市
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *city = [defaults objectForKey:@"currentCity"];
+    //第一次安装，定位到城市
     if(city == nil)
     {
         city = @"珠海";
     }
+
     cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+    // 第一次安装，没有城市列表
     if([cityArray count] == 0)
     {
         cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",nil]];
@@ -76,7 +75,6 @@
     [self loadWeatherData:cityArray];
     
     NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:UIPageViewControllerSpineLocationMin] forKey:UIPageViewControllerOptionSpineLocationKey];
-    
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:options];
     self.pageController.dataSource = self;
     self.pageController.delegate = self;
@@ -85,6 +83,7 @@
     
     //此时weatherinfo的数据还没有返回，需要进行同步
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
+        //要等到返回天气数据时才往下执行
         dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             XXBWeatherInfoViewController *initialViewController =[self viewControllerAtIndex:0];// 得到第一页
@@ -96,11 +95,6 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void) updateLocCity
 {
     XXBCity *city = [XXBLocationTool sharedInstance].locationCity;
@@ -110,6 +104,7 @@
         [self loadWeatherData:[NSArray arrayWithObject:city.city]];
     }
 }
+
 
 - (void) loadWeatherData:(NSArray *)cities
 {
@@ -138,11 +133,8 @@
              dispatch_semaphore_signal(getInfoFinishSemaphore);
          }
      ];
-    
-    //最简单的数据持久化
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:city forKey:@"currentCity"];
 }
+
 
 - (void) manageCity
 {
@@ -152,7 +144,10 @@
     [self.navigationController pushViewController:manageCityController animated:YES];
 }
 
-// 得到相应的VC对象
+
+/**
+ *  得到相应的VC对象, 供pageview显示
+ */
 - (XXBWeatherInfoViewController *)viewControllerAtIndex:(NSInteger)index {
     if (([self.weatherInfos count] == 0) || (index >= [self.weatherInfos count])) {
         return nil;
@@ -163,11 +158,17 @@
     DDLogDebug(@"create new view controller");
     return dataViewController;
 }
-// 根据数组元素值，得到下标值
+
+
+/**
+ *  根据数组元素值，得到下标值
+ */
 - (NSInteger)indexOfViewController:(XXBWeatherInfoViewController *)viewController {
     return [self.weatherInfos indexOfObject:viewController.weatherInfo];
 }
 
+
+// pageviewcontroller的delegate
 #pragma mark- UIPageViewControllerDataSource
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
@@ -178,6 +179,7 @@
     index--;
     return [self viewControllerAtIndex:index];
 }
+
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
     

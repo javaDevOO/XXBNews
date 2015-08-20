@@ -10,6 +10,9 @@
 #import "XXBBaseTabViewController.h"
 #import "CitySelectDelegate.h"
 
+/**
+ *  天气tab页，内嵌一个pageview
+ */
 @interface XXBWeatherTabController : XXBBaseTabViewController<UIPageViewControllerDataSource,UIPageViewControllerDelegate>
 
 @end

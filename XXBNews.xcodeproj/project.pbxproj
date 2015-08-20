@@ -223,10 +223,9 @@
 		CE7EF6C71B73476100FE7AA4 /* WeatherTab */ = {
 			isa = PBXGroup;
 			children = (
+				CE8CAE6F1B85D3D5006FE0CA /* Model */,
 				CE7EF6C81B73476100FE7AA4 /* XXBWeatherTabController.h */,
 				CE7EF6C91B73476100FE7AA4 /* XXBWeatherTabController.m */,
-				CE5960EE1B76011300541A47 /* XXBWeatherInfo.h */,
-				CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */,
 				CEDA81451B7F5550002FA940 /* XXBWeatherInfoViewController.h */,
 				CEDA81461B7F5550002FA940 /* XXBWeatherInfoViewController.m */,
 				CEC5D6491B76307E00CCCF6E /* XXBWeatherManager.h */,
@@ -333,6 +332,15 @@
 			name = Delegate;
 			path = XXBNews/Delegate;
 			sourceTree = SOURCE_ROOT;
+		};
+		CE8CAE6F1B85D3D5006FE0CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE5960EE1B76011300541A47 /* XXBWeatherInfo.h */,
+				CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 

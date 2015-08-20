@@ -17,6 +17,7 @@
 {
     // 请求参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
     // 百度开放平台上的文档没写清楚，还需要一个mcode参数
     params[@"location"] = [cities componentsJoinedByString:@"|"];
     params[@"output"] = @"json";

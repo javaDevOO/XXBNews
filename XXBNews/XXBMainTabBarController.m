@@ -113,15 +113,4 @@
     }
 }
 
-- (void)goToIndex:(NSInteger)to
-{
-    if(self.lastIndex != to)
-    {
-        NSLog([NSString stringWithFormat:@"go to index %d",(int)to]);
-        self.selectedIndex = to;
-        self.lastIndex = to;
-    }
-}
-
-
 @end

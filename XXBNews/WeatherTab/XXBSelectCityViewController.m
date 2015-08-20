@@ -8,9 +8,7 @@
 
 #import "XXBSelectCityViewController.h"
 #import "UIDevice+Resolutions.h"
-
 #import "XXBFileUtilities.h"
-
 
 @interface XXBSelectCityViewController ()
 
@@ -18,6 +16,7 @@
 @property (nonatomic, strong) NSMutableArray *searchResultList;
 
 @end
+
 
 @implementation XXBSelectCityViewController
 
@@ -32,26 +31,33 @@
             self.provincesAndCities = [NSArray arrayWithContentsOfFile:[XXBFileUtilities getFilePathString:@"ProvincesAndCities.plist" ofType:nil]];
         }
         
-        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-        self.searchController.searchResultsUpdater = self;
-        self.searchController.dimsBackgroundDuringPresentation = NO;
-        self.searchController.hidesNavigationBarDuringPresentation = NO;
-        self.searchController.searchBar.frame = CGRectMake(0,0, self.searchController.searchBar.frame.size.width, 44.0);
-        self.tableView.tableHeaderView = self.searchController.searchBar;
-        
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-        
+        //初始化search controller
+        [self setupSearchCotroller];
     }
     return self;
 }
 
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
     self.title = @"选择城市";
 }
+
+
+- (void) setupSearchCotroller
+{
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
+    self.searchController.searchBar.frame = CGRectMake(0,0, self.searchController.searchBar.frame.size.width, 44.0);
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+}
+
 
 # pragma tableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -61,6 +67,7 @@
     else
         return self.provincesAndCities.count;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -76,8 +83,8 @@
         NSArray *cities = provinces[@"Cities"];
         return cities.count;
     }
-    
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -99,6 +106,7 @@
     return cell;
 }
 
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     
@@ -109,6 +117,7 @@
     }
     return provinces[@"State"];
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -126,21 +135,21 @@
 }
 
 
+#pragma searchcontroller delegate
 - (void) updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     NSString *searchString = [self.searchController.searchBar text];
     
-//    NSPredicate *provincePreicate = [NSPredicate predicateWithFormat:@"State CONTAINS[c] %@", searchString];
-    
+    // 新建谓词
     NSPredicate *cityPredicate = [NSPredicate predicateWithFormat:@"city CONTAINS[c] %@",
                                   searchString];
     
     if (self.searchResultList!= nil) {
         [self.searchResultList removeAllObjects];
     }
+    
     //过滤数据
     // TODO:目前只能按省搜索，暂时不知道怎么用谓词搜索到城市
-//    self.searchResultList= [NSMutableArray arrayWithArray:[self.provincesAndCities filteredArrayUsingPredicate:provincePreicate]];
     self.searchResultList = [[NSMutableArray alloc] init];
     for(id pro in self.provincesAndCities)
     {
@@ -155,9 +164,9 @@
     }
 
     //刷新表格
-    
     [self.tableView reloadData];
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -166,7 +175,5 @@
     self.searchController.searchBar.hidden = YES;
     self.searchController.active = NO;
 }
-
-
 
 @end

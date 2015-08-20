@@ -8,23 +8,19 @@
 
 #import "XXBManageCityController.h"
 #import "XXBFileUtilities.h"
-
 #import "XXBCityCell.h"
-
 #import "XXBSelectCityViewController.h"
-
 #import "XXBWeatherInfo.h"
-
 #import "MJExtension.h"
-
 #import "UIImageView+WebCache.h"
-
 
 @interface XXBManageCityController()
 
 @property (nonatomic, strong) NSMutableArray *cityArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
+
 @end
+
 
 @implementation XXBManageCityController
 {
@@ -54,29 +50,35 @@
             self.cityArray = [NSMutableArray arrayWithObjects:@"深圳",nil];
         }
         
-        // 创建collection的时候要有layout属性
-        UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
-        self.collectionView.backgroundColor = [UIColor whiteColor];
-        
-        //要注册cell,如果用到了header和footer（supplementary views），也要进行注册
-        [self.collectionView registerClass:[XXBCityCell class] forCellWithReuseIdentifier:@"CollectionCellIdentifier"];
-        self.collectionView.delegate = self;
-        self.collectionView.dataSource = self;
-        
-        //允许多选
-        //self.collectionView.allowsMultipleSelection = YES;
-        
-        [self.view addSubview:self.collectionView];
-
+        [self setupCollectionView];
     }
     return self;
 }
+
 
 - (void) viewDidLoad
 {
     [super viewDidLoad];
 }
+
+
+- (void) setupCollectionView
+{
+    // 创建collection的时候要有layout属性
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    
+    //要注册cell,如果用到了header和footer（supplementary views），也要进行注册
+    [self.collectionView registerClass:[XXBCityCell class] forCellWithReuseIdentifier:@"CollectionCellIdentifier"];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    
+    //允许多选
+    //self.collectionView.allowsMultipleSelection = YES;
+    [self.view addSubview:self.collectionView];
+}
+
 
 #pragma datasource委托
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -85,11 +87,13 @@
     return 1;
 }
 
+
 // 一个section有多少个cell，flowlayout中有多少列由cell的大小来决定
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [self.cityArray count];
 }
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -102,11 +106,13 @@
     return cell;
 }
 
+
 //设置每个cell的大小
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(100, 120);
 }
+
 
 // 设置每组cell的边距，实际上是每个section的边距
 - (UIEdgeInsets) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -114,17 +120,20 @@
     return UIEdgeInsetsMake(15.0, 15.0, 15.0, 15.0);
 }
 
+
 // 设置最小列间距
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 20.0;
 }
 
+
 //设置行与行之间的间距，由于只有一个section，section参数没有用到
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 20.0;
 }
+
 
 // 选择了某个cell
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -146,6 +155,7 @@
     }
 }
 
+
 #pragma citySelectDelegate
 // 在collection中添加cell
 - (void) selectCityViewDidSelectCity:(NSString *)city
@@ -165,11 +175,8 @@
     [self saveCityArrayToDefault];
 }
 
-/**
- *  删除path对应的cell
- *
- *  @param path 要删除的cell的path
- */
+
+// 删除path对应的cell
 - (void) deleteCityAtIndexPath:(NSIndexPath *)path
 {
     [self.collectionView performBatchUpdates:^{
@@ -183,6 +190,7 @@
     } completion:nil];
 }
 
+
 #pragma select city delegate
 - (void) selectCity
 {
@@ -193,6 +201,7 @@
     
     [self.navigationController pushViewController:selectController animated:YES];
 }
+
 
 - (void) toggleDeleteMode
 {
@@ -222,6 +231,7 @@
             [self.collectionView insertItemsAtIndexPaths:itemPathsToAdd];
         } completion:nil];
         [self updateCellToMode:YES];
+   
     }
 }
 
@@ -241,20 +251,15 @@
     }
 }
 
-/**
- *  将城市存到属性列表中
- */
+
+// 将城市存到属性列表中
 - (void) saveCityArrayToDefault
 {
     [[NSUserDefaults standardUserDefaults] setObject:self.cityArray forKey:@"SelectedCities"];
 }
 
 
-/**
- *  更新cell的内容，或许有更好的遍历cell的方式
- *
- *  @param isNormal 是否为正常模式
- */
+// 更新cell的内容，或许有更好的遍历cell的方式
 - (void) updateCellToMode:(BOOL)isNormal
 {
     if(isNormal)
@@ -274,6 +279,7 @@
         }
     }
 }
+
 
 - (void) viewWillDisappear:(BOOL)animated
 {

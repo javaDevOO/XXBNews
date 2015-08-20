@@ -7,10 +7,9 @@
 //
 
 #import "XXBWeatherInfoViewController.h"
-
 #import "PNChart.h"
-
 #import "UIDevice+Resolutions.h"
+
 
 @implementation XXBWeatherInfoViewController
 
@@ -32,19 +31,17 @@
     return self;
 }
 
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
     
+    // 初识话chart
     [self setupChart];
     DDLogDebug(@"%f",self.view.bounds.size.width);
     
 }
 
-- (void) refresh
-{
-    self.label.text = self.weatherInfo.currentCity;
-}
 
 // 设置曲线图
 - (void) setupChart
@@ -90,6 +87,7 @@
     [lineChart strokeChart];
     [self.view addSubview:lineChart];
 }
+
 
 //一旦weatherinfo属性的值发生改变，就会调用这个方法
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
