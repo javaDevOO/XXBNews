@@ -56,9 +56,11 @@
 }
 
 
-- (void) viewDidLoad
+- (void) viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewDidAppear:animated];
+    DDLogDebug(@"%@",@"view did appear");
+    [self refresh];
 }
 
 
@@ -102,7 +104,12 @@
     if(indexPath.item < [self.cityArray count]-1)
         cell.label.text = [self.cityArray objectAtIndex:indexPath.item];
     else
+    {
         cell.label.text = @"添加城市";
+        cell.bgImage.image = [UIImage imageNamed:@"add_city_bg"];
+        cell.layer.borderWidth = 2.0;
+        cell.layer.cornerRadius = 5.0;
+    }
     return cell;
 }
 
@@ -284,7 +291,7 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    DDLogDebug(@"the manage controller will disappear");
+   // DDLogDebug(@"the manage controller will disappear");
     [self saveCityArrayToDefault];
 }
 
