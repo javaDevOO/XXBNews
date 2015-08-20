@@ -24,6 +24,10 @@
         [self.view addSubview:self.label];
         self.label.text = self.weatherInfo.currentCity;
         self.label.textAlignment = NSTextAlignmentCenter;
+        
+        //注册KVC
+//        [self.weatherInfo addObserver:self forKeyPath:@"currentCity" options:NSKeyValueObservingOptionNew context:nil];
+        [self addObserver:self forKeyPath:@"weatherInfo" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }
@@ -55,14 +59,14 @@
     for(int i=0; i<[self.weatherInfo.weather_data count]; i++)
     {
         XXBWeatherDetail *weatherData= [self.weatherInfo.weather_data objectAtIndex:i];
-        NSArray *tempArray = [self parseTemperature:weatherData.temperature];
-        [highTempData addObject:tempArray[0]];
-        [lowTempData addObject:tempArray[1]];
+        [highTempData addObject:[weatherData getHighTemperature]];
+        [lowTempData addObject:[weatherData getLowTemperature]];
         [xLabelArray addObject:weatherData.date];
     }
     xLabelArray[0] = @"今天";
     [lineChart setXLabels:xLabelArray];
     
+    //设置两条曲线的样式和数据源
     PNLineChartData *highData = [PNLineChartData new];
     highData.color = PNRed;
     highData.itemCount = lineChart.xLabels.count;
@@ -87,14 +91,14 @@
     [self.view addSubview:lineChart];
 }
 
-- (NSArray *)parseTemperature:(NSString *)str
+//一旦weatherinfo属性的值发生改变，就会调用这个方法
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    NSArray *stringList = [str componentsSeparatedByString:@"~"];
-    NSNumber *high = [NSNumber numberWithInt:[stringList[0] intValue]];
-    NSNumber *low = [NSNumber numberWithInt:[stringList[1] intValue]];
-    
-    NSArray *result = [NSArray arrayWithObjects:high, low, nil];
-    return result;
+    if([keyPath isEqualToString:@"weatherInfo"] && object==self)
+    {
+        DDLogDebug(@"%@",@"the value of weather info has changed");
+        self.label.text = self.weatherInfo.currentCity;
+    }
 }
 
 @end

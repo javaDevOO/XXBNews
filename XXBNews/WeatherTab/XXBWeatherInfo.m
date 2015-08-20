@@ -18,6 +18,7 @@
 }
 
 
+
 @end
 
 
@@ -27,4 +28,20 @@
 
 
 @implementation XXBWeatherDetail
+
+- (NSNumber *) getHighTemperature
+{
+    NSArray *stringList = [self.temperature componentsSeparatedByString:@"~"];
+    NSNumber *high = [NSNumber numberWithInt:[stringList[0] intValue]];
+    return high;
+}
+
+- (NSNumber *) getLowTemperature
+{
+    NSArray *stringList = [self.temperature componentsSeparatedByString:@"~"];
+    NSNumber *low = [NSNumber numberWithInt:[stringList[1] intValue]];
+    return low;
+}
+
+
 @end

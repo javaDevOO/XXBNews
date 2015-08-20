@@ -22,6 +22,10 @@
 
 + (NSDictionary *)objectClassInArray;
 
+- (NSInteger) getHighTemperature;
+
+- (NSInteger) getLowTemperature;
+
 @end
 
 // 细节信息
@@ -51,5 +55,9 @@
 @property (nonatomic, copy) NSString *dayPictureUrl;
 // 夜间图片url
 @property (nonatomic, copy) NSString *nightPictureUrl;
+
+- (NSNumber *) getHighTemperature;
+
+- (NSNumber *) getLowTemperature;
 @end
 
