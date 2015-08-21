@@ -1,6 +1,6 @@
 //
-// RETableViewCreditCardCell.h
-// RETableViewManager
+// REPresenceValidator.h
+// REValidation
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
 //
@@ -23,24 +23,8 @@
 // THE SOFTWARE.
 //
 
-#import "REFormattedNumberField.h"
-#import "RETableViewCell.h"
-#import "RECreditCardItem.h"
+#import "REValidator.h"
 
-@interface RETableViewCreditCardCell : RETableViewCell <UITextFieldDelegate>
-
-@property (strong, readwrite, nonatomic) RECreditCardItem *item;
-@property (assign, readwrite, nonatomic) CGSize textFieldPositionOffset;
-
-@property (strong, readonly, nonatomic) UIView *wrapperView;
-@property (strong, readonly, nonatomic) UIView *creditCardImageViewContainer;
-@property (strong, readonly, nonatomic) UIImageView *currentImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardBackImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardStackImageView;
-@property (strong, readonly, nonatomic) REFormattedNumberField *creditCardField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *expirationDateField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *cvvField;
-
+@interface REPresenceValidator : REValidator
 
 @end

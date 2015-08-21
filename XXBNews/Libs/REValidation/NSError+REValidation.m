@@ -1,6 +1,6 @@
 //
-// RETableViewCreditCardCell.h
-// RETableViewManager
+// NSError+REValidation.m
+// REValidation
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
 //
@@ -23,24 +23,18 @@
 // THE SOFTWARE.
 //
 
-#import "REFormattedNumberField.h"
-#import "RETableViewCell.h"
-#import "RECreditCardItem.h"
+#import "NSError+REValidation.h"
+#import "REValidation.h"
 
-@interface RETableViewCreditCardCell : RETableViewCell <UITextFieldDelegate>
+@implementation NSError (REValidation)
 
-@property (strong, readwrite, nonatomic) RECreditCardItem *item;
-@property (assign, readwrite, nonatomic) CGSize textFieldPositionOffset;
-
-@property (strong, readonly, nonatomic) UIView *wrapperView;
-@property (strong, readonly, nonatomic) UIView *creditCardImageViewContainer;
-@property (strong, readonly, nonatomic) UIImageView *currentImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardBackImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardStackImageView;
-@property (strong, readonly, nonatomic) REFormattedNumberField *creditCardField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *expirationDateField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *cvvField;
-
++ (NSError *)re_validationErrorForDomain:(NSString *)domain, ...
+{
+    va_list args;
+    va_start(args, domain);
+    NSError *error = [NSError errorWithDomain:domain code:0 userInfo:@{ NSLocalizedDescriptionKey:[[NSString alloc] initWithFormat:[REValidation errorMessageForDomain:domain] arguments:args] }];
+    va_end(args);
+    return error;
+}
 
 @end

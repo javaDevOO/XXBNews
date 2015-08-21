@@ -1,6 +1,6 @@
 //
-// RETableViewCreditCardCell.h
-// RETableViewManager
+// REEmailValidator.m
+// REValidation
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
 //
@@ -23,24 +23,30 @@
 // THE SOFTWARE.
 //
 
-#import "REFormattedNumberField.h"
-#import "RETableViewCell.h"
-#import "RECreditCardItem.h"
+#import "REEmailValidator.h"
+#import "REValidation.h"
 
-@interface RETableViewCreditCardCell : RETableViewCell <UITextFieldDelegate>
+@implementation REEmailValidator
 
-@property (strong, readwrite, nonatomic) RECreditCardItem *item;
-@property (assign, readwrite, nonatomic) CGSize textFieldPositionOffset;
++ (NSString *)name
+{
+    return @"email";
+}
 
-@property (strong, readonly, nonatomic) UIView *wrapperView;
-@property (strong, readonly, nonatomic) UIView *creditCardImageViewContainer;
-@property (strong, readonly, nonatomic) UIImageView *currentImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardBackImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardStackImageView;
-@property (strong, readonly, nonatomic) REFormattedNumberField *creditCardField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *expirationDateField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *cvvField;
-
++ (NSError *)validateObject:(NSString *)object variableName:(NSString *)name parameters:(NSDictionary *)parameters
+{
+    NSString *string = object ? object : @"";
+    if (string.length == 0)
+        return nil;
+    
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSTextCheckingResult *match = [regex firstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
+    
+    if (!match)
+        return [NSError re_validationErrorForDomain:@"com.REValidation.email", name];
+    
+    return nil;
+}
 
 @end

@@ -1,6 +1,6 @@
 //
-// RETableViewCreditCardCell.h
-// RETableViewManager
+// REPresenceValidator.m
+// REValidation
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
 //
@@ -23,24 +23,25 @@
 // THE SOFTWARE.
 //
 
-#import "REFormattedNumberField.h"
-#import "RETableViewCell.h"
-#import "RECreditCardItem.h"
+#import "REPresenceValidator.h"
+#import "NSError+REValidation.h"
 
-@interface RETableViewCreditCardCell : RETableViewCell <UITextFieldDelegate>
+@implementation REPresenceValidator
 
-@property (strong, readwrite, nonatomic) RECreditCardItem *item;
-@property (assign, readwrite, nonatomic) CGSize textFieldPositionOffset;
++ (NSString *)name
+{
+    return @"presence";
+}
 
-@property (strong, readonly, nonatomic) UIView *wrapperView;
-@property (strong, readonly, nonatomic) UIView *creditCardImageViewContainer;
-@property (strong, readonly, nonatomic) UIImageView *currentImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardBackImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardStackImageView;
-@property (strong, readonly, nonatomic) REFormattedNumberField *creditCardField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *expirationDateField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *cvvField;
-
++ (NSError *)validateObject:(NSString *)object variableName:(NSString *)name parameters:(NSDictionary *)parameters
+{
+    if (!object)
+        return [NSError re_validationErrorForDomain:@"com.REValidation.presence", name];
+    
+    if ([object isKindOfClass:[NSString class]] && object.length == 0)
+        return [NSError re_validationErrorForDomain:@"com.REValidation.presence", name];
+    
+    return nil;
+}
 
 @end

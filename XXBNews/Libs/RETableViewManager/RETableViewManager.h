@@ -24,7 +24,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <REValidation/REValidation.h>
+#import "REValidation.h"
 #import "RETableViewSection.h"
 #import "RETableViewCellStyle.h"
 #import "RETableViewCell.h"

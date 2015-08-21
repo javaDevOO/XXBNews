@@ -1,6 +1,6 @@
 //
-// RETableViewCreditCardCell.h
-// RETableViewManager
+// REURLValidator.m
+// REValidation
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
 //
@@ -23,24 +23,29 @@
 // THE SOFTWARE.
 //
 
-#import "REFormattedNumberField.h"
-#import "RETableViewCell.h"
-#import "RECreditCardItem.h"
+#import "REURLValidator.h"
+#import "REValidation.h"
 
-@interface RETableViewCreditCardCell : RETableViewCell <UITextFieldDelegate>
+@implementation REURLValidator
 
-@property (strong, readwrite, nonatomic) RECreditCardItem *item;
-@property (assign, readwrite, nonatomic) CGSize textFieldPositionOffset;
++ (NSString *)name
+{
+    return @"url";
+}
 
-@property (strong, readonly, nonatomic) UIView *wrapperView;
-@property (strong, readonly, nonatomic) UIView *creditCardImageViewContainer;
-@property (strong, readonly, nonatomic) UIImageView *currentImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardBackImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardStackImageView;
-@property (strong, readonly, nonatomic) REFormattedNumberField *creditCardField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *expirationDateField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *cvvField;
-
++ (NSError *)validateObject:(NSString *)object variableName:(NSString *)name parameters:(NSDictionary *)parameters
+{
+    NSString *string = object ? object : @"";
+    if (string.length == 0)
+        return nil;
+    
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^(?i)(?:(?:https?|ftp):\\/\\/)?(?:\\S+(?::\\S*)?@)?(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))(?::\\d{2,5})?(?:\\/[^\\s]*)?$" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSTextCheckingResult *match = [regex firstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
+    if (!match)
+        return [NSError re_validationErrorForDomain:@"com.REValidation.url", name];
+    
+    return nil;
+}
 
 @end

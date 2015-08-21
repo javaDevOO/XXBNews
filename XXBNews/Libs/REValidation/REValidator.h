@@ -1,6 +1,6 @@
 //
-// RETableViewCreditCardCell.h
-// RETableViewManager
+// REValidator.h
+// REValidation
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
 //
@@ -23,24 +23,33 @@
 // THE SOFTWARE.
 //
 
-#import "REFormattedNumberField.h"
-#import "RETableViewCell.h"
-#import "RECreditCardItem.h"
+#import <Foundation/Foundation.h>
 
-@interface RETableViewCreditCardCell : RETableViewCell <UITextFieldDelegate>
+@interface REValidator : NSObject
 
-@property (strong, readwrite, nonatomic) RECreditCardItem *item;
-@property (assign, readwrite, nonatomic) CGSize textFieldPositionOffset;
+@property (strong, readonly, nonatomic) NSDictionary *parameters;
+@property (copy, readwrite, nonatomic) NSError *(^inlineValidation)(id object, NSString *name);
 
-@property (strong, readonly, nonatomic) UIView *wrapperView;
-@property (strong, readonly, nonatomic) UIView *creditCardImageViewContainer;
-@property (strong, readonly, nonatomic) UIImageView *currentImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardBackImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardStackImageView;
-@property (strong, readonly, nonatomic) REFormattedNumberField *creditCardField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *expirationDateField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *cvvField;
+///-----------------------------
+/// @name Getting Validator Instance
+///-----------------------------
 
++ (instancetype)validator;
++ (instancetype)validatorWithParameters:(NSDictionary *)parameters;
++ (instancetype)validatorWithInlineValidation:(NSError *(^)(id object, NSString *name))validation;
+
+///-----------------------------
+/// @name Configuring Representation
+///-----------------------------
+
++ (NSString *)name;
++ (NSDictionary *)parseParameterString:(NSString *)string;
+
+///-----------------------------
+/// @name Validating Objects
+///-----------------------------
+
++ (NSError *)validateObject:(NSObject *)object variableName:(NSString *)name parameters:(NSDictionary *)parameters;
++ (NSError *)validateObject:(NSObject *)object variableName:(NSString *)name validation:(NSError *(^)(id object, NSString *name))validation;
 
 @end

@@ -1,6 +1,6 @@
 //
-// RETableViewCreditCardCell.h
-// RETableViewManager
+// REFormattedNumberField.h
+// REFormattedNumberField
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
 //
@@ -23,24 +23,17 @@
 // THE SOFTWARE.
 //
 
-#import "REFormattedNumberField.h"
-#import "RETableViewCell.h"
-#import "RECreditCardItem.h"
+#import <UIKit/UIKit.h>
+#import "NSString+RENumberFormat.h"
 
-@interface RETableViewCreditCardCell : RETableViewCell <UITextFieldDelegate>
+@interface REFormattedNumberField : UITextField
 
-@property (strong, readwrite, nonatomic) RECreditCardItem *item;
-@property (assign, readwrite, nonatomic) CGSize textFieldPositionOffset;
+@property (copy, readwrite, nonatomic) NSString *format;
+@property (copy, readonly, nonatomic) NSString *unformattedText;
 
-@property (strong, readonly, nonatomic) UIView *wrapperView;
-@property (strong, readonly, nonatomic) UIView *creditCardImageViewContainer;
-@property (strong, readonly, nonatomic) UIImageView *currentImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardBackImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardImageView;
-@property (strong, readonly, nonatomic) UIImageView *creditCardStackImageView;
-@property (strong, readonly, nonatomic) REFormattedNumberField *creditCardField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *expirationDateField;
-@property (strong, readonly, nonatomic) REFormattedNumberField *cvvField;
-
+// Use NSString category NSString+RENumberFormat
+// - (NSString *)re_stringWithNumberFormat:(NSString *)format;
+//
+- (NSString *)string:(NSString *)string withNumberFormat:(NSString *)format __attribute__ ((deprecated));
 
 @end
