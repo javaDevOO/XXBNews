@@ -10,6 +10,7 @@
 #import "XXBMemoCell.h"
 #import "XXBMemoSection.h"
 #import "XXBMemoHeaderCell.h"
+#import "XXBMemoEditController.h"
 
 @interface XXBMemoTabController ()
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -24,6 +25,8 @@
     if(self)
     {
         [self initTabbarItemWithTitle:@"备忘" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
+        
+         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(edit)];
         
         [self initSections];
         
@@ -70,7 +73,7 @@
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     XXBMemoSection *sec = [self.sections objectAtIndex:section];
-    return [sec.memoArray count]+4;
+    return [sec.memoArray count];
 }
 
 
@@ -124,7 +127,7 @@
 // 选择了某个cell
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+   
 }
 
 
@@ -146,6 +149,12 @@
     flowLayout.headerReferenceSize = CGSizeMake(300.0f, 30.0f);  //设置head大小
     //设置其它各种属性
     return flowLayout;
+}
+
+- (void) edit
+{
+    XXBMemoEditController *editController = [[XXBMemoEditController alloc] init];
+    [self.navigationController pushViewController:editController animated:YES];
 }
 
 @end

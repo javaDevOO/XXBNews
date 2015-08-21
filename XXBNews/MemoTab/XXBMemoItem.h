@@ -10,4 +10,8 @@
 
 @interface XXBMemoItem : NSObject
 
+@property (nonatomic, copy)   NSString *content;
+@property (nonatomic, strong) NSDate   *date;
+@property (nonatomic)         BOOL     isDone;
+
 @end
