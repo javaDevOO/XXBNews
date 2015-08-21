@@ -34,7 +34,7 @@
         
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         [self.contentView addSubview:self.imageView];
-        self.imageView.image = [UIImage imageNamed:@"tabbar_home_selected"];
+        self.imageView.image = [UIImage imageNamed:@"memo_cell_bg"];
         
         self.label = [[UILabel alloc] init];
         self.label.frame = CGRectMake(0,0,self.frame.size.width, self.frame.size.height);

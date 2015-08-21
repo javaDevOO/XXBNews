@@ -70,7 +70,7 @@
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     XXBMemoSection *sec = [self.sections objectAtIndex:section];
-    return [sec.memoArray count]+1;
+    return [sec.memoArray count]+4;
 }
 
 
@@ -143,7 +143,7 @@
 // flowlayout专门管理布局，比如设置header的大小
 - (UICollectionViewFlowLayout *) setupFlowLayout{
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.headerReferenceSize = CGSizeMake(300.0f, 50.0f);  //设置head大小
+    flowLayout.headerReferenceSize = CGSizeMake(300.0f, 30.0f);  //设置head大小
     //设置其它各种属性
     return flowLayout;
 }
