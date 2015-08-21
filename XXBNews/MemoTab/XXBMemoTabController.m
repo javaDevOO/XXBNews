@@ -73,7 +73,7 @@
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     XXBMemoSection *sec = [self.sections objectAtIndex:section];
-    return [sec.memoArray count];
+    return [sec.memoArray count]+1;
 }
 
 
@@ -127,7 +127,8 @@
 // 选择了某个cell
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    XXBMemoEditController *editController = [[XXBMemoEditController alloc] init];
+    [self.navigationController pushViewController:editController animated:YES];
 }
 
 

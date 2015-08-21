@@ -110,13 +110,11 @@
     XXBCityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCellIdentifier" forIndexPath:indexPath];
     // 注册过cell,不用再判断是否为nil，若为nil会自动创建
     if(![[self.cityArray objectAtIndex:indexPath.item] isEqualToString:@"+"])
-        cell.label.text = [self.cityArray objectAtIndex:indexPath.item];
+        cell.weatherDetail.cityName = [self.cityArray objectAtIndex:indexPath.item];
     else
     {
-        cell.label.text = @"添加城市";
-        cell.bgImage.image = [UIImage imageNamed:@"add_city_bg"];
-        cell.layer.borderWidth = 2.0;
-        cell.layer.cornerRadius = 5.0;
+        cell.nameLabel.text = @"添加城市";
+        cell.descriptionImgView.image = [UIImage imageNamed:@"add_city_bg"];
     }
     return cell;
 }
@@ -224,7 +222,6 @@
             [self.cityArray removeObjectAtIndex:path.item];
             [self.weatherInfos removeObjectAtIndex:path.item];
         }
-        
         [self.collectionView deleteItemsAtIndexPaths:itemPathsToDel];
     } completion:nil];
 }
@@ -260,7 +257,6 @@
             if(finished)
                 [self updateCellToMode:NO];
         }];
-        
     }else
     {
         isDeleteMode = NO;
@@ -276,7 +272,6 @@
             if(finished)
                 [self updateCellToMode:YES];
         }];
-   
     }
 }
 
@@ -290,9 +285,10 @@
         XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         XXBWeatherInfo *weatherInfo = [self.weatherInfos objectAtIndex:i];
         XXBWeatherDetail *detailToday = [weatherInfo.weather_data objectAtIndex:0];
-        NSString *urlStr = detailToday.dayPictureUrl;
         
-        [cell.bgImage sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"tabbar_home_selected"]];
+        cell.weatherDetail.dayPictureUrl = detailToday.dayPictureUrl;
+        cell.weatherDetail.weather = detailToday.weather;
+        cell.weatherDetail.temperature = detailToday.temperature;
     }
 }
 
@@ -312,7 +308,7 @@
         for(NSInteger i = 0; i < [self.cityArray count] ;i++)
         {
             XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-            [cell hideDelBtn];
+            cell.shouldShowDel = NO;
         }
     }
     else
@@ -320,7 +316,7 @@
         for(NSInteger i = 0; i < [self.cityArray count] ;i++)
         {
             XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-            [cell showDelBtn];
+            cell.shouldShowDel = YES;
         }
     }
 }

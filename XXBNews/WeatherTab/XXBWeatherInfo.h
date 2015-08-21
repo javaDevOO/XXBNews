@@ -41,6 +41,8 @@
 
 // 天气详情
 @interface XXBWeatherDetail : NSObject
+
+@property (nonatomic, copy) NSString *cityName;
 // 日期
 @property (nonatomic, copy) NSString *date;
 // 天气
