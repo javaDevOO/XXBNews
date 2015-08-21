@@ -18,7 +18,6 @@
 
 @interface XXBWeatherTabController ()
 
-@property (nonatomic, strong) NSArray *weatherInfos; // 天气信息的数组
 @property (nonatomic, strong) UIPageViewController *pageController;
 
 @end
@@ -26,7 +25,6 @@
 
 @implementation XXBWeatherTabController
 {
-    NSMutableArray *cityArray;
     UILabel *label;
     __block dispatch_semaphore_t getInfoFinishSemaphore;
 }
@@ -65,14 +63,14 @@
         city = @"珠海";
     }
 
-    cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+    self.cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+    
     // 第一次安装，没有城市列表
-    if([cityArray count] == 0)
+    if([self.cityArray count] == 0 || ([self.cityArray count]==1 && [[self.cityArray lastObject] isEqualToString:@"+"]))
     {
-        cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",nil]];
+        self.cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",nil]];
     }
-    label.text = [cityArray componentsJoinedByString:@"---"];
-    [self loadWeatherData:cityArray];
+    [self loadWeatherData:self.cityArray];
     
     NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:UIPageViewControllerSpineLocationMin] forKey:UIPageViewControllerOptionSpineLocationKey];
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:options];
@@ -101,16 +99,18 @@
     if(city && city.city)
     {
         DDLogDebug(@"定位到城市：%@",city.city);
-        [self loadWeatherData:[NSArray arrayWithObject:city.city]];
+        //[self loadWeatherData:[NSArray arrayWithObject:city.city]];
     }
 }
 
 
 - (void) loadWeatherData:(NSArray *)cities
 {
-    dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
-    [XXBWeatherManager getWeatherDataWithCity:cities
-          success:^(id json)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
+        dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
+        
+        [XXBWeatherManager getWeatherDataWithCity:cities
+                                          success:^(id json)
          {
              DDLogDebug(@"get the weather successfully");
              //MJExtention扩展可以将json数据变成model
@@ -119,7 +119,7 @@
                  return [XXBWeatherInfo objectClassInArray];
              }];
              NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
-             self.weatherInfos = weatherInfos;
+             self.weatherInfos = [NSMutableArray arrayWithArray:weatherInfos];
              for(XXBWeatherInfo *info in self.weatherInfos)
              {
                  info.date = json[@"date"];
@@ -127,20 +127,24 @@
              dispatch_semaphore_signal(getInfoFinishSemaphore);
              //TODO：获取数据成功了，接下来就要将数据显示在界面上
          }
-          failure:^(NSError *error)
+                                          failure:^(NSError *error)
          {
+             // TODO:要是没有网络连接时还要处理
              DDLogDebug(@"get weather info error");
              dispatch_semaphore_signal(getInfoFinishSemaphore);
          }
-     ];
+         ];
+
+    });
 }
 
 
 - (void) manageCity
 {
-    XXBManageCityController *manageCityController = [[XXBManageCityController alloc] init];
+    XXBManageCityController *manageCityController = [[XXBManageCityController alloc] initWithCityArray:self.cityArray];
     manageCityController.hidesBottomBarWhenPushed = YES;
     manageCityController.weatherInfos = self.weatherInfos;
+    
     [self.navigationController pushViewController:manageCityController animated:YES];
 }
 

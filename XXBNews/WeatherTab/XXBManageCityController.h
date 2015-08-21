@@ -15,6 +15,9 @@
  */
 @interface XXBManageCityController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CitySelectDelegate>
 
-@property (nonatomic, strong) NSArray *weatherInfos;
+@property (nonatomic, strong) NSMutableArray *weatherInfos;
+@property (nonatomic, strong) NSMutableArray *cityArray;
+
+- (id) initWithCityArray:(NSMutableArray *)cityArray;
 
 @end

@@ -15,4 +15,8 @@
  */
 @interface XXBWeatherTabController : XXBBaseTabViewController<UIPageViewControllerDataSource,UIPageViewControllerDelegate>
 
+@property (nonatomic, strong) NSMutableArray *weatherInfos; // 天气信息的数组
+@property (nonatomic, strong) NSMutableArray *cityArray;
+
+
 @end

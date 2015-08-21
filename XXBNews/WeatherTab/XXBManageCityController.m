@@ -13,10 +13,10 @@
 #import "XXBWeatherInfo.h"
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
+#import "XXBWeatherManager.h"
 
 @interface XXBManageCityController()
 
-@property (nonatomic, strong) NSMutableArray *cityArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
@@ -27,9 +27,12 @@
     BOOL isDeleteMode;  //是否处于删除模式下
     UIBarButtonItem *refreshBtn;
     UIBarButtonItem *editBtn;
+    
+    __block dispatch_semaphore_t getInfoFinishSemaphore;
+
 }
 
-- (id) init
+- (id) initWithCityArray:(NSMutableArray *)cityArray
 {
     self = [super init];
     if(self)
@@ -42,15 +45,13 @@
         self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         
         // TODO: 从属性列表中获取已选择的城市
-        self.cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
-        if(![[self.cityArray lastObject]  isEqual: @"+"])
+        self.cityArray = cityArray;
+        if(![[self.cityArray lastObject]  isEqualToString: @"+"])
             [self.cityArray addObject:@"+"];
-        if([self.cityArray count] == 0)
-        {
-            self.cityArray = [NSMutableArray arrayWithObjects:@"深圳",nil];
-        }
         
         [self setupCollectionView];
+        
+        getInfoFinishSemaphore = dispatch_semaphore_create(1);
     }
     return self;
 }
@@ -60,7 +61,14 @@
 {
     [super viewDidAppear:animated];
     DDLogDebug(@"%@",@"view did appear");
-    [self refresh];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
+        //要等到返回天气数据时才往下执行
+        dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self refresh];
+            dispatch_semaphore_signal(getInfoFinishSemaphore);
+        });
+    });
 }
 
 
@@ -101,7 +109,7 @@
 {
     XXBCityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCellIdentifier" forIndexPath:indexPath];
     // 注册过cell,不用再判断是否为nil，若为nil会自动创建
-    if(indexPath.item < [self.cityArray count]-1)
+    if(![[self.cityArray objectAtIndex:indexPath.item] isEqualToString:@"+"])
         cell.label.text = [self.cityArray objectAtIndex:indexPath.item];
     else
     {
@@ -158,7 +166,6 @@
     {
         [self deleteCityAtIndexPath:indexPath];
         //将选择的城市存到属性列表当中
-        [self saveCityArrayToDefault];
     }
 }
 
@@ -176,8 +183,32 @@
                                         [NSIndexPath indexPathForRow:oldCount-1 inSection:0], nil];
         
         [self.collectionView insertItemsAtIndexPaths:arrayWithIndexPaths];
-    } completion:nil];
+    } completion:^(BOOL finished){
+        if(finished)
+            [self updateCellToMode:YES];
+    }];
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
+        dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
+        [XXBWeatherManager getWeatherDataWithCity:[NSArray arrayWithObject:city]
+                                          success:^(id json)
+         {
+             [XXBWeatherInfo setupObjectClassInArray:^NSDictionary *{
+                 return [XXBWeatherInfo objectClassInArray];
+             }];
+             NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
+             XXBWeatherInfo *info = weatherInfos[0];
+             info.date = json[@"date"];
+             [self.weatherInfos addObject:weatherInfos[0]];
+             dispatch_semaphore_signal(getInfoFinishSemaphore);
+         }
+                                          failure:^(NSError *error)
+         {
+             DDLogDebug(@"get weather info error");
+             dispatch_semaphore_signal(getInfoFinishSemaphore);
+         }];
+    });
+
     //将选择的城市存到属性列表当中
     [self saveCityArrayToDefault];
 }
@@ -191,6 +222,7 @@
         
         for (NSIndexPath *path in itemPathsToDel) {
             [self.cityArray removeObjectAtIndex:path.item];
+            [self.weatherInfos removeObjectAtIndex:path.item];
         }
         
         [self.collectionView deleteItemsAtIndexPaths:itemPathsToDel];
@@ -217,27 +249,33 @@
     {
         isDeleteMode = YES;
         edit.title = @"返回";
+        // 隐藏增加城市的cell
         [self.collectionView performBatchUpdates:^{
             NSArray *itemPathsToDel = [NSArray arrayWithObjects:
                                        [NSIndexPath indexPathForItem:[self.cityArray count]-1 inSection:0], nil];
             [self.cityArray removeLastObject];
             
             [self.collectionView deleteItemsAtIndexPaths:itemPathsToDel];
-        } completion:nil];
-        [self updateCellToMode:NO];
+        } completion:^(BOOL finished){
+            if(finished)
+                [self updateCellToMode:NO];
+        }];
         
     }else
     {
         isDeleteMode = NO;
         edit.title = @"编辑";
+        // 恢复增加城市的cell
         [self.collectionView performBatchUpdates:^{
             NSArray *itemPathsToAdd = [NSArray arrayWithObjects:
                                        [NSIndexPath indexPathForItem:[self.cityArray count] inSection:0], nil];
             [self.cityArray addObject:@"+"];
             
             [self.collectionView insertItemsAtIndexPaths:itemPathsToAdd];
-        } completion:nil];
-        [self updateCellToMode:YES];
+        } completion:^(BOOL finished){
+            if(finished)
+                [self updateCellToMode:YES];
+        }];
    
     }
 }

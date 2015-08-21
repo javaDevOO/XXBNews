@@ -11,6 +11,7 @@
 
 /**
  *  选择城市页面
+ *  TODO:ios7中没有searchcontroller，所以显示不了搜索栏，还需要适配
  */
 @interface XXBSelectCityViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate, UISearchResultsUpdating>
 
