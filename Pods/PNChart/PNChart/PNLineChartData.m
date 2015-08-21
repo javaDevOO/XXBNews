@@ -23,6 +23,7 @@
     _inflexionPointWidth = 6.f;
     _lineWidth = 2.f;
     _alpha = 1.f;
+    _pointLablePos = PNPointLabelPosBelow;
 }
 
 @end

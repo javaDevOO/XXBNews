@@ -12,6 +12,11 @@ typedef NS_ENUM(NSUInteger, PNLineChartPointStyle) {
     PNLineChartPointStyleTriangle = 4
 };
 
+typedef NS_ENUM (NSUInteger, PNPointLabelPos) {
+    PNPointLabelPosBelow,
+    PNPointLabelPosAbove
+};
+
 @class PNLineChartDataItem;
 
 typedef PNLineChartDataItem *(^LCLineChartDataGetter)(NSUInteger item);
@@ -33,5 +38,7 @@ typedef PNLineChartDataItem *(^LCLineChartDataGetter)(NSUInteger item);
 @property (nonatomic, assign) CGFloat inflexionPointWidth;
 
 @property (nonatomic, assign) CGFloat lineWidth;
+
+@property (nonatomic) PNPointLabelPos pointLablePos;
 
 @end

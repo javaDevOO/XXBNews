@@ -65,6 +65,7 @@
     PNLineChartData *highData = [PNLineChartData new];
     highData.color = PNRed;
     highData.itemCount = lineChart.xLabels.count;
+    highData.pointLablePos = PNPointLabelPosAbove;
     highData.getData = ^(NSUInteger index) {
         CGFloat yValue = [highTempData[index] floatValue];
         return [PNLineChartDataItem dataItemWithY:yValue];

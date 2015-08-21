@@ -60,6 +60,15 @@
 		CE33AD111B86B20C007DDC7D /* RETableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33ACDA1B86B20C007DDC7D /* RETableViewManager.m */; };
 		CE33AD121B86B20C007DDC7D /* RETableViewOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33ACDC1B86B20C007DDC7D /* RETableViewOptionsController.m */; };
 		CE33AD131B86B20C007DDC7D /* RETableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33ACDE1B86B20C007DDC7D /* RETableViewSection.m */; };
+		CE33AD191B86BF8B007DDC7D /* NSString+RENumberFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD161B86BF8B007DDC7D /* NSString+RENumberFormat.m */; };
+		CE33AD1A1B86BF8B007DDC7D /* REFormattedNumberField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD181B86BF8B007DDC7D /* REFormattedNumberField.m */; };
+		CE33AD2B1B86BF97007DDC7D /* NSError+REValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD1D1B86BF97007DDC7D /* NSError+REValidation.m */; };
+		CE33AD2C1B86BF97007DDC7D /* REValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD1F1B86BF97007DDC7D /* REValidation.m */; };
+		CE33AD2D1B86BF97007DDC7D /* REValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD211B86BF97007DDC7D /* REValidator.m */; };
+		CE33AD2E1B86BF97007DDC7D /* REEmailValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD241B86BF97007DDC7D /* REEmailValidator.m */; };
+		CE33AD2F1B86BF97007DDC7D /* RELengthValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD261B86BF97007DDC7D /* RELengthValidator.m */; };
+		CE33AD301B86BF97007DDC7D /* REPresenceValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD281B86BF97007DDC7D /* REPresenceValidator.m */; };
+		CE33AD311B86BF97007DDC7D /* REURLValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD2A1B86BF97007DDC7D /* REURLValidator.m */; };
 		CE5960F01B76011300541A47 /* XXBWeatherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */; };
 		CE73E4791B7B69B30006568C /* XXBLocationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E4781B7B69B30006568C /* XXBLocationTool.m */; };
 		CE73E47C1B7B79CE0006568C /* XXBManageCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */; };
@@ -195,6 +204,24 @@
 		CE33ACDC1B86B20C007DDC7D /* RETableViewOptionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RETableViewOptionsController.m; sourceTree = "<group>"; };
 		CE33ACDD1B86B20C007DDC7D /* RETableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RETableViewSection.h; sourceTree = "<group>"; };
 		CE33ACDE1B86B20C007DDC7D /* RETableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RETableViewSection.m; sourceTree = "<group>"; };
+		CE33AD151B86BF8B007DDC7D /* NSString+RENumberFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RENumberFormat.h"; sourceTree = "<group>"; };
+		CE33AD161B86BF8B007DDC7D /* NSString+RENumberFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RENumberFormat.m"; sourceTree = "<group>"; };
+		CE33AD171B86BF8B007DDC7D /* REFormattedNumberField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFormattedNumberField.h; sourceTree = "<group>"; };
+		CE33AD181B86BF8B007DDC7D /* REFormattedNumberField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REFormattedNumberField.m; sourceTree = "<group>"; };
+		CE33AD1C1B86BF97007DDC7D /* NSError+REValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+REValidation.h"; sourceTree = "<group>"; };
+		CE33AD1D1B86BF97007DDC7D /* NSError+REValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+REValidation.m"; sourceTree = "<group>"; };
+		CE33AD1E1B86BF97007DDC7D /* REValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REValidation.h; sourceTree = "<group>"; };
+		CE33AD1F1B86BF97007DDC7D /* REValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REValidation.m; sourceTree = "<group>"; };
+		CE33AD201B86BF97007DDC7D /* REValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REValidator.h; sourceTree = "<group>"; };
+		CE33AD211B86BF97007DDC7D /* REValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REValidator.m; sourceTree = "<group>"; };
+		CE33AD231B86BF97007DDC7D /* REEmailValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REEmailValidator.h; sourceTree = "<group>"; };
+		CE33AD241B86BF97007DDC7D /* REEmailValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REEmailValidator.m; sourceTree = "<group>"; };
+		CE33AD251B86BF97007DDC7D /* RELengthValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RELengthValidator.h; sourceTree = "<group>"; };
+		CE33AD261B86BF97007DDC7D /* RELengthValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RELengthValidator.m; sourceTree = "<group>"; };
+		CE33AD271B86BF97007DDC7D /* REPresenceValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REPresenceValidator.h; sourceTree = "<group>"; };
+		CE33AD281B86BF97007DDC7D /* REPresenceValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REPresenceValidator.m; sourceTree = "<group>"; };
+		CE33AD291B86BF97007DDC7D /* REURLValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REURLValidator.h; sourceTree = "<group>"; };
+		CE33AD2A1B86BF97007DDC7D /* REURLValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REURLValidator.m; sourceTree = "<group>"; };
 		CE5960EE1B76011300541A47 /* XXBWeatherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherInfo.h; sourceTree = "<group>"; };
 		CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherInfo.m; sourceTree = "<group>"; };
 		CE6FF2201B7493B2006727CF /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -298,6 +325,8 @@
 		CE33AC831B86B20C007DDC7D /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE33AD1B1B86BF97007DDC7D /* REValidation */,
+				CE33AD141B86BF8B007DDC7D /* REFormattedNumberField */,
 				CE33AC841B86B20C007DDC7D /* RETableViewManager */,
 			);
 			path = Libs;
@@ -419,6 +448,46 @@
 				CE33ACD21B86B20C007DDC7D /* UIButtonBarArrowRight@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		CE33AD141B86BF8B007DDC7D /* REFormattedNumberField */ = {
+			isa = PBXGroup;
+			children = (
+				CE33AD151B86BF8B007DDC7D /* NSString+RENumberFormat.h */,
+				CE33AD161B86BF8B007DDC7D /* NSString+RENumberFormat.m */,
+				CE33AD171B86BF8B007DDC7D /* REFormattedNumberField.h */,
+				CE33AD181B86BF8B007DDC7D /* REFormattedNumberField.m */,
+			);
+			path = REFormattedNumberField;
+			sourceTree = "<group>";
+		};
+		CE33AD1B1B86BF97007DDC7D /* REValidation */ = {
+			isa = PBXGroup;
+			children = (
+				CE33AD1C1B86BF97007DDC7D /* NSError+REValidation.h */,
+				CE33AD1D1B86BF97007DDC7D /* NSError+REValidation.m */,
+				CE33AD1E1B86BF97007DDC7D /* REValidation.h */,
+				CE33AD1F1B86BF97007DDC7D /* REValidation.m */,
+				CE33AD201B86BF97007DDC7D /* REValidator.h */,
+				CE33AD211B86BF97007DDC7D /* REValidator.m */,
+				CE33AD221B86BF97007DDC7D /* Validators */,
+			);
+			path = REValidation;
+			sourceTree = "<group>";
+		};
+		CE33AD221B86BF97007DDC7D /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				CE33AD231B86BF97007DDC7D /* REEmailValidator.h */,
+				CE33AD241B86BF97007DDC7D /* REEmailValidator.m */,
+				CE33AD251B86BF97007DDC7D /* RELengthValidator.h */,
+				CE33AD261B86BF97007DDC7D /* RELengthValidator.m */,
+				CE33AD271B86BF97007DDC7D /* REPresenceValidator.h */,
+				CE33AD281B86BF97007DDC7D /* REPresenceValidator.m */,
+				CE33AD291B86BF97007DDC7D /* REURLValidator.h */,
+				CE33AD2A1B86BF97007DDC7D /* REURLValidator.m */,
+			);
+			path = Validators;
 			sourceTree = "<group>";
 		};
 		CE7EF6B61B73476100FE7AA4 /* MoreInfoTab */ = {
@@ -764,6 +833,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */,
+				CE33AD2F1B86BF97007DDC7D /* RELengthValidator.m in Sources */,
+				CE33AD311B86BF97007DDC7D /* REURLValidator.m in Sources */,
 				CE33ACE01B86B20C007DDC7D /* RETableViewCreditCardCell.m in Sources */,
 				CE33ACEE1B86B20C007DDC7D /* REFloatItem.m in Sources */,
 				CE33ACF71B86B20C007DDC7D /* RETextItem.m in Sources */,
@@ -774,22 +845,27 @@
 				CE33ACEF1B86B20C007DDC7D /* REInlineDatePickerItem.m in Sources */,
 				CE33ACE61B86B20C007DDC7D /* RETableViewNumberCell.m in Sources */,
 				CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */,
+				CE33AD2C1B86BF97007DDC7D /* REValidation.m in Sources */,
 				CE33ACE31B86B20C007DDC7D /* RETableViewInlineDatePickerCell.m in Sources */,
 				CE33AD0F1B86B20C007DDC7D /* RETableViewCellStyle.m in Sources */,
 				CE33ACE51B86B20C007DDC7D /* RETableViewLongTextCell.m in Sources */,
 				CE7EF6D31B734ACC00FE7AA4 /* XXBBaseTabViewController.m in Sources */,
 				CE33ACE21B86B20C007DDC7D /* RETableViewFloatCell.m in Sources */,
 				CE79235F1B80A78C0076395A /* XXBMemoHeaderCell.m in Sources */,
+				CE33AD191B86BF8B007DDC7D /* NSString+RENumberFormat.m in Sources */,
 				CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */,
 				CE33ACEA1B86B20C007DDC7D /* RETableViewTextCell.m in Sources */,
 				CE7923561B80A1AE0076395A /* XXBMemoTabController.m in Sources */,
+				CE33AD2E1B86BF97007DDC7D /* REEmailValidator.m in Sources */,
 				CE79235C1B80A2E30076395A /* XXBMemoSection.m in Sources */,
 				CE33ACED1B86B20C007DDC7D /* REDateTimeItem.m in Sources */,
+				CE33AD301B86BF97007DDC7D /* REPresenceValidator.m in Sources */,
 				CE33AD121B86B20C007DDC7D /* RETableViewOptionsController.m in Sources */,
 				CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */,
 				CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */,
 				CE33ACE41B86B20C007DDC7D /* RETableViewInlinePickerCell.m in Sources */,
 				CE33ACFA1B86B20C007DDC7D /* REPlaceholderTextView.m in Sources */,
+				CE33AD2B1B86BF97007DDC7D /* NSError+REValidation.m in Sources */,
 				CE33AD0E1B86B20C007DDC7D /* RETableViewCell.m in Sources */,
 				CE7A418D1B8322A8003CACF5 /* UILabel+VerticalAlign.m in Sources */,
 				CE33ACF51B86B20C007DDC7D /* RERadioItem.m in Sources */,
@@ -797,11 +873,13 @@
 				CE7923591B80A2AD0076395A /* XXBMemoItem.m in Sources */,
 				CEDA81471B7F5550002FA940 /* XXBWeatherInfoViewController.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
+				CE33AD1A1B86BF8B007DDC7D /* REFormattedNumberField.m in Sources */,
 				CE33ACEB1B86B20C007DDC7D /* REBoolItem.m in Sources */,
 				CE33AD111B86B20C007DDC7D /* RETableViewManager.m in Sources */,
 				CE33ACF41B86B20C007DDC7D /* REPickerItem.m in Sources */,
 				CE33ACDF1B86B20C007DDC7D /* RETableViewBoolCell.m in Sources */,
 				CE73E47F1B7B7FB20006568C /* XXBCityCell.m in Sources */,
+				CE33AD2D1B86BF97007DDC7D /* REValidator.m in Sources */,
 				CE33ACE11B86B20C007DDC7D /* RETableViewDateTimeCell.m in Sources */,
 				CE33AD101B86B20C007DDC7D /* RETableViewItem.m in Sources */,
 				CE33ACE71B86B20C007DDC7D /* RETableViewOptionCell.m in Sources */,

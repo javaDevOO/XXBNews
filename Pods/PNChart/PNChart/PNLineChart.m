@@ -359,6 +359,17 @@
             int x = 2 * _chartMargin +  (i * offSetX);
             int y = _chartCavanHeight - (innerGrade * _chartCavanHeight) + (_yLabelHeight / 2);
             
+            // add the label near the point, add temporarily
+            PNChartLabel *lb = [[PNChartLabel alloc] init];
+            lb.frame = CGRectMake(x - inflexionWidth / 2 - 13, y - inflexionWidth / 2 + 5, 35, 20);
+            if(chartData.pointLablePos == PNPointLabelPosAbove)
+                lb.frame = CGRectMake(x - inflexionWidth / 2 - 13, y - inflexionWidth / 2 - 20, 35, 20);
+            
+            lb.text = [[NSNumber numberWithInt:yValue] stringValue];//[[NSNumber numberWithInt:yValue] stringValue];
+            
+            [self addSubview:lb];
+
+            
             // Circular point
             if (chartData.inflexionPointStyle == PNLineChartPointStyleCircle) {
                 
