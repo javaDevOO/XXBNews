@@ -93,6 +93,7 @@
 }
 
 
+
 - (void) updateLocCity
 {
     XXBCity *city = [XXBLocationTool sharedInstance].locationCity;
