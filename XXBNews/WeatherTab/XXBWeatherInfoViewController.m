@@ -24,7 +24,7 @@
         self.label.text = self.weatherInfo.currentCity;
         self.label.textAlignment = NSTextAlignmentCenter;
         
-        [info addObserver:self forKeyPath:@"currentCity" options:NSKeyValueObservingOptionNew context:nil];
+        [self addObserver:self forKeyPath:@"weatherInfo" options:0 context:nil];
     }
     return self;
 }
@@ -91,16 +91,12 @@
 //一旦weatherinfo属性的值发生改变，就会调用这个方法
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if([keyPath isEqualToString:@"currentCity"] && object==self.weatherInfo)
-    {
-        DDLogDebug(@"%@",@"the value of weather info has changed");
-        self.label.text = self.weatherInfo.currentCity;
-    }
+    
 }
 
 - (void)dealloc
 {
-    [self.weatherInfo removeObserver:self forKeyPath:@"currentCity"];
+    [self removeObserver:self forKeyPath:@"weatherInfo"];
 }
 
 @end

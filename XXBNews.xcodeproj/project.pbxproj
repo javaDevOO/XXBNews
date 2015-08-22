@@ -69,6 +69,7 @@
 		CE33AD2F1B86BF97007DDC7D /* RELengthValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD261B86BF97007DDC7D /* RELengthValidator.m */; };
 		CE33AD301B86BF97007DDC7D /* REPresenceValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD281B86BF97007DDC7D /* REPresenceValidator.m */; };
 		CE33AD311B86BF97007DDC7D /* REURLValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD2A1B86BF97007DDC7D /* REURLValidator.m */; };
+		CE33AD341B86D1E0007DDC7D /* XXBMemoEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD331B86D1E0007DDC7D /* XXBMemoEditController.m */; };
 		CE5960F01B76011300541A47 /* XXBWeatherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */; };
 		CE73E4791B7B69B30006568C /* XXBLocationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E4781B7B69B30006568C /* XXBLocationTool.m */; };
 		CE73E47C1B7B79CE0006568C /* XXBManageCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */; };
@@ -99,6 +100,7 @@
 		CE86CF581B78CE6500DD54C1 /* XXBSelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86CF571B78CE6500DD54C1 /* XXBSelectCityViewController.m */; };
 		CE86CF5A1B78D1C100DD54C1 /* ProvincesAndCities.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE86CF591B78D1C100DD54C1 /* ProvincesAndCities.plist */; };
 		CE86CF5D1B78D28E00DD54C1 /* XXBFileUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CE86CF5C1B78D28E00DD54C1 /* XXBFileUtilities.m */; };
+		CEA143951B880E9900EC6130 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA143941B880E9900EC6130 /* SwipeView.m */; };
 		CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */; };
 		CEC5D64E1B763CA600CCCF6E /* XXBHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64D1B763CA600CCCF6E /* XXBHttpTool.m */; };
 		CEDA81471B7F5550002FA940 /* XXBWeatherInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA81461B7F5550002FA940 /* XXBWeatherInfoViewController.m */; };
@@ -222,6 +224,8 @@
 		CE33AD281B86BF97007DDC7D /* REPresenceValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REPresenceValidator.m; sourceTree = "<group>"; };
 		CE33AD291B86BF97007DDC7D /* REURLValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REURLValidator.h; sourceTree = "<group>"; };
 		CE33AD2A1B86BF97007DDC7D /* REURLValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REURLValidator.m; sourceTree = "<group>"; };
+		CE33AD321B86D1E0007DDC7D /* XXBMemoEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBMemoEditController.h; path = XXBNews/MemoTab/XXBMemoEditController.h; sourceTree = SOURCE_ROOT; };
+		CE33AD331B86D1E0007DDC7D /* XXBMemoEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBMemoEditController.m; path = XXBNews/MemoTab/XXBMemoEditController.m; sourceTree = SOURCE_ROOT; };
 		CE5960EE1B76011300541A47 /* XXBWeatherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherInfo.h; sourceTree = "<group>"; };
 		CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherInfo.m; sourceTree = "<group>"; };
 		CE6FF2201B7493B2006727CF /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 		CE86CF5B1B78D28E00DD54C1 /* XXBFileUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBFileUtilities.h; sourceTree = "<group>"; };
 		CE86CF5C1B78D28E00DD54C1 /* XXBFileUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBFileUtilities.m; sourceTree = "<group>"; };
 		CE86CF5F1B78D9E400DD54C1 /* CitySelectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySelectDelegate.h; sourceTree = "<group>"; };
+		CEA143931B880E9900EC6130 /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeView.h; sourceTree = "<group>"; };
+		CEA143941B880E9900EC6130 /* SwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeView.m; sourceTree = "<group>"; };
 		CEC5D6491B76307E00CCCF6E /* XXBWeatherManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherManager.h; sourceTree = "<group>"; };
 		CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherManager.m; sourceTree = "<group>"; };
 		CEC5D64C1B763CA600CCCF6E /* XXBHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBHttpTool.h; sourceTree = "<group>"; };
@@ -325,6 +331,7 @@
 		CE33AC831B86B20C007DDC7D /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				CEA143921B880E9900EC6130 /* SwipeView */,
 				CE33AD1B1B86BF97007DDC7D /* REValidation */,
 				CE33AD141B86BF8B007DDC7D /* REFormattedNumberField */,
 				CE33AC841B86B20C007DDC7D /* RETableViewManager */,
@@ -513,6 +520,8 @@
 			children = (
 				CE7923511B80A1AE0076395A /* XXBMemoTabController.h */,
 				CE7923521B80A1AE0076395A /* XXBMemoTabController.m */,
+				CE33AD321B86D1E0007DDC7D /* XXBMemoEditController.h */,
+				CE33AD331B86D1E0007DDC7D /* XXBMemoEditController.m */,
 				CE79234B1B80A1AE0076395A /* XXBMemoCell.h */,
 				CE79234C1B80A1AE0076395A /* XXBMemoCell.m */,
 				CE7923571B80A2AD0076395A /* XXBMemoItem.h */,
@@ -676,6 +685,15 @@
 				CE5960EF1B76011300541A47 /* XXBWeatherInfo.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		CEA143921B880E9900EC6130 /* SwipeView */ = {
+			isa = PBXGroup;
+			children = (
+				CEA143931B880E9900EC6130 /* SwipeView.h */,
+				CEA143941B880E9900EC6130 /* SwipeView.m */,
+			);
+			path = SwipeView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -842,6 +860,7 @@
 				CE33ACF31B86B20C007DDC7D /* RENumberItem.m in Sources */,
 				CE86CF581B78CE6500DD54C1 /* XXBSelectCityViewController.m in Sources */,
 				CE86CF5D1B78D28E00DD54C1 /* XXBFileUtilities.m in Sources */,
+				CEA143951B880E9900EC6130 /* SwipeView.m in Sources */,
 				CE33ACEF1B86B20C007DDC7D /* REInlineDatePickerItem.m in Sources */,
 				CE33ACE61B86B20C007DDC7D /* RETableViewNumberCell.m in Sources */,
 				CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */,
@@ -888,6 +907,7 @@
 				CE33ACE91B86B20C007DDC7D /* RETableViewSegmentedCell.m in Sources */,
 				CE33ACF61B86B20C007DDC7D /* RESegmentedItem.m in Sources */,
 				CE33ACF81B86B20C007DDC7D /* NSString+RETableViewManagerAdditions.m in Sources */,
+				CE33AD341B86D1E0007DDC7D /* XXBMemoEditController.m in Sources */,
 				CE73E47C1B7B79CE0006568C /* XXBManageCityController.m in Sources */,
 				CE33ACEC1B86B20C007DDC7D /* RECreditCardItem.m in Sources */,
 				CE73E4791B7B69B30006568C /* XXBLocationTool.m in Sources */,
@@ -1022,7 +1042,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "./XXBNews/XXBNews-Prefix.pch";
 				INFOPLIST_FILE = XXBNews/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1038,7 +1058,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "./XXBNews/XXBNews-Prefix.pch";
 				INFOPLIST_FILE = XXBNews/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

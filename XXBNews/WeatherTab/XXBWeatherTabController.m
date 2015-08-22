@@ -16,16 +16,19 @@
 #import "XXBManageCityController.h"
 #import "XXBWeatherInfoViewController.h"
 
-@interface XXBWeatherTabController ()
+#import "SwipeView.h"
 
-@property (nonatomic, strong) UIPageViewController *pageController;
+@interface XXBWeatherTabController () <SwipeViewDataSource, SwipeViewDelegate>
+
+@property (nonatomic, strong) SwipeView *swipeView;
+
+@property (nonatomic, strong) UIActivityIndicatorView* indicator;
 
 @end
 
 
 @implementation XXBWeatherTabController
 {
-    UILabel *label;
     __block dispatch_semaphore_t getInfoFinishSemaphore;
 }
 
@@ -41,6 +44,14 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
         
         getInfoFinishSemaphore = dispatch_semaphore_create(1);
+        
+        self.swipeView = [[SwipeView alloc] init];
+        self.swipeView.frame = self.view.bounds;
+        self.swipeView.delegate = self;
+        self.swipeView.dataSource = self;
+        [self.view addSubview:self.swipeView];
+        
+        [self setupIndicator];
     }
     return self;
 }
@@ -72,26 +83,48 @@
     }
     [self loadWeatherData:self.cityArray];
     
-    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:UIPageViewControllerSpineLocationMin] forKey:UIPageViewControllerOptionSpineLocationKey];
-    self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:options];
-    self.pageController.dataSource = self;
-    self.pageController.delegate = self;
-    self.pageController.view.frame = self.view.bounds;
-    [self.view addSubview:self.pageController.view];
     
     //此时weatherinfo的数据还没有返回，需要进行同步
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
         //要等到返回天气数据时才往下执行
         dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
-            XXBWeatherInfoViewController *initialViewController =[self viewControllerAtIndex:0];// 得到第一页
-            NSArray *viewControllers =[NSArray arrayWithObject:initialViewController];
-            [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-            dispatch_semaphore_signal(getInfoFinishSemaphore);
+            [self.indicator stopAnimating];
+            [self.swipeView reloadData];
         });
     });
 }
 
+
+# pragma swipeview datasource and delegate
+- (NSInteger) numberOfItemsInSwipeView:(SwipeView *)swipeView
+{
+    //最后一个城市名是+号，不算
+    return [self.cityArray count]-1;
+}
+
+
+- (UIView *) swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
+    // TODO：重用view
+    view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
+
+    if([self.weatherInfos count] == 0)
+    {
+        
+        [self.indicator startAnimating];
+        
+        [view addSubview:self.indicator];
+        return view;
+    }
+    
+    XXBWeatherInfoViewController *vc= [[XXBWeatherInfoViewController alloc] initWithWeatherInfo:[self.weatherInfos objectAtIndex:index]];
+    
+    // 重用view的话，原本上面是有内容的，直接addSubview就会重叠了
+    [view addSubview:vc.view];
+    
+    return view;
+}
 
 
 - (void) updateLocCity
@@ -102,6 +135,29 @@
         DDLogDebug(@"定位到城市：%@",city.city);
         //[self loadWeatherData:[NSArray arrayWithObject:city.city]];
     }
+}
+
+
+- (void) setupIndicator
+{
+    //初始化:
+    self.indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+    
+    //设置显示样式,见UIActivityIndicatorViewStyle的定义
+    self.indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    //设置显示位置
+    [self.indicator setCenter:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2)];
+    
+    //设置背景色
+    self.indicator.backgroundColor = [UIColor grayColor];
+    
+    //设置背景透明
+    self.indicator.alpha = 0.5;
+    
+    //设置背景为圆角矩形
+    self.indicator.layer.cornerRadius = 6;
+    self.indicator.layer.masksToBounds = YES;
 }
 
 
@@ -150,53 +206,10 @@
 }
 
 
-/**
- *  得到相应的VC对象, 供pageview显示
- */
-- (XXBWeatherInfoViewController *)viewControllerAtIndex:(NSInteger)index {
-    if (([self.weatherInfos count] == 0) || (index >= [self.weatherInfos count])) {
-        return nil;
-    }
-    // 创建一个新的控制器类，并且分配给相应的数据
-    XXBWeatherInfo *info = [self.weatherInfos objectAtIndex:index];
-    XXBWeatherInfoViewController *dataViewController =[[XXBWeatherInfoViewController alloc] initWithWeatherInfo:info];
-    DDLogDebug(@"create new view controller");
-    return dataViewController;
-}
-
-
-/**
- *  根据数组元素值，得到下标值
- */
-- (NSInteger)indexOfViewController:(XXBWeatherInfoViewController *)viewController {
-    return [self.weatherInfos indexOfObject:viewController.weatherInfo];
-}
-
-
-// pageviewcontroller的delegate
-#pragma mark- UIPageViewControllerDataSource
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+- (void) dealloc
 {
-    NSUInteger index = [self indexOfViewController:(XXBWeatherInfoViewController *)viewController];
-    if ((index == 0) || (index == NSNotFound)) {
-        return nil;
-    }
-    index--;
-    return [self viewControllerAtIndex:index];
-}
-
-
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
-    
-    NSUInteger index = [self indexOfViewController:(XXBWeatherInfoViewController *)viewController];
-    if (index == NSNotFound) {
-        return nil;
-    }
-    index++;
-    if (index == [self.weatherInfos count]) {
-        return nil;
-    }
-    return [self viewControllerAtIndex:index];
+    self.swipeView.delegate = nil;
+    self.swipeView.dataSource = nil;
 }
 
 @end
