@@ -15,6 +15,7 @@
 #import "XXBLocationTool.h"
 #import "XXBManageCityController.h"
 #import "XXBWeatherInfoViewController.h"
+#import "XXBWeatherInfoView.h"
 
 #import "SwipeView.h"
 
@@ -106,23 +107,30 @@
 
 - (UIView *) swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
+    XXBWeatherInfoView *infoView = nil;
     // TODO：重用view
-    view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
-
-    if([self.weatherInfos count] == 0)
+    if(view  == nil)
     {
+        view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
         
-        [self.indicator startAnimating];
-        
-        [view addSubview:self.indicator];
-        return view;
+        if([self.weatherInfos count] == 0)
+        {
+            [self.indicator startAnimating];
+            [view addSubview:self.indicator];
+        }
+        else
+        {
+            infoView = [[XXBWeatherInfoView alloc] initWithFrame:self.swipeView.bounds];
+            infoView.tag = 1;
+            [view addSubview:infoView];
+        }
     }
-    
-    XXBWeatherInfoViewController *vc= [[XXBWeatherInfoViewController alloc] initWithWeatherInfo:[self.weatherInfos objectAtIndex:index]];
-    
-    // 重用view的话，原本上面是有内容的，直接addSubview就会重叠了
-    [view addSubview:vc.view];
-    
+    else
+    {
+        infoView = (XXBWeatherInfoView *)[view viewWithTag:1];
+        
+    }
+    infoView.weatherInfo = [self.weatherInfos objectAtIndex:index];
     return view;
 }
 
