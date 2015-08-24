@@ -88,7 +88,7 @@
 
     } else {
         NSInteger index = 0;
-        NSInteger num = _yLabelNum + 1;
+        NSInteger num = _yLabelNum;
 
         while (num > 0)
         {
@@ -669,7 +669,7 @@
 
             // draw y axis separator
             CGFloat yStepHeight = _chartCavanHeight / _yLabelNum;
-            for (NSUInteger i = 0; i < [self.xLabels count]; i++) {
+            for (NSUInteger i = 0; i < _yLabelNum; i++) {
                 point = CGPointMake(_chartMargin + yAxisOffset, (_chartCavanHeight - i * yStepHeight + _yLabelHeight / 2));
                 CGContextMoveToPoint(ctx, point.x, point.y);
                 CGContextAddLineToPoint(ctx, point.x + 2, point.y);
