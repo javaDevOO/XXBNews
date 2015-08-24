@@ -15,15 +15,15 @@
     PNLineChartData *lowData;
 }
 
-- (id) initWithFrame:(CGRect)frame
+- (id) initWithWeatherInfo:(XXBWeatherInfo *)info
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if(self)
     {
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 88, [UIDevice currentWidth], 30)];
         [self addSubview:self.nameLabel];
         self.nameLabel.textAlignment = NSTextAlignmentCenter;
-        
+        self.weatherInfo = info;
         [self addObserver:self forKeyPath:@"weatherInfo" options:0 context:nil];
         
         [self setupChart];
@@ -34,39 +34,39 @@
 - (void) setupChart
 {
     self.lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135, [UIDevice currentWidth], 200)];
-    //两条数据曲线的数据
-//    NSMutableArray *highTempData = [NSMutableArray array];
-//    NSMutableArray *lowTempData = [NSMutableArray array];
-//    //x轴label
-//    NSMutableArray *xLabelArray = [NSMutableArray array];
-//    for(int i=0; i<[self.weatherInfo.weather_data count]; i++)
-//    {
-//        XXBWeatherDetail *weatherData= [self.weatherInfo.weather_data objectAtIndex:i];
-//        [highTempData addObject:[weatherData getHighTemperature]];
-//        [lowTempData addObject:[weatherData getLowTemperature]];
-//        [xLabelArray addObject:weatherData.date];
-//    }
-//    xLabelArray[0] = @"今天";
-//    [self.lineChart setXLabels:xLabelArray];
+    // 两条数据曲线的数据
+    NSMutableArray *highTempData = [NSMutableArray array];
+    NSMutableArray *lowTempData = [NSMutableArray array];
+    // x轴label
+    NSMutableArray *xLabelArray = [NSMutableArray array];
+    for(int i=0; i<[self.weatherInfo.weather_data count]; i++)
+    {
+        XXBWeatherDetail *weatherData= [self.weatherInfo.weather_data objectAtIndex:i];
+        [highTempData addObject:[weatherData getHighTemperature]];
+        [lowTempData addObject:[weatherData getLowTemperature]];
+        [xLabelArray addObject:weatherData.date];
+    }
+    xLabelArray[0] = @"今天";
+    [self.lineChart setXLabels:xLabelArray];
     
     //设置两条曲线的样式和数据源
     highData = [PNLineChartData new];
     highData.color = PNRed;
-    //highData.itemCount = self.lineChart.xLabels.count;
+    highData.itemCount = self.lineChart.xLabels.count;
     highData.pointLablePos = PNPointLabelPosAbove;
-//    highData.getData = ^(NSUInteger index) {
-//        CGFloat yValue = [highTempData[index] floatValue];
-//        return [PNLineChartDataItem dataItemWithY:yValue];
-//    };
+    highData.getData = ^(NSUInteger index) {
+        CGFloat yValue = [highTempData[index] floatValue];
+        return [PNLineChartDataItem dataItemWithY:yValue];
+    };
     highData.inflexionPointStyle = PNLineChartPointStyleCircle;
     
     lowData = [PNLineChartData new];
     lowData.color = PNFreshGreen;
-//    lowData.itemCount = lowTempData.count;
-//    lowData.getData = ^(NSUInteger index) {
-//        CGFloat yValue = [lowTempData[index] floatValue];
-//        return [PNLineChartDataItem dataItemWithY:yValue];
-//    };
+    lowData.itemCount = lowTempData.count;
+    lowData.getData = ^(NSUInteger index) {
+        CGFloat yValue = [lowTempData[index] floatValue];
+        return [PNLineChartDataItem dataItemWithY:yValue];
+    };
     lowData.inflexionPointStyle = PNLineChartPointStyleCircle;
     
     self.lineChart.chartData = @[highData, lowData];
@@ -86,23 +86,19 @@
         
         NSMutableArray *highTempData = [NSMutableArray array];
         NSMutableArray *lowTempData = [NSMutableArray array];
-        //x轴label
-        NSMutableArray *xLabelArray = [NSMutableArray array];
+        
         for(int i=0; i<[self.weatherInfo.weather_data count]; i++)
         {
             XXBWeatherDetail *weatherData= [self.weatherInfo.weather_data objectAtIndex:i];
             [highTempData addObject:[weatherData getHighTemperature]];
             [lowTempData addObject:[weatherData getLowTemperature]];
-            [xLabelArray addObject:weatherData.date];
         }
-        xLabelArray[0] = @"今天";
-        [self.lineChart setXLabels:xLabelArray];
-        highData.itemCount = self.lineChart.xLabels.count;
+        
         highData.getData = ^(NSUInteger index) {
             CGFloat yValue = [highTempData[index] floatValue];
             return [PNLineChartDataItem dataItemWithY:yValue];
         };
-        lowData.itemCount = lowTempData.count;
+        
         lowData.getData = ^(NSUInteger index) {
             CGFloat yValue = [lowTempData[index] floatValue];
             return [PNLineChartDataItem dataItemWithY:yValue];

@@ -16,6 +16,6 @@
 @property (nonatomic, strong) PNLineChart *lineChart;
 @property (nonatomic, strong) XXBWeatherInfo *weatherInfo;
 
-- (id) initWithFrame:(CGRect)frame;
+- (id) initWithWeatherInfo:(XXBWeatherInfo *)info;
 
 @end

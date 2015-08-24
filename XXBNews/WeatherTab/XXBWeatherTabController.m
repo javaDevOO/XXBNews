@@ -108,6 +108,7 @@
 - (UIView *) swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
     XXBWeatherInfoView *infoView = nil;
+    XXBWeatherInfo *info = [self.weatherInfos objectAtIndex:index];
     // TODO：重用view
     if(view  == nil)
     {
@@ -120,8 +121,9 @@
         }
         else
         {
-            infoView = [[XXBWeatherInfoView alloc] initWithFrame:self.swipeView.bounds];
+            infoView = [[XXBWeatherInfoView alloc] initWithWeatherInfo:info];
             infoView.tag = 1;
+            infoView.frame = self.view.bounds;
             [view addSubview:infoView];
         }
     }
@@ -130,7 +132,7 @@
         infoView = (XXBWeatherInfoView *)[view viewWithTag:1];
         
     }
-    infoView.weatherInfo = [self.weatherInfos objectAtIndex:index];
+    infoView.weatherInfo = info;
     return view;
 }
 
