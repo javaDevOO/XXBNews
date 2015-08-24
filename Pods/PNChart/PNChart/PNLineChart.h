@@ -32,6 +32,8 @@
 @property (nonatomic) NSMutableArray *xChartLabels;
 @property (nonatomic) NSMutableArray *yChartLabels;
 
+@property (nonatomic) NSMutableArray *pointChartLabels;
+
 @property (nonatomic) CGFloat xLabelWidth;
 @property (nonatomic) UIFont *xLabelFont;
 @property (nonatomic) UIColor *xLabelColor;
