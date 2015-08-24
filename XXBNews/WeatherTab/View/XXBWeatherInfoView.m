@@ -8,6 +8,8 @@
 
 #import "XXBWeatherInfoView.h"
 #import "UIDevice+Resolutions.h"
+#import "XXBWeatherIndexCell.h"
+#import "XXBWeatherDetailCell.h"
 
 @implementation XXBWeatherInfoView
 {
@@ -27,6 +29,16 @@
         [self addObserver:self forKeyPath:@"weatherInfo" options:0 context:nil];
         
         [self setupChart];
+        
+        self.indexTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,500,[UIDevice currentHeight], 440)];
+        self.indexTableView.dataSource = self;
+        self.indexTableView.delegate = self;
+        self.indexTableView.scrollEnabled = NO;
+        self.indexTableView.rowHeight = 88.0;
+        [self addSubview:self.indexTableView];
+        
+        self.detailView = [[XXBWeatherDetailView alloc] initWithFrame:CGRectMake(10, 350, [UIDevice currentWidth]-20, 100) withWeatherInfo:self.weatherInfo];
+        [self addSubview:self.detailView];
     }
     return self;
 }
@@ -76,7 +88,6 @@
     [self addSubview:self.lineChart];
 }
 
-
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     DDLogDebug(@"%@",@"the weatherinfo of the weatherinfoview is changed");
@@ -105,7 +116,35 @@
         };
         [self.lineChart updateChartData:@[highData, lowData]];
         DDLogDebug(@"%@",@"the data in the chart is updated");
+        
+        [self.indexTableView reloadData];
+        
+        self.detailView.weatherInfo.weather_data = self.weatherInfo.weather_data;
     }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.weatherInfo.index count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XXBIndexDetail *indexDetail = [self.weatherInfo.index objectAtIndex:indexPath.row];
+    static NSString* indexCellID = @"IndexCell";
+    XXBWeatherIndexCell *cell = [tableView dequeueReusableCellWithIdentifier:indexCellID];
+    
+    if(cell == nil)
+    {
+        cell = [[XXBWeatherIndexCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indexCellID];
+    }
+    
+    cell.nameLabel.text = indexDetail.tipt;
+    cell.zsLabel.text = indexDetail.zs;
+    cell.desTextView.text = indexDetail.des;
+    
+    return cell;
 }
 
 

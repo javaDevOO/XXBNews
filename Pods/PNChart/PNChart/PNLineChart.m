@@ -326,6 +326,7 @@
     else{
         self.pointChartLabels = [[NSMutableArray alloc] init];
     }
+    NSString *pLabelFormat = self.pLabelFormat?:@"%@°";
     // Draw each line
     for (NSUInteger lineIndex = 0; lineIndex < self.chartData.count; lineIndex++) {
         PNLineChartData *chartData = self.chartData[lineIndex];
@@ -371,13 +372,12 @@
             int y = _chartCavanHeight - (innerGrade * _chartCavanHeight) + (_yLabelHeight / 2);
             
             // add the label near the point, add temporarily
-            
             PNChartLabel *lb = [[PNChartLabel alloc] init];
             lb.frame = CGRectMake(x - inflexionWidth / 2 - 13, y - inflexionWidth / 2 + 5, 35, 20);
             if(chartData.pointLablePos == PNPointLabelPosAbove)
                 lb.frame = CGRectMake(x - inflexionWidth / 2 - 13, y - inflexionWidth / 2 - 20, 35, 20);
             
-            lb.text = [[NSNumber numberWithInt:yValue] stringValue];//[[NSNumber numberWithInt:yValue] stringValue];
+            lb.text = [NSString stringWithFormat:pLabelFormat,[[NSNumber numberWithInt:yValue] stringValue]];
             
             [self addSubview:lb];
             [self.pointChartLabels addObject:lb];

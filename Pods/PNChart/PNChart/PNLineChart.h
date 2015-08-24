@@ -65,6 +65,8 @@
  */
 @property (nonatomic, strong) NSString *yLabelFormat;
 
+@property (nonatomic, strong) NSString *pLabelFormat;
+
 - (void)setXLabels:(NSArray *)xLabels withWidth:(CGFloat)width;
 
 /**

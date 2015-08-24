@@ -10,7 +10,7 @@
 #import "XXBWeatherInfo.h"
 
 /**
- *  管理城市页面中每个cell的布局,目前还比较简陋
+ *  管理城市页面中每个cell的布局
  */
 @interface XXBCityCell : UICollectionViewCell
 

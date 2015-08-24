@@ -17,6 +17,8 @@
 #import "XXBWeatherInfoViewController.h"
 #import "XXBWeatherInfoView.h"
 
+#import "UIDevice+Resolutions.h"
+
 #import "SwipeView.h"
 
 @interface XXBWeatherTabController () <SwipeViewDataSource, SwipeViewDelegate>
@@ -96,6 +98,11 @@
     });
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.swipeView reloadData];
+}
 
 # pragma swipeview datasource and delegate
 - (NSInteger) numberOfItemsInSwipeView:(SwipeView *)swipeView
@@ -112,6 +119,7 @@
     // TODO：重用view
     if(view  == nil)
     {
+        DDLogDebug(@"%@", @"alloc a new uiview");
         view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
         
         if([self.weatherInfos count] == 0)
@@ -124,11 +132,13 @@
             infoView = [[XXBWeatherInfoView alloc] initWithWeatherInfo:info];
             infoView.tag = 1;
             infoView.frame = self.view.bounds;
+            infoView.contentSize = CGSizeMake([UIDevice currentWidth],[UIDevice currentHeight]*3);
             [view addSubview:infoView];
         }
     }
     else
     {
+        DDLogDebug(@"%@", @"reuse the uiview");
         infoView = (XXBWeatherInfoView *)[view viewWithTag:1];
         
     }
