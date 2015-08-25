@@ -75,7 +75,7 @@
     self.textLabel.backgroundColor = [UIColor clearColor];
     self.textLabel.text = self.item.title;
     self.switchView.on = self.item.value;
-
+    self.imageView.image = self.item.image;
     self.enabled = self.item.enabled;
 }
 
