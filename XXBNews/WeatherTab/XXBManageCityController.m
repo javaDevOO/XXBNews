@@ -112,7 +112,9 @@
     // 注册过cell,不用再判断是否为nil，若为nil会自动创建
     if(![[self.cityArray objectAtIndex:indexPath.item] isEqualToString:@"+"])
     {
-        XXBCityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCellIdentifier" forIndexPath:indexPath];
+        XXBCityCell *cell =
+        
+        [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCellIdentifier" forIndexPath:indexPath];
         cell.weatherDetail.cityName = [self.cityArray objectAtIndex:indexPath.item];
         // 先把cell加上，当数据返回时再更新天气数据
         if(indexPath.item == self.weatherInfos.count)

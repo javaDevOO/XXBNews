@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XXBBaseTabViewController.h"
 #import "RETableViewManager.h"
 
-@interface XXBMoreInfoTabController : XXBBaseTabViewController
+@interface XXBMoreInfoTabController : UITableViewController
 
 @end

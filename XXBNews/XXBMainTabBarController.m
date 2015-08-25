@@ -106,10 +106,6 @@
     {
         NSLog(@"different index is select");
         self.lastIndex = selectedIndex;
-        if(selectedIndex == 3)
-            self.more.tabBarItem.badgeValue = nil;
-        else
-            self.more.tabBarItem.badgeValue = @"5";
     }
 }
 
