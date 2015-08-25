@@ -14,7 +14,6 @@
 #import "XXBSelectCityViewController.h"
 #import "XXBLocationTool.h"
 #import "XXBManageCityController.h"
-#import "XXBWeatherInfoViewController.h"
 #import "XXBWeatherInfoView.h"
 
 #import "UIDevice+Resolutions.h"
@@ -32,6 +31,7 @@
 
 @implementation XXBWeatherTabController
 {
+    UIBarButtonItem *refreshBtn;
     __block dispatch_semaphore_t getInfoFinishSemaphore;
 }
 
@@ -44,7 +44,10 @@
         //设置tabbarItem最好放在init里面
         [self initTabbarItemWithTitle:@"天气" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
         
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
+        refreshBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+        UIBarButtonItem *manageBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
+        
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:manageBtn,refreshBtn, nil];
         
         getInfoFinishSemaphore = dispatch_semaphore_create(1);
         
@@ -221,8 +224,25 @@
     XXBManageCityController *manageCityController = [[XXBManageCityController alloc] initWithCityArray:self.cityArray];
     manageCityController.hidesBottomBarWhenPushed = YES;
     manageCityController.weatherInfos = self.weatherInfos;
+    manageCityController.cityCellSelDelegate = self;
     
     [self.navigationController pushViewController:manageCityController animated:YES];
+}
+
+
+#pragma manage city view delegate
+//跳转到相应的页面
+- (void) manageCityViewDidSelectCityCell:(NSString *)city
+{
+    NSInteger index = [self.cityArray indexOfObject:city];
+    DDLogDebug(@"manage city view did select city %@%d",city, index);
+    [self.swipeView scrollToPage:index duration:0];
+}
+
+
+- (void) refresh
+{
+    
 }
 
 

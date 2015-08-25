@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  天气预报的cell
+ */
 @interface XXBWeatherIndexCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *nameLabel;

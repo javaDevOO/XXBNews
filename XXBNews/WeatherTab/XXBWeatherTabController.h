@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "XXBBaseTabViewController.h"
-#import "CitySelectDelegate.h"
+#import "CityCellSelectDelegate.h"
 
 /**
  *  天气tab页，内嵌一个pageview
  */
-@interface XXBWeatherTabController : XXBBaseTabViewController
+@interface XXBWeatherTabController : XXBBaseTabViewController<CityCellSelectDelegate>
 
 @property (nonatomic, strong) NSMutableArray *weatherInfos; // 天气信息的数组
 @property (nonatomic, strong) NSMutableArray *cityArray;

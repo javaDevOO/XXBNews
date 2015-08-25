@@ -14,6 +14,7 @@
 #import "MJExtension.h"
 #import "UIImageView+WebCache.h"
 #import "XXBWeatherManager.h"
+#import "XXBCityCellAdd.h"
 
 @interface XXBManageCityController()
 
@@ -81,6 +82,7 @@
     
     //要注册cell,如果用到了header和footer（supplementary views），也要进行注册
     [self.collectionView registerClass:[XXBCityCell class] forCellWithReuseIdentifier:@"CollectionCellIdentifier"];
+    [self.collectionView registerClass:[XXBCityCellAdd class] forCellWithReuseIdentifier:@"CollectionCityCellAddIdentifier"];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
@@ -107,16 +109,28 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    XXBCityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCellIdentifier" forIndexPath:indexPath];
     // 注册过cell,不用再判断是否为nil，若为nil会自动创建
     if(![[self.cityArray objectAtIndex:indexPath.item] isEqualToString:@"+"])
+    {
+        XXBCityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCellIdentifier" forIndexPath:indexPath];
         cell.weatherDetail.cityName = [self.cityArray objectAtIndex:indexPath.item];
+        // 先把cell加上，当数据返回时再更新天气数据
+        if(indexPath.item == self.weatherInfos.count)
+            return cell;
+        XXBWeatherInfo *weatherInfo = [self.weatherInfos objectAtIndex:indexPath.item];
+        XXBWeatherDetail *detailToday = [weatherInfo.weather_data objectAtIndex:0];
+        
+        cell.weatherDetail.dayPictureUrl = detailToday.dayPictureUrl;
+        cell.weatherDetail.weather = detailToday.weather;
+        cell.weatherDetail.temperature = detailToday.temperature;
+
+        return cell;
+    }
     else
     {
-        cell.nameLabel.text = @"添加城市";
-        cell.descriptionImgView.image = [UIImage imageNamed:@"add_city_bg"];
+        XXBCityCellAdd *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCityCellAddIdentifier" forIndexPath:indexPath];
+        return cell;
     }
-    return cell;
 }
 
 
@@ -157,7 +171,10 @@
         if(indexPath.item == [self.cityArray count]-1)
             [self selectCity];
         else
+        {
+            [self.cityCellSelDelegate manageCityViewDidSelectCityCell:[self.cityArray objectAtIndex:indexPath.row]];
             [self.navigationController popViewControllerAnimated:YES];
+        }
     }
     // 否则直接删除
     else
@@ -198,6 +215,11 @@
              XXBWeatherInfo *info = weatherInfos[0];
              info.date = json[@"date"];
              [self.weatherInfos addObject:weatherInfos[0]];
+             
+             NSInteger oldCount = [self.cityArray count];
+             NSArray *arrayWithIndexPaths = [NSArray arrayWithObjects:
+                                             [NSIndexPath indexPathForRow:oldCount-2 inSection:0], nil];
+             [self.collectionView reloadItemsAtIndexPaths:arrayWithIndexPaths];
              dispatch_semaphore_signal(getInfoFinishSemaphore);
          }
                                           failure:^(NSError *error)
@@ -275,21 +297,15 @@
     }
 }
 
+
+// TODO:重新获取天气信息，更新完数据源之后reloadData
 - (void) refresh
 {
     DDLogDebug(@"refresh the weather");
     //清除缓存
     [[SDImageCache sharedImageCache] cleanDisk];
-    for(NSInteger i = 0; i < [self.cityArray count]-1 ;i++)
-    {
-        XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-        XXBWeatherInfo *weatherInfo = [self.weatherInfos objectAtIndex:i];
-        XXBWeatherDetail *detailToday = [weatherInfo.weather_data objectAtIndex:0];
-        
-        cell.weatherDetail.dayPictureUrl = detailToday.dayPictureUrl;
-        cell.weatherDetail.weather = detailToday.weather;
-        cell.weatherDetail.temperature = detailToday.temperature;
-    }
+    
+    [self.collectionView reloadData];
 }
 
 
@@ -305,7 +321,7 @@
 {
     if(isNormal)
     {
-        for(NSInteger i = 0; i < [self.cityArray count] ;i++)
+        for(NSInteger i = 0; i < [self.cityArray count]-1 ;i++)
         {
             XXBCityCell *cell = (XXBCityCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             cell.shouldShowDel = NO;

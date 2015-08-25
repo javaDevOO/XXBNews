@@ -23,7 +23,6 @@
 
 
 // TODO：布局的参数还要修改，目前无法适配不同大小屏幕
-
 - (void) setupContentView
 {
     DDLogDebug(@"bounds:%f,%f",self.bounds.size.height,self.bounds.size.width);

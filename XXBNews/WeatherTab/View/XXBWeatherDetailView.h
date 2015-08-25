@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "XXBWeatherInfo.h"
 
+/**
+ *  天气预报
+ */
 @interface XXBWeatherDetailView : UIView
 
 @property (nonatomic, strong) NSMutableArray *cellArray;
 @property (nonatomic, strong) XXBWeatherInfo *weatherInfo;
 
 - (id) initWithFrame:(CGRect)frame withWeatherInfo:(XXBWeatherInfo *)info;
-
 
 @end

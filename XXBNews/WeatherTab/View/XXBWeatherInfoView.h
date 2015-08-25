@@ -11,6 +11,10 @@
 #import "XXBWeatherInfo.h"
 #import "XXBWeatherDetailView.h"
 
+/**
+ *  天气详情页面
+ */
+
 @interface XXBWeatherInfoView : UIScrollView<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UILabel *nameLabel;

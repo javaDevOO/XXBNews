@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "CitySelectDelegate.h"
+#import "CityCellSelectDelegate.h"
 
 /**
  *  管理城市页面，利用FlowLayout布局可以实现最简单的gridview视图
@@ -17,6 +18,7 @@
 
 @property (nonatomic, strong) NSMutableArray *weatherInfos;
 @property (nonatomic, strong) NSMutableArray *cityArray;
+@property (nonatomic, weak) id<CityCellSelectDelegate> cityCellSelDelegate;
 
 - (id) initWithCityArray:(NSMutableArray *)cityArray;
 
