@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XXBMemoItem.h"
 
 @interface XXBMemoCell : UICollectionViewCell
 
-@property (nonatomic, strong) XXBMemoItem *toolItem;
 
 @end

@@ -15,3 +15,5 @@
 
 #import "Common.h"
 
+#import <CoreData/CoreData.h>
+

@@ -7,3 +7,6 @@
 */
 
 "weatherTabTitle" = "Weather";
+"newsTabTitle" = "News";
+"memoTabTitle" = "Memo";
+"moreTabTitle" = "More";

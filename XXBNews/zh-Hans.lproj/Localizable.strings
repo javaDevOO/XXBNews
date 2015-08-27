@@ -6,3 +6,6 @@
   Copyright (c) 2015年 xuxubin. All rights reserved.
 */
 "weatherTabTitle" = "天气";
+"newsTabTitle" = "新闻";
+"memoTabTitle" = "备忘录";
+"moreTabTitle" = "更多";
