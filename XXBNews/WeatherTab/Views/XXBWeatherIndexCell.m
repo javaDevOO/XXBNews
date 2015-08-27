@@ -25,8 +25,6 @@
 // TODO：布局的参数还要修改，目前无法适配不同大小屏幕
 - (void) setupContentView
 {
-    DDLogDebug(@"bounds:%f,%f",self.bounds.size.height,self.bounds.size.width);
-    DDLogDebug(@"frames:%f,%f",self.frame.size.height,self.frame.size.width);
     self.descriptionImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 50, 50)];
         self.descriptionImgView.image = [UIImage imageNamed:@"tabbar_home_selected"];
     
@@ -41,6 +39,7 @@
     self.desTextView = [[UITextView alloc] init];
     self.desTextView.scrollEnabled = NO;
     self.desTextView.frame = CGRectMake(55+5, 30,[UIDevice currentWidth]-60, 50);
+    self.desTextView.editable = NO;
     
     [self addSubview:self.nameLabel];
     [self addSubview:self.zsLabel];

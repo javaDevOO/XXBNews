@@ -21,7 +21,7 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     if(self)
     {
-        [self initTabbarItemWithTitle:@"更多" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
+        [self initTabbarItemWithTitle:NSLocalizedString(@"moreTabTitle", @"") imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
     }
     return self;
 }
@@ -30,6 +30,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    DDLogDebug(@"%@",@"more tab view did load");
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView];
     self.manager.style.cellHeight = 40;
     

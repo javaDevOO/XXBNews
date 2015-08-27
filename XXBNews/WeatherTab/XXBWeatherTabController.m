@@ -43,21 +43,8 @@
     {
         //设置tabbarItem最好放在init里面
         [self initTabbarItemWithTitle:NSLocalizedString(@"weatherTabTitle",@"") imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
-        
-        refreshBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
-        UIBarButtonItem *manageBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
-        
-        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:manageBtn,refreshBtn, nil];
-        
         getInfoFinishSemaphore = dispatch_semaphore_create(1);
         
-        self.swipeView = [[SwipeView alloc] init];
-        self.swipeView.frame = self.view.bounds;
-        self.swipeView.delegate = self;
-        self.swipeView.dataSource = self;
-        [self.view addSubview:self.swipeView];
-        
-        [self setupIndicator];
     }
     return self;
 }
@@ -65,7 +52,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    DDLogDebug(@"%@",@"weather tab view did load");
     
+    // 初始化导航栏按钮
+    refreshBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+    UIBarButtonItem *manageBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:manageBtn,refreshBtn, nil];
+    
+    self.swipeView = [[SwipeView alloc] init];
+    self.swipeView.frame = self.view.bounds;
+    self.swipeView.delegate = self;
+    self.swipeView.dataSource = self;
+    [self.view addSubview:self.swipeView];
+    
+    [self setupIndicator];
     //调用了LocationTool的初始化方法
     [XXBLocationTool sharedInstance];
     //接收到定位成功的回调
@@ -88,7 +88,6 @@
         self.cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",nil]];
     }
     [self loadWeatherData:self.cityArray];
-    
     
     //此时weatherinfo的数据还没有返回，需要进行同步
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{

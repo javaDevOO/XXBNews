@@ -30,7 +30,7 @@
     self = [super init];
     if(self)
     {
-        [self initTabbarItemWithTitle:@"新闻" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
+        [self initTabbarItemWithTitle:NSLocalizedString(@"newsTabTitle", @"") imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
     }
     return self;
 }
@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    DDLogDebug(@"%@",@"news tab view did load");
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self action:@selector(selectMoreView)];
     
@@ -70,40 +70,46 @@
 
 - (void) setupMenuView
 {
+    // 在block中使用self，未防止循环引用，要用weak
+    typeof(self) __weak weakSelf = self;
     REMenuItem *baiduItem = [[REMenuItem alloc] initWithTitle:@"百度新闻"
                                                      subtitle:@"全球最大的中文新闻平台"
                                                         image:nil
                                              highlightedImage:nil
                                                        action:^(REMenuItem *item) {
-                                                           [self loadWebViewUrl:baiduNewUrl];
+                                                           [weakSelf loadWebViewUrl:baiduNewUrl];
                                                        }];
     REMenuItem *fengItem = [[REMenuItem alloc] initWithTitle:@"凤凰新闻"
                                                     subtitle:@"24小时提供最及时，最权威，最客观的新闻资讯"
                                                        image:nil
                                             highlightedImage:nil
                                                       action:^(REMenuItem *item) {
-                                                          [self loadWebViewUrl:fengNewUrl];
+                                                          [weakSelf loadWebViewUrl:fengNewUrl];
                                                       }];
     REMenuItem *sinaItem = [[REMenuItem alloc] initWithTitle:@"新浪新闻"
                                                     subtitle:@"最新，最快头条新闻一网打尽"
                                                        image:nil
                                             highlightedImage:nil
                                                       action:^(REMenuItem *item) {
-                                                          [self loadWebViewUrl:sinaNewUrl];
+                                                          [weakSelf loadWebViewUrl:sinaNewUrl];
                                                       }];
     REMenuItem *tencenItem = [[REMenuItem alloc] initWithTitle:@"腾讯新闻"
                                                       subtitle:@"中国浏览最大的中文门户网站"
                                                          image:nil
                                               highlightedImage:nil
                                                         action:^(REMenuItem *item) {
-                                                            [self loadWebViewUrl:tencenNewUrl];
+                                                            [weakSelf loadWebViewUrl:tencenNewUrl];
                                                         }];
     REMenuItem *wangyiItem = [[REMenuItem alloc] initWithTitle:@"网易新闻"
                                                       subtitle:@"因新闻最快速，评论最犀利而备受推崇"
                                                          image:nil
                                               highlightedImage:nil
                                                         action:^(REMenuItem *item) {
-                                                            [self loadWebViewUrl:wangyiNewUrl];
+                                                            //[weakSelf loadWebViewUrl:wangyiNewUrl];
+                                                            //另一种对self的处理方式
+                                                            typeof(self) __strong strongSelf = weakSelf;
+                                                            if(strongSelf)
+                                                                [strongSelf loadWebViewUrl:wangyiNewUrl];
                                                         }];
     self.menu = [[REMenu alloc] initWithItems:@[fengItem, baiduItem, sinaItem, tencenItem, wangyiItem]];
     self.menu.liveBlur = YES;

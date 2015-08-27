@@ -48,11 +48,6 @@
     
     // 设置每个tab对应的view
     [self initChildViewContent];
-    
-    // 增加手势滑动
-    [self initGesture];
-    //self.selectedIndex = 1;
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,11 +85,6 @@
     // 添加到导航控制器
     XXBNavigationViewController *childVcNav = [[XXBNavigationViewController alloc]initWithRootViewController:childVc];
     [self addChildViewController:childVcNav];
-}
-
-- (void)initGesture
-{
-    
 }
 
 // tarbar的代理

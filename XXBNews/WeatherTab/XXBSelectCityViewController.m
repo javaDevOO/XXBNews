@@ -30,9 +30,6 @@
             //加载plist文件中的城市列表
             self.provincesAndCities = [NSArray arrayWithContentsOfFile:[XXBFileUtilities getFilePathString:@"ProvincesAndCities.plist" ofType:nil]];
         }
-        
-        //初始化search controller
-        [self setupSearchCotroller];
     }
     return self;
 }
@@ -42,6 +39,9 @@
 {
     [super viewDidLoad];
     self.title = @"选择城市";
+    DDLogDebug(@"%@",@"select city view did load");
+    //初始化search controller
+    [self setupSearchCotroller];
 }
 
 

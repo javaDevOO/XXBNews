@@ -40,21 +40,28 @@
     {
         isDeleteMode = NO;
         self.title = @"管理城市";
-        refreshBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
-        editBtn = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleDeleteMode)];
-        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:editBtn,refreshBtn, nil];
-        self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         
         // TODO: 从属性列表中获取已选择的城市
         self.cityArray = cityArray;
         if(![[self.cityArray lastObject]  isEqualToString: @"+"])
             [self.cityArray addObject:@"+"];
         
-        [self setupCollectionView];
-        
         getInfoFinishSemaphore = dispatch_semaphore_create(1);
     }
     return self;
+}
+
+
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    DDLogDebug(@"%@",@"manage city view did load");
+    
+    refreshBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+    editBtn = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleDeleteMode)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:editBtn,refreshBtn, nil];
+    self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self setupCollectionView];
 }
 
 

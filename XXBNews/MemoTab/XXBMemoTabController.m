@@ -11,6 +11,8 @@
 #import "XXBMemoSection.h"
 #import "XXBMemoHeaderCell.h"
 #import "XXBMemoEditController.h"
+#import "Memo.h"
+#import "AppDelegate.h"
 
 @interface XXBMemoTabController ()
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -24,26 +26,10 @@
     self = [super init];
     if(self)
     {
-        [self initTabbarItemWithTitle:@"备忘" imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
+        [self initTabbarItemWithTitle:NSLocalizedString(@"memoTabTitle", @"") imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
         
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(edit)];
-        
         [self initSections];
-        
-        // 创建collection的时候要有layout属性
-        self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        
-        UICollectionViewFlowLayout* flowLayout = [self setupFlowLayout];
-        self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
-        self.collectionView.backgroundColor = [UIColor whiteColor];
-        
-        //要注册cell,如果用到了header和footer（supplementary views），也要进行注册
-        [self.collectionView registerClass:[XXBMemoCell class] forCellWithReuseIdentifier:@"MemoTabCollectionCellIdentifier"];
-        [self.collectionView registerClass:[XXBMemoHeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MemoTabHeaderIdentifier"];
-        self.collectionView.delegate = self;
-        self.collectionView.dataSource = self;
-        
-        [self.view addSubview:self.collectionView];
     }
     return self;
 }
@@ -51,13 +37,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    DDLogDebug(@"%@",@"view did load");
+    
+    // 创建collection的时候要有layout属性
+    self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UICollectionViewFlowLayout* flowLayout = [self setupFlowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    
+    //要注册cell,如果用到了header和footer（supplementary views），也要进行注册
+    [self.collectionView registerClass:[XXBMemoCell class] forCellWithReuseIdentifier:@"MemoTabCollectionCellIdentifier"];
+    [self.collectionView registerClass:[XXBMemoHeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MemoTabHeaderIdentifier"];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    
+    [self.view addSubview:self.collectionView];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void) fetchData
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Memo" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSArray *fetchObjs = [context executeFetchRequest:fetchRequest error:&error];
+    for(Memo *memo in fetchObjs)
+    {
+        DDLogDebug(@"memo content:%@",memo.content);
+        DDLogDebug(@"memo date:%@",memo.createDate);
+    }
 }
 
 
@@ -73,7 +92,7 @@
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     XXBMemoSection *sec = [self.sections objectAtIndex:section];
-    return [sec.memoArray count]+1;
+    return [sec.memoArray count]+4;
 }
 
 
