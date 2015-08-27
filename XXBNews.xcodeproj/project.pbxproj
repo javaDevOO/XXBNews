@@ -72,8 +72,11 @@
 		CE33AD341B86D1E0007DDC7D /* XXBMemoEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33AD331B86D1E0007DDC7D /* XXBMemoEditController.m */; };
 		CE73E4791B7B69B30006568C /* XXBLocationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E4781B7B69B30006568C /* XXBLocationTool.m */; };
 		CE73E47C1B7B79CE0006568C /* XXBManageCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */; };
+		CE7468591B8EA8BC00355835 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7468581B8EA8BC00355835 /* CoreData.framework */; };
+		CE74685C1B8EAC0500355835 /* XXBNews.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE74685A1B8EAC0500355835 /* XXBNews.xcdatamodeld */; };
+		CE74685F1B8EE40B00355835 /* Memo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE74685E1B8EE40B00355835 /* Memo.m */; };
+		CE7468621B8F32BA00355835 /* XXBTimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7468611B8F32BA00355835 /* XXBTimeTool.m */; };
 		CE7923561B80A1AE0076395A /* XXBMemoTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7923521B80A1AE0076395A /* XXBMemoTabController.m */; };
-		CE7A418D1B8322A8003CACF5 /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A418C1B8322A8003CACF5 /* UILabel+VerticalAlign.m */; };
 		CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */; };
 		CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */; };
 		CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */; };
@@ -106,7 +109,6 @@
 		CEF8B7B01B8C63D10048699B /* XXBWeatherDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7A81B8C63D10048699B /* XXBWeatherDetailView.m */; };
 		CEF8B7B11B8C63D10048699B /* XXBWeatherIndexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7AA1B8C63D10048699B /* XXBWeatherIndexCell.m */; };
 		CEF8B7B21B8C63D10048699B /* XXBWeatherInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7AC1B8C63D10048699B /* XXBWeatherInfoView.m */; };
-		CEF8B7B81B8C64460048699B /* XXBMemoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7B51B8C64460048699B /* XXBMemoItem.m */; };
 		CEF8B7B91B8C64460048699B /* XXBMemoSection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7B71B8C64460048699B /* XXBMemoSection.m */; };
 		CEF8B7BF1B8C64530048699B /* XXBMemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7BC1B8C64530048699B /* XXBMemoCell.m */; };
 		CEF8B7C01B8C64530048699B /* XXBMemoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7BE1B8C64530048699B /* XXBMemoHeaderCell.m */; };
@@ -237,10 +239,15 @@
 		CE73E4781B7B69B30006568C /* XXBLocationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBLocationTool.m; sourceTree = "<group>"; };
 		CE73E47A1B7B79CE0006568C /* XXBManageCityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBManageCityController.h; sourceTree = "<group>"; };
 		CE73E47B1B7B79CE0006568C /* XXBManageCityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBManageCityController.m; sourceTree = "<group>"; };
+		CE7468581B8EA8BC00355835 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CE74685B1B8EAC0500355835 /* XXBNews.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = XXBNews.xcdatamodel; sourceTree = "<group>"; };
+		CE74685D1B8EE40B00355835 /* Memo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memo.h; sourceTree = "<group>"; };
+		CE74685E1B8EE40B00355835 /* Memo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memo.m; sourceTree = "<group>"; };
+		CE7468601B8F32BA00355835 /* XXBTimeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBTimeTool.h; sourceTree = "<group>"; };
+		CE7468611B8F32BA00355835 /* XXBTimeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBTimeTool.m; sourceTree = "<group>"; };
+		CE7468631B8F392900355835 /* MemoEditDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoEditDelegate.h; sourceTree = "<group>"; };
 		CE7923511B80A1AE0076395A /* XXBMemoTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBMemoTabController.h; path = XXBNews/MemoTab/XXBMemoTabController.h; sourceTree = SOURCE_ROOT; };
 		CE7923521B80A1AE0076395A /* XXBMemoTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBMemoTabController.m; path = XXBNews/MemoTab/XXBMemoTabController.m; sourceTree = SOURCE_ROOT; };
-		CE7A418B1B8322A8003CACF5 /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
-		CE7A418C1B8322A8003CACF5 /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
 		CE7EF6B71B73476100FE7AA4 /* XXBMoreInfoTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMoreInfoTabController.h; sourceTree = "<group>"; };
 		CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMoreInfoTabController.m; sourceTree = "<group>"; };
 		CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XXBNewsTabController .m"; sourceTree = "<group>"; };
@@ -302,8 +309,6 @@
 		CEF8B7AA1B8C63D10048699B /* XXBWeatherIndexCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBWeatherIndexCell.m; path = XXBNews/WeatherTab/Views/XXBWeatherIndexCell.m; sourceTree = SOURCE_ROOT; };
 		CEF8B7AB1B8C63D10048699B /* XXBWeatherInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBWeatherInfoView.h; path = XXBNews/WeatherTab/Views/XXBWeatherInfoView.h; sourceTree = SOURCE_ROOT; };
 		CEF8B7AC1B8C63D10048699B /* XXBWeatherInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBWeatherInfoView.m; path = XXBNews/WeatherTab/Views/XXBWeatherInfoView.m; sourceTree = SOURCE_ROOT; };
-		CEF8B7B41B8C64460048699B /* XXBMemoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMemoItem.h; sourceTree = "<group>"; };
-		CEF8B7B51B8C64460048699B /* XXBMemoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMemoItem.m; sourceTree = "<group>"; };
 		CEF8B7B61B8C64460048699B /* XXBMemoSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMemoSection.h; sourceTree = "<group>"; };
 		CEF8B7B71B8C64460048699B /* XXBMemoSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMemoSection.m; sourceTree = "<group>"; };
 		CEF8B7BB1B8C64530048699B /* XXBMemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMemoCell.h; sourceTree = "<group>"; };
@@ -319,6 +324,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7468591B8EA8BC00355835 /* CoreData.framework in Frameworks */,
 				CE8659641B71FC6A00ADD92A /* CoreGraphics.framework in Frameworks */,
 				CE8659621B71FC5500ADD92A /* Foundation.framework in Frameworks */,
 				CE8659601B71FC4B00ADD92A /* UIKit.framework in Frameworks */,
@@ -556,10 +562,10 @@
 				CE73E4781B7B69B30006568C /* XXBLocationTool.m */,
 				CE86CF5B1B78D28E00DD54C1 /* XXBFileUtilities.h */,
 				CE86CF5C1B78D28E00DD54C1 /* XXBFileUtilities.m */,
+				CE7468601B8F32BA00355835 /* XXBTimeTool.h */,
+				CE7468611B8F32BA00355835 /* XXBTimeTool.m */,
 				CE7EF6C01B73476100FE7AA4 /* UIDevice+Resolutions.h */,
 				CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */,
-				CE7A418B1B8322A8003CACF5 /* UILabel+VerticalAlign.h */,
-				CE7A418C1B8322A8003CACF5 /* UILabel+VerticalAlign.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -654,6 +660,7 @@
 				CE8659371B71EE9300ADD92A /* LaunchScreen.xib */,
 				CE33AC831B86B20C007DDC7D /* Libs */,
 				CE8659281B71EE9300ADD92A /* Supporting Files */,
+				CE74685A1B8EAC0500355835 /* XXBNews.xcdatamodeld */,
 			);
 			path = XXBNews;
 			sourceTree = "<group>";
@@ -690,6 +697,7 @@
 		CE8659661B71FC7D00ADD92A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE7468581B8EA8BC00355835 /* CoreData.framework */,
 				CE86595F1B71FC4B00ADD92A /* UIKit.framework */,
 				CE8659611B71FC5500ADD92A /* Foundation.framework */,
 				CE8659631B71FC6A00ADD92A /* CoreGraphics.framework */,
@@ -703,6 +711,7 @@
 			children = (
 				CE86CF5F1B78D9E400DD54C1 /* CitySelectDelegate.h */,
 				CEF8B79A1B8BFF150048699B /* CityCellSelectDelegate.h */,
+				CE7468631B8F392900355835 /* MemoEditDelegate.h */,
 			);
 			name = Delegate;
 			path = XXBNews/Delegate;
@@ -729,10 +738,10 @@
 		CEF8B7B31B8C64460048699B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CEF8B7B41B8C64460048699B /* XXBMemoItem.h */,
-				CEF8B7B51B8C64460048699B /* XXBMemoItem.m */,
 				CEF8B7B61B8C64460048699B /* XXBMemoSection.h */,
 				CEF8B7B71B8C64460048699B /* XXBMemoSection.m */,
+				CE74685D1B8EE40B00355835 /* Memo.h */,
+				CE74685E1B8EE40B00355835 /* Memo.m */,
 			);
 			name = Models;
 			path = XXBNews/MemoTab/Models;
@@ -935,6 +944,7 @@
 				CE86592E1B71EE9300ADD92A /* AppDelegate.m in Sources */,
 				CE33ACEA1B86B20C007DDC7D /* RETableViewTextCell.m in Sources */,
 				CE7923561B80A1AE0076395A /* XXBMemoTabController.m in Sources */,
+				CE74685F1B8EE40B00355835 /* Memo.m in Sources */,
 				CE33AD2E1B86BF97007DDC7D /* REEmailValidator.m in Sources */,
 				CE33ACED1B86B20C007DDC7D /* REDateTimeItem.m in Sources */,
 				CE33AD301B86BF97007DDC7D /* REPresenceValidator.m in Sources */,
@@ -946,7 +956,6 @@
 				CE33ACFA1B86B20C007DDC7D /* REPlaceholderTextView.m in Sources */,
 				CE33AD2B1B86BF97007DDC7D /* NSError+REValidation.m in Sources */,
 				CE33AD0E1B86B20C007DDC7D /* RETableViewCell.m in Sources */,
-				CE7A418D1B8322A8003CACF5 /* UILabel+VerticalAlign.m in Sources */,
 				CE33ACF51B86B20C007DDC7D /* RERadioItem.m in Sources */,
 				CE8659B91B72353300ADD92A /* XXBMainTabBarController.m in Sources */,
 				CE86592B1B71EE9300ADD92A /* main.m in Sources */,
@@ -963,6 +972,7 @@
 				CE33ACE71B86B20C007DDC7D /* RETableViewOptionCell.m in Sources */,
 				CEF8B7AD1B8C63D10048699B /* XXBCityCell.m in Sources */,
 				CE33ACF11B86B20C007DDC7D /* RELongTextItem.m in Sources */,
+				CE74685C1B8EAC0500355835 /* XXBNews.xcdatamodeld in Sources */,
 				CEC5D64E1B763CA600CCCF6E /* XXBHttpTool.m in Sources */,
 				CEF8B7BF1B8C64530048699B /* XXBMemoCell.m in Sources */,
 				CE33ACE91B86B20C007DDC7D /* RETableViewSegmentedCell.m in Sources */,
@@ -978,11 +988,11 @@
 				CE33ACF21B86B20C007DDC7D /* REMultipleChoiceItem.m in Sources */,
 				CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */,
 				CE33ACF01B86B20C007DDC7D /* REInlinePickerItem.m in Sources */,
-				CEF8B7B81B8C64460048699B /* XXBMemoItem.m in Sources */,
 				CE8659B01B72091600ADD92A /* XXBNavigationViewController.m in Sources */,
 				CEF8B7AF1B8C63D10048699B /* XXBWeatherDetailCell.m in Sources */,
 				CEF8B7B21B8C63D10048699B /* XXBWeatherInfoView.m in Sources */,
 				CE33ACF91B86B20C007DDC7D /* REActionBar.m in Sources */,
+				CE7468621B8F32BA00355835 /* XXBTimeTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1208,6 +1218,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CE74685A1B8EAC0500355835 /* XXBNews.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CE74685B1B8EAC0500355835 /* XXBNews.xcdatamodel */,
+			);
+			currentVersion = CE74685B1B8EAC0500355835 /* XXBNews.xcdatamodel */;
+			path = XXBNews.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CE86591D1B71EE9300ADD92A /* Project object */;
 }
