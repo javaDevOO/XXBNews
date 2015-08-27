@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "XXBBaseTabViewController.h"
+#import "MemoEditDelegate.h"
 
-@interface XXBMemoTabController : XXBBaseTabViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface XXBMemoTabController : XXBBaseTabViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, MemoEditDelegate>
 
 @end

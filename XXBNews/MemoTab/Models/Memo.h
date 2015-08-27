@@ -12,6 +12,7 @@
 
 @interface Memo : NSManagedObject
 
+//TODO:需要一个属性来唯一确定一条记录
 @property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSNumber * isFinished;//[self.isFinished boolValue];[NSNumber numberWithBool:YES];
 @property (nonatomic, retain) NSDate * createDate;

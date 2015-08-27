@@ -7,6 +7,7 @@
 //
 
 #import "XXBMemoEditController.h"
+#import "Memo.h"
 
 @interface XXBMemoEditController ()
 
@@ -14,16 +15,14 @@
 
 @implementation XXBMemoEditController
 
-- (id) init
+- (id) initWithMode:(MemoEditMode)mode withMemo:(Memo *)memo
 {
     self = [super init];
     if(self)
     {
         self.title = @"编辑备忘";
-        UILabel *lb = [[UILabel alloc] initWithFrame:self.view.frame];
-        self.view.backgroundColor = [UIColor blueColor];
-        lb.text = @"编辑";
-        [self.view addSubview:lb];
+        self.memo = memo;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveMemo)];
     }
     
     return self;
@@ -32,6 +31,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.contentTv = [[UITextView alloc] initWithFrame:self.view.frame];
+    self.contentTv.backgroundColor = [UIColor blueColor];
+    self.contentTv.font = [UIFont systemFontOfSize:15.0];
+    if(self.memo != nil)
+    {
+        self.contentTv.text = self.memo.content;
+    }
+    [self.contentTv becomeFirstResponder];
+    [self.view addSubview:self.contentTv];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,14 +47,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) saveMemo
+{
+    NSString *content = self.contentTv.text;
+    self.memo.content = content;
+    if(self.mode == MemoEditModeUpdate)
+        [self.delegate memoEditController:self updateMemo:self.memo];
+    if(self.mode == MemoEditModeAdd)
+        [self.delegate memoEditController:self addMemo:nil];
+    DDLogDebug(@"should save memo %@",content);
+    [self.navigationController popViewControllerAnimated:YES];
 }
-*/
 
 @end

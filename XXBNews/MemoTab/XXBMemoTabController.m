@@ -13,6 +13,7 @@
 #import "XXBMemoEditController.h"
 #import "Memo.h"
 #import "AppDelegate.h"
+#import "XXBTimeTool.h"
 
 @interface XXBMemoTabController ()
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -29,7 +30,7 @@
     {
         [self initTabbarItemWithTitle:NSLocalizedString(@"memoTabTitle", @"") imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
         
-         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(edit)];
+         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMemo)];
         [self initSections];
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         self.managedObjectContext = [appDelegate managedObjectContext];
@@ -58,6 +59,8 @@
     [self.view addSubview:self.collectionView];
     
     [self fetchData];
+//    [self deleteData];
+//    [self insertData:nil];
 }
 
 
@@ -91,12 +94,13 @@
     }
 }
 
+
 - (void) insertData:(Memo *)memo
 {
     Memo *memo1 = [NSEntityDescription insertNewObjectForEntityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
     memo1.content = @"还书！！";
     memo1.isFinished = [NSNumber numberWithBool:YES];
-    memo1.createDate = [NSDate date];
+    memo1.createDate = [XXBTimeTool localeDate];
     NSError *error;
     if(![self.managedObjectContext save:&error])
     {
@@ -105,9 +109,55 @@
     DDLogDebug(@"%@",@"数据已保存");
 }
 
+
 - (void) deleteData
 {
-    //先fetch在delete
+    // 1. 实例化查询请求
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Memo"];
+    
+    // 2. 设置谓词条件
+    request.predicate = [NSPredicate predicateWithFormat:@"content CONTAINS '还书'"];
+    
+    // 3. 由上下文查询数据
+    NSArray *result = [self.managedObjectContext executeFetchRequest:request error:nil];
+    
+    // 4. 输出结果
+    for (Memo *memo in result) {
+        // 删除一条记录
+        [self.managedObjectContext deleteObject:memo];
+    }
+    
+    // 5. 通知_context保存数据
+    if ([self.managedObjectContext save:nil]) {
+        NSLog(@"删除成功");
+    } else {
+        NSLog(@"删除失败");
+    }
+}
+
+//更新
+- (void)updateData:(NSString*)newsId  withContent:(NSString*)content
+{
+    
+    NSPredicate *predicate = [NSPredicate
+                              predicateWithFormat:@"id like[cd] %@",newsId];
+    
+    //首先你需要建立一个request
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Memo" inManagedObjectContext:self.managedObjectContext]];
+    [request setPredicate:predicate];//这里相当于sqlite中的查询条件，具体格式参考苹果文档
+    
+    NSError *error = nil;
+    NSArray *result = [self.managedObjectContext executeFetchRequest:request error:&error];//这里获取到的是一个数组，你需要取出你要更新的那个obj
+    for (Memo *memo in result) {
+         memo.content = content;
+    }
+    
+    //保存
+    if ([self.managedObjectContext save:&error]) {
+        //更新成功
+        NSLog(@"更新成功");
+    }
 }
 
 
@@ -180,7 +230,10 @@
 // 选择了某个cell
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    XXBMemoEditController *editController = [[XXBMemoEditController alloc] init];
+    XXBMemoSection *sec = [self.sections objectAtIndex:indexPath.section];
+    Memo *memo = [sec.memoArray objectAtIndex:indexPath.item];
+    XXBMemoEditController *editController = [[XXBMemoEditController alloc] initWithMode:MemoEditModeUpdate withMemo:memo];
+    editController.delegate = self;
     [self.navigationController pushViewController:editController animated:YES];
 }
 
@@ -205,10 +258,22 @@
     return flowLayout;
 }
 
-- (void) edit
+- (void) addMemo
 {
-    XXBMemoEditController *editController = [[XXBMemoEditController alloc] init];
+    XXBMemoEditController *editController = [[XXBMemoEditController alloc] initWithMode:MemoEditModeAdd withMemo:nil];
+    editController.delegate = self;
     [self.navigationController pushViewController:editController animated:YES];
+}
+
+- (void)memoEditController:(XXBMemoEditController *)memoEditController addMemo:(Memo *)memo
+{
+    DDLogDebug(@"%@",@"should update the record");
+}
+
+- (void)memoEditController:(XXBMemoEditController *)memoEditController updateMemo:(Memo *)memo
+{
+    DDLogDebug(@"%@",@"should insert new record");
+    DDLogDebug(@"%@",memo.content);
 }
 
 @end
