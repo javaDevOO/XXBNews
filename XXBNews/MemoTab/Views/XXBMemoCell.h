@@ -10,5 +10,6 @@
 
 @interface XXBMemoCell : UICollectionViewCell
 
+@property (nonatomic, strong) UILabel *label;
 
 @end

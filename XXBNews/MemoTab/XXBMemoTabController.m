@@ -17,6 +17,7 @@
 @interface XXBMemoTabController ()
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *sections;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation XXBMemoTabController
@@ -30,6 +31,8 @@
         
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(edit)];
         [self initSections];
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        self.managedObjectContext = [appDelegate managedObjectContext];
     }
     return self;
 }
@@ -53,6 +56,8 @@
     self.collectionView.dataSource = self;
     
     [self.view addSubview:self.collectionView];
+    
+    [self fetchData];
 }
 
 
@@ -64,19 +69,45 @@
 
 - (void) fetchData
 {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Memo" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
+    
+    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
+                                         initWithKey:@"createDate" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc]
+                                initWithObjects:sortDescriptor1, nil];
+    
     [fetchRequest setEntity:entity];
+    [fetchRequest setSortDescriptors:sortDescriptors];
     NSError *error;
-    NSArray *fetchObjs = [context executeFetchRequest:fetchRequest error:&error];
+    NSArray *fetchObjs = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    DDLogDebug(@"%d",[fetchObjs count]);
     for(Memo *memo in fetchObjs)
     {
         DDLogDebug(@"memo content:%@",memo.content);
         DDLogDebug(@"memo date:%@",memo.createDate);
+        XXBMemoSection *section = [self.sections objectAtIndex:0];
+        [section.memoArray addObject:memo];
     }
+}
+
+- (void) insertData:(Memo *)memo
+{
+    Memo *memo1 = [NSEntityDescription insertNewObjectForEntityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
+    memo1.content = @"还书！！";
+    memo1.isFinished = [NSNumber numberWithBool:YES];
+    memo1.createDate = [NSDate date];
+    NSError *error;
+    if(![self.managedObjectContext save:&error])
+    {
+        DDLogDebug(@"%@",@"保存失败");
+    }
+    DDLogDebug(@"%@",@"数据已保存");
+}
+
+- (void) deleteData
+{
+    //先fetch在delete
 }
 
 
@@ -92,7 +123,7 @@
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     XXBMemoSection *sec = [self.sections objectAtIndex:section];
-    return [sec.memoArray count]+4;
+    return [sec.memoArray count];
 }
 
 
@@ -100,6 +131,9 @@
 {
     XXBMemoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MemoTabCollectionCellIdentifier" forIndexPath:indexPath];
     // 注册过cell,不用再判断是否为nil，若为nil会自动创建
+    XXBMemoSection *sec = [self.sections objectAtIndex:indexPath.section];
+    Memo *memo = [sec.memoArray objectAtIndex:indexPath.item];
+    cell.label.text = memo.content;
     return cell;
 }
 

@@ -30,17 +30,6 @@
     
     [self.window makeKeyAndVisible];
     
-    Memo *memo1 = [NSEntityDescription insertNewObjectForEntityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
-    memo1.content = @"还书！！";
-    memo1.isFinished = [NSNumber numberWithBool:YES];
-    memo1.createDate = [NSDate date];
-    NSError *error;
-    if(![self.managedObjectContext save:&error])
-    {
-        DDLogDebug(@"%@",@"保存失败");
-    }
-    DDLogDebug(@"%@",@"数据已保存");
-    
     return YES;
 }
 
