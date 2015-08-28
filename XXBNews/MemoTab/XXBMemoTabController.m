@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation XXBMemoTabController
@@ -58,40 +59,45 @@
     
     [self.view addSubview:self.collectionView];
     
-    [self fetchData];
+    //[self fetchData];
 //    [self deleteData];
 //    [self insertData:nil];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-- (void) fetchData
+// 重写get方法
+- (NSFetchedResultsController *)fetchedResultsController
 {
+    if(self.fetchedResultsController != nil)
+    {
+        return self.fetchedResultsController;
+    }
+    
+    // Create the fetch request for the entity.
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
-    
-    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc]
-                                         initWithKey:@"createDate" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc]
-                                initWithObjects:sortDescriptor1, nil];
-    
     [fetchRequest setEntity:entity];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    NSError *error;
-    NSArray *fetchObjs = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    DDLogDebug(@"%d",[fetchObjs count]);
-    for(Memo *memo in fetchObjs)
+    [fetchRequest setFetchBatchSize:20];
+    NSSortDescriptor *sectionSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"isFinished" ascending:YES];
+    NSSortDescriptor *contentSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sectionSortDescriptor, contentSortDescriptor]];
+    
+    NSFetchedResultsController *fetchResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"isFinished" cacheName:nil];
+    fetchResultController.delegate  = self;
+    self.fetchedResultsController = fetchResultController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error])
     {
-        DDLogDebug(@"memo content:%@",memo.content);
-        DDLogDebug(@"memo date:%@",memo.createDate);
-        XXBMemoSection *section = [self.sections objectAtIndex:0];
-        [section.memoArray addObject:memo];
+        /*
+        abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
     }
+    
+    return self.fetchedResultsController;
+
 }
 
 
@@ -107,57 +113,6 @@
         DDLogDebug(@"%@",@"保存失败");
     }
     DDLogDebug(@"%@",@"数据已保存");
-}
-
-
-- (void) deleteData
-{
-    // 1. 实例化查询请求
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Memo"];
-    
-    // 2. 设置谓词条件
-    request.predicate = [NSPredicate predicateWithFormat:@"content CONTAINS '还书'"];
-    
-    // 3. 由上下文查询数据
-    NSArray *result = [self.managedObjectContext executeFetchRequest:request error:nil];
-    
-    // 4. 输出结果
-    for (Memo *memo in result) {
-        // 删除一条记录
-        [self.managedObjectContext deleteObject:memo];
-    }
-    
-    // 5. 通知_context保存数据
-    if ([self.managedObjectContext save:nil]) {
-        NSLog(@"删除成功");
-    } else {
-        NSLog(@"删除失败");
-    }
-}
-
-//更新
-- (void)updateData:(NSString*)newsId  withContent:(NSString*)content
-{
-    
-    NSPredicate *predicate = [NSPredicate
-                              predicateWithFormat:@"id like[cd] %@",newsId];
-    
-    //首先你需要建立一个request
-    NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"Memo" inManagedObjectContext:self.managedObjectContext]];
-    [request setPredicate:predicate];//这里相当于sqlite中的查询条件，具体格式参考苹果文档
-    
-    NSError *error = nil;
-    NSArray *result = [self.managedObjectContext executeFetchRequest:request error:&error];//这里获取到的是一个数组，你需要取出你要更新的那个obj
-    for (Memo *memo in result) {
-         memo.content = content;
-    }
-    
-    //保存
-    if ([self.managedObjectContext save:&error]) {
-        //更新成功
-        NSLog(@"更新成功");
-    }
 }
 
 
@@ -268,12 +223,18 @@
 - (void)memoEditController:(XXBMemoEditController *)memoEditController addMemo:(Memo *)memo
 {
     DDLogDebug(@"%@",@"should update the record");
+    NSError *error;
+    if(![self.managedObjectContext save:&error])
+    {
+        DDLogDebug(@"%@",@"保存失败");
+    }
+    DDLogDebug(@"%@",@"数据已保存");
 }
 
-- (void)memoEditController:(XXBMemoEditController *)memoEditController updateMemo:(Memo *)memo
+- (void)memoEditController:(XXBMemoEditController *)memoEditController updateOldMemo:(Memo *)oldMemo toNewMemo:(Memo *)newMemo
 {
     DDLogDebug(@"%@",@"should insert new record");
-    DDLogDebug(@"%@",memo.content);
+    DDLogDebug(@"%@",newMemo.content);
 }
 
 @end

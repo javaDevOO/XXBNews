@@ -20,7 +20,7 @@
 
 - (void) memoEditController:(UIViewController *)memoEditController addMemo:(Memo *)memo;
 
-- (void) memoEditController:(UIViewController *)memoEditController updateMemo:(Memo *)memo;
+- (void) memoEditController:(UIViewController *)memoEditController updateOldMemo:(Memo *)oldMemo toNewMemo:(Memo*)newMemo;
 
 @end
 

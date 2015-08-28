@@ -10,6 +10,6 @@
 #import "XXBBaseTabViewController.h"
 #import "MemoEditDelegate.h"
 
-@interface XXBMemoTabController : XXBBaseTabViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, MemoEditDelegate>
+@interface XXBMemoTabController : XXBBaseTabViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, MemoEditDelegate, NSFetchedResultsControllerDelegate>
 
 @end
