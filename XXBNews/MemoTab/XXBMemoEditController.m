@@ -13,8 +13,6 @@
 
 @interface XXBMemoEditController ()
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-
 @end
 
 @implementation XXBMemoEditController
@@ -27,9 +25,6 @@
         self.title = @"编辑备忘";
         self.memo = memo;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveMemo)];
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        self.managedObjectContext = [appDelegate managedObjectContext];
-
     }
     
     return self;
@@ -58,15 +53,14 @@
 - (void) saveMemo
 {
     NSString *content = self.contentTv.text;
-    Memo *newMemo = [NSEntityDescription insertNewObjectForEntityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
-    newMemo.content = content;
-    newMemo.isFinished = [NSNumber numberWithBool:NO];
-    newMemo.createDate = [XXBTimeTool localeDate];
+    self.memo.content = content;
+    
     if(self.mode == MemoEditModeUpdate && ![self.memo.content isEqualToString:content])
-        [self.delegate memoEditController:self updateOldMemo:self.memo toNewMemo:newMemo];
+    {
+        //更新内容
+    }
     if(self.mode == MemoEditModeAdd)
-        [self.delegate memoEditController:self addMemo:newMemo];
-    DDLogDebug(@"should save memo %@",content);
+        [self.delegate memoEditController:self addMemoWithContent:content];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

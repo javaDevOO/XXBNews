@@ -18,9 +18,9 @@
 
 @protocol MemoEditDelegate <NSObject>
 
-- (void) memoEditController:(UIViewController *)memoEditController addMemo:(Memo *)memo;
+- (void) memoEditController:(UIViewController *)memoEditController addMemoWithContent:(NSString *)content;
 
-- (void) memoEditController:(UIViewController *)memoEditController updateOldMemo:(Memo *)oldMemo toNewMemo:(Memo*)newMemo;
+//- (void) memoEditController:(UIViewController *)memoEditController updateOldMemo:(Memo *)oldMemo toNewMemo:(Memo*)newMemo;
 
 @end
 

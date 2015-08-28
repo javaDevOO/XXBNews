@@ -12,4 +12,6 @@
 
 @interface XXBMemoTabController : XXBBaseTabViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, MemoEditDelegate, NSFetchedResultsControllerDelegate>
 
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
 @end

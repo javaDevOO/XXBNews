@@ -19,7 +19,6 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation XXBMemoTabController
@@ -35,6 +34,10 @@
         [self initSections];
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         self.managedObjectContext = [appDelegate managedObjectContext];
+        
+        [self setupFetchResultsController];
+        
+        DDLogDebug(@"%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
     }
     return self;
 }
@@ -58,21 +61,24 @@
     self.collectionView.dataSource = self;
     
     [self.view addSubview:self.collectionView];
-    
-    //[self fetchData];
-//    [self deleteData];
-//    [self insertData:nil];
 }
 
 
-// 重写get方法
+// 重写get方法,要注意，如果使用self.实际上是调用getter方法，会陷入循环
 - (NSFetchedResultsController *)fetchedResultsController
 {
-    if(self.fetchedResultsController != nil)
+    if(_fetchedResultsController == nil)
     {
-        return self.fetchedResultsController;
+        [self setupFetchResultsController];
     }
     
+    return _fetchedResultsController;
+
+}
+
+
+- (void) setupFetchResultsController
+{
     // Create the fetch request for the entity.
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
@@ -84,35 +90,17 @@
     
     NSFetchedResultsController *fetchResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"isFinished" cacheName:nil];
     fetchResultController.delegate  = self;
-    self.fetchedResultsController = fetchResultController;
+    _fetchedResultsController = fetchResultController;
     
     NSError *error = nil;
-    if (![self.fetchedResultsController performFetch:&error])
+    if (![_fetchedResultsController performFetch:&error])
     {
         /*
-        abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    
-    return self.fetchedResultsController;
-
-}
-
-
-- (void) insertData:(Memo *)memo
-{
-    Memo *memo1 = [NSEntityDescription insertNewObjectForEntityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
-    memo1.content = @"还书！！";
-    memo1.isFinished = [NSNumber numberWithBool:YES];
-    memo1.createDate = [XXBTimeTool localeDate];
-    NSError *error;
-    if(![self.managedObjectContext save:&error])
-    {
-        DDLogDebug(@"%@",@"保存失败");
-    }
-    DDLogDebug(@"%@",@"数据已保存");
 }
 
 
@@ -120,15 +108,16 @@
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     DDLogDebug(@"return the number of section");
-    return [self.sections count];
+    return [[self.fetchedResultsController sections] count];
+//    return 2;
 }
 
 
 // 一个section有多少个cell，flowlayout中有多少列由cell的大小来决定
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    XXBMemoSection *sec = [self.sections objectAtIndex:section];
-    return [sec.memoArray count];
+    id<NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 
@@ -136,9 +125,10 @@
 {
     XXBMemoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MemoTabCollectionCellIdentifier" forIndexPath:indexPath];
     // 注册过cell,不用再判断是否为nil，若为nil会自动创建
-    XXBMemoSection *sec = [self.sections objectAtIndex:indexPath.section];
-    Memo *memo = [sec.memoArray objectAtIndex:indexPath.item];
+    
+    Memo *memo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.label.text = memo.content;
+    
     return cell;
 }
 
@@ -220,9 +210,14 @@
     [self.navigationController pushViewController:editController animated:YES];
 }
 
-- (void)memoEditController:(XXBMemoEditController *)memoEditController addMemo:(Memo *)memo
+- (void)memoEditController:(XXBMemoEditController *)memoEditController addMemoWithContent:(NSString *)content
 {
     DDLogDebug(@"%@",@"should update the record");
+    Memo *newMemo = [NSEntityDescription insertNewObjectForEntityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
+    newMemo.content = content;
+    newMemo.isFinished = [NSNumber numberWithBool:NO];
+    newMemo.createDate = [XXBTimeTool localeDate];
+    
     NSError *error;
     if(![self.managedObjectContext save:&error])
     {
@@ -231,10 +226,56 @@
     DDLogDebug(@"%@",@"数据已保存");
 }
 
-- (void)memoEditController:(XXBMemoEditController *)memoEditController updateOldMemo:(Memo *)oldMemo toNewMemo:(Memo *)newMemo
+
+#pragma mark - Fetched results controller delegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    DDLogDebug(@"%@",@"should insert new record");
-    DDLogDebug(@"%@",newMemo.content);
 }
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            DDLogDebug(@"%@",@"a new section insert");
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type)
+    {
+            
+        case NSFetchedResultsChangeInsert:
+            
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            
+            break;
+            
+        case NSFetchedResultsChangeMove:
+
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    
+}
+
 
 @end
