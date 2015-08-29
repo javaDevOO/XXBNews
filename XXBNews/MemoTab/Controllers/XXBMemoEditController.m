@@ -62,7 +62,7 @@
     
     if(self.mode == MemoEditModeUpdate && ![trimContent isEqualToString:@""] && ![self.memo.content isEqualToString:content])
     {
-        //更新数据库里面的记录
+        // 更新数据库里面的记录
         self.memo.content = content;
     }
     if(self.mode == MemoEditModeAdd && ![trimContent isEqualToString:@""])
@@ -72,5 +72,6 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 @end

@@ -41,7 +41,7 @@
     self = [super init];
     if(self)
     {
-        //设置tabbarItem最好放在init里面
+        // 设置tabbarItem最好放在init里面
         [self initTabbarItemWithTitle:NSLocalizedString(@"weatherTabTitle",@"") imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
         getInfoFinishSemaphore = dispatch_semaphore_create(1);
         
@@ -66,15 +66,15 @@
     [self.view addSubview:self.swipeView];
     
     [self setupIndicator];
-    //调用了LocationTool的初始化方法
+    // 调用了LocationTool的初始化方法
     [XXBLocationTool sharedInstance];
     //接收到定位成功的回调
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocCity) name:@"LocationCity" object:nil];
     
-    //读取default中存储的城市
+    // 读取default中存储的城市
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *city = [defaults objectForKey:@"currentCity"];
-    //第一次安装，定位到城市
+    // 第一次安装，定位到城市
     if(city == nil)
     {
         city = @"珠海";
@@ -89,7 +89,7 @@
     }
     [self loadWeatherData:self.cityArray];
     
-    //此时weatherinfo的数据还没有返回，需要进行同步
+    // 此时weatherinfo的数据还没有返回，需要进行同步
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
         //要等到返回天气数据时才往下执行
         dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
@@ -109,7 +109,7 @@
 # pragma swipeview datasource and delegate
 - (NSInteger) numberOfItemsInSwipeView:(SwipeView *)swipeView
 {
-    //最后一个城市名是+号，不算
+    // 最后一个城市名是+号，不算
     return [self.cityArray count]-1;
 }
 
@@ -164,20 +164,10 @@
 {
     //初始化:
     self.indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
-    
-    //设置显示样式,见UIActivityIndicatorViewStyle的定义
     self.indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    
-    //设置显示位置
     [self.indicator setCenter:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2)];
-    
-    //设置背景色
     self.indicator.backgroundColor = [UIColor grayColor];
-    
-    //设置背景透明
     self.indicator.alpha = 0.5;
-    
-    //设置背景为圆角矩形
     self.indicator.layer.cornerRadius = 6;
     self.indicator.layer.masksToBounds = YES;
 }
@@ -193,7 +183,6 @@
          {
              DDLogDebug(@"get the weather successfully");
              //MJExtention扩展可以将json数据变成model
-             //model的属性要和json的关键字对应上，否则会被置为nil
              [XXBWeatherInfo setupObjectClassInArray:^NSDictionary *{
                  return [XXBWeatherInfo objectClassInArray];
              }];
@@ -211,9 +200,7 @@
              // TODO:要是没有网络连接时还要处理
              DDLogDebug(@"get weather info error");
              dispatch_semaphore_signal(getInfoFinishSemaphore);
-         }
-         ];
-
+         }];
     });
 }
 
@@ -239,6 +226,7 @@
 }
 
 
+// TODO: 从服务器更新天气数据
 - (void) refresh
 {
     
@@ -247,6 +235,7 @@
 
 - (void) dealloc
 {
+    // swipeview建议做法
     self.swipeView.delegate = nil;
     self.swipeView.dataSource = nil;
 }

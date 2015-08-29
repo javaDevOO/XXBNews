@@ -9,10 +9,6 @@
 #import "XXBMemoCell.h"
 
 @interface XXBMemoCell ()
-
-@property (nonatomic, strong) UIImageView *imageView;
-
-
 @end
 
 @implementation XXBMemoCell
@@ -24,17 +20,13 @@
     if(self)
     {
         //设置两个backgroundview，一个是正常情况下显示，一个是被select时显示
-        UIView *backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-        backgroundView.backgroundColor = [UIColor redColor];
+        UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
+        backgroundView.image = [UIImage imageNamed:@"memo_cell_bg"];
         self.backgroundView = backgroundView;
-        //        UIView* selectedBGView = [[UIView alloc] initWithFrame:self.bounds];
-        //        selectedBGView.backgroundColor = [UIColor greenColor];
-        //        self.selectedBackgroundView = selectedBGView;
-        // TODO: 找一张删除的图片换上
         
-        self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        [self.contentView addSubview:self.imageView];
-        self.imageView.image = [UIImage imageNamed:@"memo_cell_bg"];
+//        UIView *selectedView = [[UIView alloc] initWithFrame:self.bounds];
+//        selectedView.backgroundColor = [UIColor yellowColor];
+//        self.selectedBackgroundView = selectedView;
         
         self.label = [[UILabel alloc] init];
         self.label.frame = CGRectMake(0,0,self.frame.size.width, self.frame.size.height);

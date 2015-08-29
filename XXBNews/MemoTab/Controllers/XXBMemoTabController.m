@@ -54,17 +54,12 @@
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
-    //要注册cell,如果用到了header和footer（supplementary views），也要进行注册
+    // 要注册cell,如果用到了header和footer（supplementary views），也要进行注册
     [self.collectionView registerClass:[XXBMemoCell class] forCellWithReuseIdentifier:@"MemoTabCollectionCellIdentifier"];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
     [self.view addSubview:self.collectionView];
-    
-    UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"删除"
-                                                      action:@selector(deleteMemo)];
-    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:menuItem]];
-
 }
 
 
@@ -107,12 +102,11 @@
 }
 
 
-#pragma datasource委托
+#pragma mark - collectionview data source and delegate
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     DDLogDebug(@"return the number of section");
     return [[self.fetchedResultsController sections] count];
-//    return 2;
 }
 
 
@@ -139,7 +133,7 @@
 }
 
 
-//设置每个cell的大小
+// 设置每个cell的大小
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(100, 120);
@@ -160,7 +154,7 @@
 }
 
 
-//设置行与行之间的间距，由于只有一个section，section参数没有用到
+// 设置行与行之间的间距，由于只有一个section，section参数没有用到
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 20.0;
@@ -179,17 +173,12 @@
 // flowlayout专门管理布局，比如设置header的大小
 - (UICollectionViewFlowLayout *) setupFlowLayout{
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    //设置其它各种属性
+    // 设置其它各种属性
     return flowLayout;
 }
 
-- (void) addMemo
-{
-    XXBMemoEditController *editController = [[XXBMemoEditController alloc] initWithMode:MemoEditModeAdd withMemo:nil];
-    editController.delegate = self;
-    [self.navigationController pushViewController:editController animated:YES];
-}
 
+#pragma mark - EditMemo finish delegate
 - (void)memoEditController:(XXBMemoEditController *)memoEditController addMemoWithContent:(NSString *)content
 {
     DDLogDebug(@"%@",@"should add a new record");
@@ -208,10 +197,12 @@
 
 
 #pragma mark - Fetched results controller delegate
-// 当调用context的save方法的时候就会执行代理方法
+// insert或者delete时，当调用context的save方法的时候就会执行代理方法
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    DDLogDebug(@"%@",@"fetch result will change content");
 }
+
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
@@ -265,17 +256,25 @@
             DDLogDebug(@"%@",@"更新数据成功");
             break;
         }
-            
         case NSFetchedResultsChangeMove:
-
             break;
     }
 }
 
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    
+    DDLogDebug(@"%@",@"fetch result did change content");
 }
+
+
+- (void) addMemo
+{
+    XXBMemoEditController *editController = [[XXBMemoEditController alloc] initWithMode:MemoEditModeAdd withMemo:nil];
+    editController.delegate = self;
+    [self.navigationController pushViewController:editController animated:YES];
+}
+
 
 - (void) deleteMemo:(id)sender
 {
@@ -289,26 +288,50 @@
     }
 }
 
-- (void)cellLongPress:(UIGestureRecognizer *)recognizer{
+- (void) cellLongPress:(UIGestureRecognizer *)recognizer{
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         // 获取被长按的cell的indexpath
         CGPoint location = [recognizer locationInView:self.collectionView];
         NSIndexPath * indexPath = [self.collectionView indexPathForItemAtPoint:location];
         XXBMemoCell *cell = (XXBMemoCell *)recognizer.view;
-        //这里把cell做为第一响应(cell默认是无法成为responder,需要重写canBecomeFirstResponder方法)
+        // 这里把cell做为第一响应(cell默认是无法成为responder,需要重写canBecomeFirstResponder方法)
         [cell becomeFirstResponder];
         
         UIMenuItem *itDelete = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteMemo:)];
+        // 暂时找不到见indexPath传给action的方法，先用实例变量存起来
         longPressedIndex = indexPath;
         DDLogDebug(@"%d,%d",indexPath.section,indexPath.item);
-        UIMenuItem *itMarkDone = [[UIMenuItem alloc] initWithTitle:@"已完成" action:@selector(deleteMemo:)];
         UIMenuController *menu = [UIMenuController sharedMenuController];
-        [menu setMenuItems:[NSArray arrayWithObjects:itDelete, itMarkDone, nil]];
+        [menu setMenuItems:[NSArray arrayWithObjects:itDelete, nil]];
         [menu setTargetRect:cell.frame inView:self.collectionView];
         [menu setMenuVisible:YES animated:YES];
     }
 }
 
+
+- (BOOL) collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+
+- (void) collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    XXBMemoCell* cell = (XXBMemoCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    //设置(Highlight)高亮下的颜色
+    UIImageView *bgImg = (UIImageView *)cell.backgroundView;
+    bgImg.image = [UIImage imageNamed:@"tabbar_more_selected"];
+    DDLogDebug(@"%@",@"change the background of the cell");
+}
+
+
+- (void) collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
+    //设置(Nomal)正常状态下的颜色
+    UIImageView *bgImg = (UIImageView *)cell.backgroundView;
+    bgImg.image = [UIImage imageNamed:@"memo_cell_bg"];
+}
 
 @end
