@@ -44,4 +44,10 @@
     return self;
 }
 
+
+- (BOOL) canBecomeFirstResponder
+{
+    return YES;
+}
+
 @end

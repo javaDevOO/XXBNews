@@ -22,6 +22,9 @@
 @end
 
 @implementation XXBMemoTabController
+{
+    NSIndexPath *longPressedIndex;
+}
 
 - (id) init
 {
@@ -61,6 +64,11 @@
     self.collectionView.dataSource = self;
     
     [self.view addSubview:self.collectionView];
+    
+    UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"删除"
+                                                      action:@selector(deleteMemo)];
+    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:menuItem]];
+
 }
 
 
@@ -84,11 +92,11 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     [fetchRequest setFetchBatchSize:20];
-    NSSortDescriptor *sectionSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"isFinished" ascending:YES];
+    NSSortDescriptor *sectionSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"isFinished" ascending:NO];
     NSSortDescriptor *contentSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO];
     [fetchRequest setSortDescriptors:@[sectionSortDescriptor, contentSortDescriptor]];
     
-    NSFetchedResultsController *fetchResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"isFinished" cacheName:nil];
+    NSFetchedResultsController *fetchResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     fetchResultController.delegate  = self;
     _fetchedResultsController = fetchResultController;
     
@@ -128,6 +136,9 @@
     
     Memo *memo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.label.text = memo.content;
+    
+    UILongPressGestureRecognizer * longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
+    [cell addGestureRecognizer:longPressGesture];
     
     return cell;
 }
@@ -175,8 +186,7 @@
 // 选择了某个cell
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    XXBMemoSection *sec = [self.sections objectAtIndex:indexPath.section];
-    Memo *memo = [sec.memoArray objectAtIndex:indexPath.item];
+    Memo *memo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     XXBMemoEditController *editController = [[XXBMemoEditController alloc] initWithMode:MemoEditModeUpdate withMemo:memo];
     editController.delegate = self;
     [self.navigationController pushViewController:editController animated:YES];
@@ -212,7 +222,7 @@
 
 - (void)memoEditController:(XXBMemoEditController *)memoEditController addMemoWithContent:(NSString *)content
 {
-    DDLogDebug(@"%@",@"should update the record");
+    DDLogDebug(@"%@",@"should add a new record");
     Memo *newMemo = [NSEntityDescription insertNewObjectForEntityForName:@"Memo" inManagedObjectContext:self.managedObjectContext];
     newMemo.content = content;
     newMemo.isFinished = [NSNumber numberWithBool:NO];
@@ -221,14 +231,14 @@
     NSError *error;
     if(![self.managedObjectContext save:&error])
     {
-        DDLogDebug(@"%@",@"保存失败");
+        DDLogDebug(@"%@",@"添加失败");
     }
-    DDLogDebug(@"%@",@"数据已保存");
+    DDLogDebug(@"%@",@"添加成功");
 }
 
 
 #pragma mark - Fetched results controller delegate
-
+// 当调用context的save方法的时候就会执行代理方法
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
 }
@@ -239,32 +249,51 @@
     switch(type)
     {
         case NSFetchedResultsChangeInsert:
+        {
             DDLogDebug(@"%@",@"a new section insert");
             break;
+        }
             
         case NSFetchedResultsChangeDelete:
             break;
     }
 }
 
+
+// 更新视图
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     switch(type)
     {
-            
         case NSFetchedResultsChangeInsert:
-            
+        {
+            DDLogDebug(@"%@",@"insert new record");
+            [self.collectionView performBatchUpdates:^{
+                [self.collectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]];
+            }
+                completion:nil];
             break;
-            
+        }
         case NSFetchedResultsChangeDelete:
-            
+        {
+            [self.collectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
             break;
-            
+        }
         case NSFetchedResultsChangeUpdate:
-            
+        {
+            DDLogDebug(@"%@",@"update the record");
+            [self.collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]];
+            // fetchResult里面的数据被改变了，但是数据库里面的没有改变，要调用context的save方法
+            NSError *error;
+            if(![self.managedObjectContext save:&error])
+            {
+                DDLogDebug(@"%@",@"更新失败");
+            }
+            DDLogDebug(@"%@",@"更新数据成功");
             break;
+        }
             
         case NSFetchedResultsChangeMove:
 
@@ -275,6 +304,39 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     
+}
+
+- (void) deleteMemo:(id)sender
+{
+    DDLogDebug(@"%@",@"should delete the memo");
+    [self.managedObjectContext deleteObject:[self.fetchedResultsController objectAtIndexPath:longPressedIndex]];
+    NSError *error = nil;
+    if (![self.managedObjectContext save:&error])
+    {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
+- (void)cellLongPress:(UIGestureRecognizer *)recognizer{
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        // 获取被长按的cell的indexpath
+        CGPoint location = [recognizer locationInView:self.collectionView];
+        NSIndexPath * indexPath = [self.collectionView indexPathForItemAtPoint:location];
+        XXBMemoCell *cell = (XXBMemoCell *)recognizer.view;
+        //这里把cell做为第一响应(cell默认是无法成为responder,需要重写canBecomeFirstResponder方法)
+        [cell becomeFirstResponder];
+        
+        UIMenuItem *itDelete = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteMemo:)];
+        longPressedIndex = indexPath;
+        DDLogDebug(@"%d,%d",indexPath.section,indexPath.item);
+        UIMenuItem *itMarkDone = [[UIMenuItem alloc] initWithTitle:@"已完成" action:@selector(deleteMemo:)];
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        [menu setMenuItems:[NSArray arrayWithObjects:itDelete, itMarkDone, nil]];
+        [menu setTargetRect:cell.frame inView:self.collectionView];
+        [menu setMenuVisible:YES animated:YES];
+    }
 }
 
 

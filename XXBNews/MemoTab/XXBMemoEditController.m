@@ -24,11 +24,13 @@
     {
         self.title = @"编辑备忘";
         self.memo = memo;
+        self.mode = mode;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveMemo)];
     }
     
     return self;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,7 +42,10 @@
     {
         self.contentTv.text = self.memo.content;
     }
-    [self.contentTv becomeFirstResponder];
+    if(self.mode == MemoEditModeAdd)
+    {
+        [self.contentTv becomeFirstResponder];
+    }
     [self.view addSubview:self.contentTv];
 }
 
@@ -53,14 +58,17 @@
 - (void) saveMemo
 {
     NSString *content = self.contentTv.text;
-    self.memo.content = content;
     
     if(self.mode == MemoEditModeUpdate && ![self.memo.content isEqualToString:content])
     {
-        //更新内容
+        //更新数据库里面的记录
+        self.memo.content = content;
     }
     if(self.mode == MemoEditModeAdd)
+    {
+        // 通过代理添加一条新的记录
         [self.delegate memoEditController:self addMemoWithContent:content];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
