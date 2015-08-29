@@ -9,7 +9,6 @@
 #import "XXBMemoTabController.h"
 #import "XXBMemoCell.h"
 #import "XXBMemoSection.h"
-#import "XXBMemoHeaderCell.h"
 #import "XXBMemoEditController.h"
 #import "Memo.h"
 #import "AppDelegate.h"
@@ -17,7 +16,6 @@
 
 @interface XXBMemoTabController ()
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
@@ -34,7 +32,6 @@
         [self initTabbarItemWithTitle:NSLocalizedString(@"memoTabTitle", @"") imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
         
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMemo)];
-        [self initSections];
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         self.managedObjectContext = [appDelegate managedObjectContext];
         
@@ -59,7 +56,6 @@
     
     //要注册cell,如果用到了header和footer（supplementary views），也要进行注册
     [self.collectionView registerClass:[XXBMemoCell class] forCellWithReuseIdentifier:@"MemoTabCollectionCellIdentifier"];
-    [self.collectionView registerClass:[XXBMemoHeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MemoTabHeaderIdentifier"];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
@@ -81,7 +77,6 @@
     }
     
     return _fetchedResultsController;
-
 }
 
 
@@ -144,18 +139,6 @@
 }
 
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    if([kind isEqualToString:UICollectionElementKindSectionHeader])
-    {
-        XXBMemoHeaderCell *cell = [self.collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"MemoTabHeaderIdentifier" forIndexPath:indexPath];
-        cell.titleLabel.text = [self.sections[indexPath.section] title];
-        return cell;
-    }
-    return nil;
-}
-
-
 //设置每个cell的大小
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -193,22 +176,9 @@
 }
 
 
-- (void) initSections
-{
-    self.sections = [NSMutableArray array];
-    XXBMemoSection *undoSection = [[XXBMemoSection alloc] init];
-    undoSection.title = @"未完成";
-    XXBMemoSection *finishSection = [[XXBMemoSection alloc] init];
-    finishSection.title = @"已完成";
-    [self.sections addObject:undoSection];
-    [self.sections addObject:finishSection];
-}
-
-
 // flowlayout专门管理布局，比如设置header的大小
 - (UICollectionViewFlowLayout *) setupFlowLayout{
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.headerReferenceSize = CGSizeMake(300.0f, 30.0f);  //设置head大小
     //设置其它各种属性
     return flowLayout;
 }
@@ -253,14 +223,14 @@
             DDLogDebug(@"%@",@"a new section insert");
             break;
         }
-            
         case NSFetchedResultsChangeDelete:
+            break;
+        default:
             break;
     }
 }
 
 
-// 更新视图
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
@@ -270,6 +240,7 @@
         case NSFetchedResultsChangeInsert:
         {
             DDLogDebug(@"%@",@"insert new record");
+            // 更新视图
             [self.collectionView performBatchUpdates:^{
                 [self.collectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]];
             }

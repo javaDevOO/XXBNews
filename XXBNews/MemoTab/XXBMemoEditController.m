@@ -58,13 +58,14 @@
 - (void) saveMemo
 {
     NSString *content = self.contentTv.text;
+    NSString *trimContent = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if(self.mode == MemoEditModeUpdate && ![self.memo.content isEqualToString:content])
+    if(self.mode == MemoEditModeUpdate && ![trimContent isEqualToString:@""] && ![self.memo.content isEqualToString:content])
     {
         //更新数据库里面的记录
         self.memo.content = content;
     }
-    if(self.mode == MemoEditModeAdd)
+    if(self.mode == MemoEditModeAdd && ![trimContent isEqualToString:@""])
     {
         // 通过代理添加一条新的记录
         [self.delegate memoEditController:self addMemoWithContent:content];

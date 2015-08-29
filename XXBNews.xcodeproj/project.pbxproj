@@ -111,7 +111,6 @@
 		CEF8B7B21B8C63D10048699B /* XXBWeatherInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7AC1B8C63D10048699B /* XXBWeatherInfoView.m */; };
 		CEF8B7B91B8C64460048699B /* XXBMemoSection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7B71B8C64460048699B /* XXBMemoSection.m */; };
 		CEF8B7BF1B8C64530048699B /* XXBMemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7BC1B8C64530048699B /* XXBMemoCell.m */; };
-		CEF8B7C01B8C64530048699B /* XXBMemoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7BE1B8C64530048699B /* XXBMemoHeaderCell.m */; };
 		DD24807B0281F81CC6B0E4BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA1149B7651DE07DE1AE6FD /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -313,8 +312,6 @@
 		CEF8B7B71B8C64460048699B /* XXBMemoSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMemoSection.m; sourceTree = "<group>"; };
 		CEF8B7BB1B8C64530048699B /* XXBMemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMemoCell.h; sourceTree = "<group>"; };
 		CEF8B7BC1B8C64530048699B /* XXBMemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMemoCell.m; sourceTree = "<group>"; };
-		CEF8B7BD1B8C64530048699B /* XXBMemoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMemoHeaderCell.h; sourceTree = "<group>"; };
-		CEF8B7BE1B8C64530048699B /* XXBMemoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMemoHeaderCell.m; sourceTree = "<group>"; };
 		D2BB1B7B8257D6987849032C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EA95C4909267EB5A12248CB6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -752,8 +749,6 @@
 			children = (
 				CEF8B7BB1B8C64530048699B /* XXBMemoCell.h */,
 				CEF8B7BC1B8C64530048699B /* XXBMemoCell.m */,
-				CEF8B7BD1B8C64530048699B /* XXBMemoHeaderCell.h */,
-				CEF8B7BE1B8C64530048699B /* XXBMemoHeaderCell.m */,
 			);
 			name = Views;
 			path = XXBNews/MemoTab/Views;
@@ -920,7 +915,6 @@
 				CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */,
 				CE33AD2F1B86BF97007DDC7D /* RELengthValidator.m in Sources */,
 				CE33AD311B86BF97007DDC7D /* REURLValidator.m in Sources */,
-				CEF8B7C01B8C64530048699B /* XXBMemoHeaderCell.m in Sources */,
 				CE33ACE01B86B20C007DDC7D /* RETableViewCreditCardCell.m in Sources */,
 				CE33ACEE1B86B20C007DDC7D /* REFloatItem.m in Sources */,
 				CE33ACF71B86B20C007DDC7D /* RETextItem.m in Sources */,
