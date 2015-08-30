@@ -23,8 +23,8 @@
 @interface XXBWeatherTabController () <SwipeViewDataSource, SwipeViewDelegate>
 
 @property (nonatomic, strong) SwipeView *swipeView;
-
 @property (nonatomic, strong) UIActivityIndicatorView* indicator;
+@property (nonatomic, strong) UIPageControl *pageControl;
 
 @end
 
@@ -45,6 +45,27 @@
         [self initTabbarItemWithTitle:NSLocalizedString(@"weatherTabTitle",@"") imageNamed:@"tabbar_more" selectedImageNamed:@"tabbar_more_selected"];
         getInfoFinishSemaphore = dispatch_semaphore_create(1);
         
+        // 调用了LocationTool的初始化方法
+        [XXBLocationTool sharedInstance];
+        //接收到定位成功的回调
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocCity) name:@"LocationCity" object:nil];
+        
+        // 读取default中存储的城市
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *city = [defaults objectForKey:@"currentCity"];
+        // 第一次安装，定位到城市
+        if(city == nil)
+        {
+            city = @"珠海";
+        }
+        
+        self.cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+        
+        // 第一次安装，没有城市列表
+        if([self.cityArray count] == 0 || ([self.cityArray count]==1 && [[self.cityArray lastObject] isEqualToString:@"+"]))
+        {
+            self.cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",nil]];
+        }
     }
     return self;
 }
@@ -59,34 +80,11 @@
     UIBarButtonItem *manageBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(manageCity)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:manageBtn,refreshBtn, nil];
     
-    self.swipeView = [[SwipeView alloc] init];
-    self.swipeView.frame = self.view.bounds;
-    self.swipeView.delegate = self;
-    self.swipeView.dataSource = self;
-    [self.view addSubview:self.swipeView];
     
+    [self setupSwipeView];
+    [self setupPageController];
     [self setupIndicator];
-    // 调用了LocationTool的初始化方法
-    [XXBLocationTool sharedInstance];
-    //接收到定位成功的回调
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocCity) name:@"LocationCity" object:nil];
     
-    // 读取default中存储的城市
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *city = [defaults objectForKey:@"currentCity"];
-    // 第一次安装，定位到城市
-    if(city == nil)
-    {
-        city = @"珠海";
-    }
-
-    self.cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
-    
-    // 第一次安装，没有城市列表
-    if([self.cityArray count] == 0 || ([self.cityArray count]==1 && [[self.cityArray lastObject] isEqualToString:@"+"]))
-    {
-        self.cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",nil]];
-    }
     [self loadWeatherData:self.cityArray];
     
     // 此时weatherinfo的数据还没有返回，需要进行同步
@@ -100,11 +98,36 @@
     });
 }
 
+
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.swipeView reloadData];
+    self.pageControl.hidden = NO;
+    [self updatePageControl];
 }
+
+
+- (void) setupSwipeView
+{
+    self.swipeView = [[SwipeView alloc] init];
+    self.swipeView.frame = self.view.bounds;
+    self.swipeView.delegate = self;
+    self.swipeView.dataSource = self;
+    [self.view addSubview:self.swipeView];
+}
+
+
+- (void) setupPageController
+{
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 34,self.view.bounds.size.width, 10)];
+    self.pageControl.numberOfPages = self.swipeView.numberOfPages;
+    self.pageControl.currentPage = self.swipeView.currentPage;
+    self.pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
+    [self.navigationController.navigationBar addSubview:self.pageControl];
+}
+
 
 # pragma swipeview datasource and delegate
 - (NSInteger) numberOfItemsInSwipeView:(SwipeView *)swipeView
@@ -146,6 +169,35 @@
     }
     infoView.weatherInfo = info;
     return view;
+}
+
+#pragma mark -- swipeview delegate
+- (void) swipeViewWillBeginDecelerating:(SwipeView *)swipeView;
+{
+    DDLogDebug(@"swipeViewWillBeginDecelerating at %d",swipeView.currentPage);
+    [self updatePageControl];
+}
+
+
+- (void) swipeViewDidEndDecelerating:(SwipeView *)swipeView;
+{
+    DDLogDebug(@"swipeViewDidEndDecelerating at %d",swipeView.currentPage);
+    [self updatePageControl];
+}
+
+- (void) swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView;
+{
+    DDLogDebug(@"swipeViewCurrentItemIndexDidChange at %d",swipeView.currentPage);
+    [self updatePageControl];
+}
+
+
+- (void) updatePageControl
+{
+    if(self.pageControl.numberOfPages != self.swipeView.numberOfPages)
+        self.pageControl.numberOfPages = self.swipeView.numberOfPages;
+    if(self.pageControl.currentPage != self.swipeView.currentPage)
+        self.pageControl.currentPage = self.swipeView.currentPage;
 }
 
 
@@ -211,6 +263,7 @@
     manageCityController.hidesBottomBarWhenPushed = YES;
     manageCityController.weatherInfos = self.weatherInfos;
     manageCityController.cityCellSelDelegate = self;
+    self.pageControl.hidden = YES;
     
     [self.navigationController pushViewController:manageCityController animated:YES];
 }
