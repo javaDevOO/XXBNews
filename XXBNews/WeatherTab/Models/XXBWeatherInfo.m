@@ -17,6 +17,20 @@
     return @{@"index": [XXBIndexDetail class], @"weather_data": [XXBWeatherDetail class]};
 }
 
+- (int) getRealTimeTemp
+{
+    XXBWeatherDetail *todayDetail = [self.weather_data objectAtIndex:0];
+    NSArray *stringList = [todayDetail.date componentsSeparatedByString:@"："];
+    NSNumber *realTemp = [NSNumber numberWithInt:[stringList[1] intValue]];
+    DDLogDebug(@"the real time temperature is %d",[realTemp intValue]);
+    return [realTemp intValue];
+}
+
+- (XXBWeatherDetail *)getTodayDetail
+{
+    return [self.weather_data objectAtIndex:0];
+}
+
 @end
 
 

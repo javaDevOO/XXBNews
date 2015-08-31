@@ -11,6 +11,7 @@
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import "Memo.h"
+#import <AFNetworking.h>
 
 @implementation AppDelegate
 
@@ -29,6 +30,8 @@
     self.window.rootViewController = tab;
     
     [self.window makeKeyAndVisible];
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     return YES;
 }

@@ -36,8 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.contentTv = [[UITextView alloc] initWithFrame:self.view.frame];
-    self.contentTv.backgroundColor = [UIColor blueColor];
-    self.contentTv.font = [UIFont systemFontOfSize:15.0];
+    self.contentTv.font = [UIFont systemFontOfSize:24.0];
     if(self.memo != nil)
     {
         self.contentTv.text = self.memo.content;

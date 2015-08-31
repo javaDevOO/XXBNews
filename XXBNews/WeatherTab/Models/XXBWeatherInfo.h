@@ -7,23 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-//天气信息的数据模型，要根据天气API返回的数据格式建立，此处采用的是百度车联网API的天气接口
-@interface XXBWeatherInfo : NSObject
-// 当前城市
-@property (nonatomic, copy) NSString *currentCity;
-// 当前日期
-@property (nonatomic, copy) NSString *date;
-// pm25
-@property (nonatomic, copy) NSString *pm25;
-// 细节信息，
-@property (nonatomic, strong) NSArray *index;
-// 天气详情
-@property (nonatomic, strong) NSArray *weather_data;
-
-+ (NSDictionary *)objectClassInArray;
-
-@end
-
 
 // 细节信息
 @interface XXBIndexDetail : NSObject
@@ -72,4 +55,27 @@
 - (NSNumber *) getLowTemperature;
 
 @end
+
+
+//天气信息的数据模型，要根据天气API返回的数据格式建立，此处采用的是百度车联网API的天气接口
+@interface XXBWeatherInfo : NSObject
+// 当前城市
+@property (nonatomic, copy) NSString *currentCity;
+// 当前日期
+@property (nonatomic, copy) NSString *date;
+// pm25
+@property (nonatomic, copy) NSString *pm25;
+// 细节信息，
+@property (nonatomic, strong) NSArray *index;
+// 天气详情
+@property (nonatomic, strong) NSArray *weather_data;
+
++ (NSDictionary *)objectClassInArray;
+
+- (int) getRealTimeTemp;
+
+- (XXBWeatherDetail *)getTodayDetail;
+@end
+
+
 

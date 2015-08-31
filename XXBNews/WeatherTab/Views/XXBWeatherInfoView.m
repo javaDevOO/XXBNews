@@ -10,6 +10,8 @@
 #import "UIDevice+Resolutions.h"
 #import "XXBWeatherIndexCell.h"
 #import "XXBWeatherDetailCell.h"
+#import "UIImageView+WebCache.h"
+
 
 @implementation XXBWeatherInfoView
 {
@@ -22,30 +24,35 @@
     self = [super init];
     if(self)
     {
-        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 88, [UIDevice currentWidth], 30)];
-        [self addSubview:self.nameLabel];
-        self.nameLabel.textAlignment = NSTextAlignmentCenter;
         self.weatherInfo = info;
         [self addObserver:self forKeyPath:@"weatherInfo" options:0 context:nil];
         
+        self.contentSize = CGSizeMake([UIDevice currentWidth],1000);
+
+        self.headerView = [[XXBWeatherInfoViewHeaderView alloc] initWithFrame:CGRectMake(10, 84, [UIDevice currentWidth]-20,100)];
+        [self addSubview:self.headerView];
+        [self updateHeaderView];
+        
         [self setupChart];
         
-        self.indexTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,500,[UIDevice currentHeight], 440)];
+        self.indexTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,520,[UIDevice currentHeight], 440)];
         self.indexTableView.dataSource = self;
         self.indexTableView.delegate = self;
         self.indexTableView.scrollEnabled = NO;
         self.indexTableView.rowHeight = 88.0;
         [self addSubview:self.indexTableView];
         
-        self.detailView = [[XXBWeatherDetailView alloc] initWithFrame:CGRectMake(10, 350, [UIDevice currentWidth]-20, 100) withWeatherInfo:self.weatherInfo];
+        self.detailView = [[XXBWeatherDetailView alloc] initWithFrame:CGRectMake(10, 400, [UIDevice currentWidth]-20, 100) withWeatherInfo:self.weatherInfo];
         [self addSubview:self.detailView];
     }
     return self;
 }
 
+
 - (void) setupChart
 {
-    self.lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135, [UIDevice currentWidth], 200)];
+    // TODO:去曲线图隐藏坐标轴的时候需要放大
+    self.lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(-50, 200, [UIDevice currentWidth]+100, 200)];
     // 两条数据曲线的数据
     NSMutableArray *highTempData = [NSMutableArray array];
     NSMutableArray *lowTempData = [NSMutableArray array];
@@ -82,19 +89,30 @@
     lowData.inflexionPointStyle = PNLineChartPointStyleCircle;
     
     self.lineChart.chartData = @[highData, lowData];
-    self.lineChart.showCoordinateAxis = YES;
+    self.lineChart.showCoordinateAxis = NO;
+    self.lineChart.yLabelFormat=@"";
+//    self.lineChart.showLabel = NO;
     self.lineChart.axisColor = [UIColor blackColor];
     [self.lineChart strokeChart];
     [self addSubview:self.lineChart];
 }
+
+
+- (void) updateHeaderView
+{
+    XXBWeatherDetail *todayDetail = [self.weatherInfo getTodayDetail];
+    [self.headerView.imageView sd_setImageWithURL:[NSURL URLWithString:todayDetail.dayPictureUrl]];
+    self.headerView.temperatureLabel.text = [NSString stringWithFormat:@"%d°C",[self.weatherInfo getRealTimeTemp]];
+    self.headerView.weatherLabel.text = todayDetail.weather;
+    self.headerView.windLabel.text = todayDetail.wind;
+}
+
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     DDLogDebug(@"%@",@"the weatherinfo of the weatherinfoview is changed");
     if([keyPath isEqualToString:@"weatherInfo"])
     {
-        self.nameLabel.text = self.weatherInfo.currentCity;
-        
         NSMutableArray *highTempData = [NSMutableArray array];
         NSMutableArray *lowTempData = [NSMutableArray array];
         
@@ -120,6 +138,8 @@
         [self.indexTableView reloadData];
         
         self.detailView.weatherInfo.weather_data = self.weatherInfo.weather_data;
+        
+        [self updateHeaderView];
     }
 }
 
@@ -139,7 +159,7 @@
     {
         cell = [[XXBWeatherIndexCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indexCellID];
     }
-    
+    cell.userInteractionEnabled = NO;
     cell.nameLabel.text = indexDetail.tipt;
     cell.zsLabel.text = indexDetail.zs;
     cell.desTextView.text = indexDetail.des;

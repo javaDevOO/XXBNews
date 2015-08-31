@@ -102,6 +102,13 @@
 		CEABAB9C1B8DF08000F71912 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEABAB9B1B8DF08000F71912 /* Info.plist */; };
 		CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */; };
 		CEC5D64E1B763CA600CCCF6E /* XXBHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64D1B763CA600CCCF6E /* XXBHttpTool.m */; };
+		CECF083A1B94566D0038D98D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECF08391B94566D0038D98D /* libicucore.dylib */; };
+		CECF083C1B9456760038D98D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECF083B1B9456760038D98D /* libz.dylib */; };
+		CECF083E1B9456800038D98D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECF083D1B9456800038D98D /* libstdc++.dylib */; };
+		CECF08401B9456880038D98D /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECF083F1B9456880038D98D /* JavaScriptCore.framework */; };
+		CECF08421B9456A00038D98D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECF08411B9456A00038D98D /* libsqlite3.dylib */; };
+		CECF08441B9456AA0038D98D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECF08431B9456AA0038D98D /* ImageIO.framework */; };
+		CECF08471B9477B40038D98D /* XXBWeatherInfoViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECF08461B9477B40038D98D /* XXBWeatherInfoViewHeaderView.m */; };
 		CEF8B7A01B8C63C20048699B /* XXBWeatherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B79F1B8C63C20048699B /* XXBWeatherInfo.m */; };
 		CEF8B7AD1B8C63D10048699B /* XXBCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7A21B8C63D10048699B /* XXBCityCell.m */; };
 		CEF8B7AE1B8C63D10048699B /* XXBCityCellAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8B7A41B8C63D10048699B /* XXBCityCellAdd.m */; };
@@ -293,6 +300,14 @@
 		CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherManager.m; sourceTree = "<group>"; };
 		CEC5D64C1B763CA600CCCF6E /* XXBHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBHttpTool.h; sourceTree = "<group>"; };
 		CEC5D64D1B763CA600CCCF6E /* XXBHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBHttpTool.m; sourceTree = "<group>"; };
+		CECF08391B94566D0038D98D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		CECF083B1B9456760038D98D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CECF083D1B9456800038D98D /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		CECF083F1B9456880038D98D /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		CECF08411B9456A00038D98D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		CECF08431B9456AA0038D98D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		CECF08451B9477B40038D98D /* XXBWeatherInfoViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBWeatherInfoViewHeaderView.h; path = XXBNews/WeatherTab/Views/XXBWeatherInfoViewHeaderView.h; sourceTree = SOURCE_ROOT; };
+		CECF08461B9477B40038D98D /* XXBWeatherInfoViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBWeatherInfoViewHeaderView.m; path = XXBNews/WeatherTab/Views/XXBWeatherInfoViewHeaderView.m; sourceTree = SOURCE_ROOT; };
 		CEF8B79A1B8BFF150048699B /* CityCellSelectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCellSelectDelegate.h; sourceTree = "<group>"; };
 		CEF8B79E1B8C63C20048699B /* XXBWeatherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXBWeatherInfo.h; path = Models/XXBWeatherInfo.h; sourceTree = "<group>"; };
 		CEF8B79F1B8C63C20048699B /* XXBWeatherInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXBWeatherInfo.m; path = Models/XXBWeatherInfo.m; sourceTree = "<group>"; };
@@ -321,6 +336,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECF08441B9456AA0038D98D /* ImageIO.framework in Frameworks */,
+				CECF08421B9456A00038D98D /* libsqlite3.dylib in Frameworks */,
+				CECF08401B9456880038D98D /* JavaScriptCore.framework in Frameworks */,
+				CECF083E1B9456800038D98D /* libstdc++.dylib in Frameworks */,
+				CECF083C1B9456760038D98D /* libz.dylib in Frameworks */,
+				CECF083A1B94566D0038D98D /* libicucore.dylib in Frameworks */,
 				CE7468591B8EA8BC00355835 /* CoreData.framework in Frameworks */,
 				CE8659641B71FC6A00ADD92A /* CoreGraphics.framework in Frameworks */,
 				CE8659621B71FC5500ADD92A /* Foundation.framework in Frameworks */,
@@ -627,6 +648,8 @@
 				CEF8B7AA1B8C63D10048699B /* XXBWeatherIndexCell.m */,
 				CEF8B7AB1B8C63D10048699B /* XXBWeatherInfoView.h */,
 				CEF8B7AC1B8C63D10048699B /* XXBWeatherInfoView.m */,
+				CECF08451B9477B40038D98D /* XXBWeatherInfoViewHeaderView.h */,
+				CECF08461B9477B40038D98D /* XXBWeatherInfoViewHeaderView.m */,
 			);
 			name = Views;
 			path = View;
@@ -711,6 +734,12 @@
 		CE8659661B71FC7D00ADD92A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CECF08431B9456AA0038D98D /* ImageIO.framework */,
+				CECF08411B9456A00038D98D /* libsqlite3.dylib */,
+				CECF083F1B9456880038D98D /* JavaScriptCore.framework */,
+				CECF083D1B9456800038D98D /* libstdc++.dylib */,
+				CECF083B1B9456760038D98D /* libz.dylib */,
+				CECF08391B94566D0038D98D /* libicucore.dylib */,
 				CE7468581B8EA8BC00355835 /* CoreData.framework */,
 				CE86595F1B71FC4B00ADD92A /* UIKit.framework */,
 				CE8659611B71FC5500ADD92A /* Foundation.framework */,
@@ -1003,6 +1032,7 @@
 				CEF8B7B21B8C63D10048699B /* XXBWeatherInfoView.m in Sources */,
 				CE7F66A61B91982800336656 /* XXBWeatherTabController.m in Sources */,
 				CE33ACF91B86B20C007DDC7D /* REActionBar.m in Sources */,
+				CECF08471B9477B40038D98D /* XXBWeatherInfoViewHeaderView.m in Sources */,
 				CE7468621B8F32BA00355835 /* XXBTimeTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1134,10 +1164,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/GooglePlusSDK",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/QQSDK",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/RenRenSDK",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK",
+				);
 				GCC_PREFIX_HEADER = "./XXBNews/XXBNews-Prefix.pch";
 				INFOPLIST_FILE = XXBNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/SinaWeiboSDK",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/WeChatSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1153,10 +1195,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/GooglePlusSDK",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/QQSDK",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/RenRenSDK",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK",
+				);
 				GCC_PREFIX_HEADER = "./XXBNews/XXBNews-Prefix.pch";
 				INFOPLIST_FILE = XXBNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/SinaWeiboSDK",
+					"$(PROJECT_DIR)/XXBNews/Libs/ShareSDK/extends/WeChatSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

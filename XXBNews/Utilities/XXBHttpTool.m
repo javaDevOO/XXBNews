@@ -13,6 +13,26 @@
 
 + (void)getWithURL:(NSString *)url params:(NSDictionary *)params success:(void(^)(id json))success failure:(void(^)(NSError *error))failure
 {
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable:
+            {
+                DDLogDebug(@"%@",@"无网络");
+                break;
+            }
+            case AFNetworkReachabilityStatusReachableViaWiFi:{
+                DDLogDebug(@"%@",@"WiFi网络");
+                break;
+            }
+            case AFNetworkReachabilityStatusReachableViaWWAN:{
+                DDLogDebug(@"%@",@"无线网络");
+                break;
+            }
+            default:
+                break;
+        }
+    }];
+    
     // 创建一个manager对象，单例
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     

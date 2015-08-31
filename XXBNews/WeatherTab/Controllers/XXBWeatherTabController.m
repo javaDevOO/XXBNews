@@ -64,7 +64,7 @@
         // 第一次安装，没有城市列表
         if([self.cityArray count] == 0 || ([self.cityArray count]==1 && [[self.cityArray lastObject] isEqualToString:@"+"]))
         {
-            self.cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",nil]];
+            self.cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",@"+",nil]];
         }
     }
     return self;
@@ -94,6 +94,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.indicator stopAnimating];
             [self.swipeView reloadData];
+            dispatch_semaphore_signal(getInfoFinishSemaphore);
         });
     });
 }
@@ -123,6 +124,7 @@
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 34,self.view.bounds.size.width, 10)];
     self.pageControl.numberOfPages = self.swipeView.numberOfPages;
     self.pageControl.currentPage = self.swipeView.currentPage;
+    self.title = [self.cityArray objectAtIndex:self.pageControl.currentPage];
     self.pageControl.pageIndicatorTintColor = [UIColor grayColor];
     self.pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
     [self.navigationController.navigationBar addSubview:self.pageControl];
@@ -150,14 +152,13 @@
         if([self.weatherInfos count] == 0)
         {
             [self.indicator startAnimating];
-            [view addSubview:self.indicator];
+            //[view addSubview:self.indicator];
         }
         else
         {
             infoView = [[XXBWeatherInfoView alloc] initWithWeatherInfo:info];
             infoView.tag = 1;
             infoView.frame = self.view.bounds;
-            infoView.contentSize = CGSizeMake([UIDevice currentWidth],[UIDevice currentHeight]*3);
             [view addSubview:infoView];
         }
     }
@@ -198,6 +199,7 @@
         self.pageControl.numberOfPages = self.swipeView.numberOfPages;
     if(self.pageControl.currentPage != self.swipeView.currentPage)
         self.pageControl.currentPage = self.swipeView.currentPage;
+    self.title = [self.cityArray objectAtIndex:self.pageControl.currentPage];
 }
 
 
@@ -222,6 +224,7 @@
     self.indicator.alpha = 0.5;
     self.indicator.layer.cornerRadius = 6;
     self.indicator.layer.masksToBounds = YES;
+    [self.view addSubview:self.indicator];
 }
 
 
@@ -282,7 +285,38 @@
 // TODO: 从服务器更新天气数据
 - (void) refresh
 {
-    
+    DDLogDebug(@"%@",@"refresh the weather");
+    [self.indicator startAnimating];
+    __block NSInteger index = self.pageControl.currentPage;
+    __block NSArray *cities = [NSArray arrayWithObject:[self.cityArray objectAtIndex:index]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
+        // 增加延时，用于测试
+        [NSThread sleepForTimeInterval:2];
+        [XXBWeatherManager getWeatherDataWithCity:cities
+                                          success:^(id json)
+         {
+             // MJExtention扩展可以将json数据变成model
+             [XXBWeatherInfo setupObjectClassInArray:^NSDictionary *{
+                 return [XXBWeatherInfo objectClassInArray];
+             }];
+             NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
+             XXBWeatherInfo *info = weatherInfos[0];
+             info.date = json[@"date"];
+             [self.weatherInfos replaceObjectAtIndex:index withObject:info];
+             DDLogDebug(@"update the weather successfully");
+             
+             [self.swipeView reloadItemAtIndex:index];
+             [self.indicator stopAnimating];
+         }
+                                          failure:^(NSError *error)
+         {
+             // TODO:要是没有网络连接时还要处理
+             DDLogDebug(@"get weather info error");
+             [self.indicator stopAnimating];
+         }];
+        
+    });
+
 }
 
 

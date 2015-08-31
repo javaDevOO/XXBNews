@@ -166,6 +166,7 @@
     Memo *memo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     XXBMemoEditController *editController = [[XXBMemoEditController alloc] initWithMode:MemoEditModeUpdate withMemo:memo];
     editController.delegate = self;
+    editController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:editController animated:YES];
 }
 
@@ -272,6 +273,7 @@
 {
     XXBMemoEditController *editController = [[XXBMemoEditController alloc] initWithMode:MemoEditModeAdd withMemo:nil];
     editController.delegate = self;
+    editController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:editController animated:YES];
 }
 
