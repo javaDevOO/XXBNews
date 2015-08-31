@@ -27,13 +27,16 @@
         self.weatherInfo = info;
         [self addObserver:self forKeyPath:@"weatherInfo" options:0 context:nil];
         
-        self.contentSize = CGSizeMake([UIDevice currentWidth],1000);
+        self.contentSize = CGSizeMake([UIDevice currentWidth],1050);
 
         self.headerView = [[XXBWeatherInfoViewHeaderView alloc] initWithFrame:CGRectMake(10, 84, [UIDevice currentWidth]-20,100)];
         [self addSubview:self.headerView];
         [self updateHeaderView];
         
         [self setupChart];
+        
+        self.detailView = [[XXBWeatherDetailView alloc] initWithFrame:CGRectMake(10, 400, [UIDevice currentWidth]-20, 100) withWeatherInfo:self.weatherInfo];
+        [self addSubview:self.detailView];
         
         self.indexTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,520,[UIDevice currentHeight], 440)];
         self.indexTableView.dataSource = self;
@@ -42,8 +45,11 @@
         self.indexTableView.rowHeight = 88.0;
         [self addSubview:self.indexTableView];
         
-        self.detailView = [[XXBWeatherDetailView alloc] initWithFrame:CGRectMake(10, 400, [UIDevice currentWidth]-20, 100) withWeatherInfo:self.weatherInfo];
-        [self addSubview:self.detailView];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,970, [UIDevice currentWidth],30)];
+        label.text = @"数据来源:百度天气";
+        label.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:label];
+        
     }
     return self;
 }
