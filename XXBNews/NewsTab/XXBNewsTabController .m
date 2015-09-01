@@ -70,43 +70,57 @@
 
 - (void) setupMenuView
 {
-    // 在block中使用self，未防止循环引用，要用weak
+    // 在block中使用self，而在后面block所属的对象又会被self持有，为防止循环引用，要用weak
     typeof(self) __weak weakSelf = self;
     REMenuItem *baiduItem = [[REMenuItem alloc] initWithTitle:@"百度新闻"
                                                      subtitle:@"全球最大的中文新闻平台"
                                                         image:nil
                                              highlightedImage:nil
                                                        action:^(REMenuItem *item) {
-                                                           [weakSelf loadWebViewUrl:baiduNewUrl];
+                                                           typeof(self) __strong strongSelf = weakSelf;
+                                                           if(strongSelf)
+                                                           {
+                                                               [weakSelf loadWebViewUrl:baiduNewUrl];
+                                                           }
                                                        }];
     REMenuItem *fengItem = [[REMenuItem alloc] initWithTitle:@"凤凰新闻"
                                                     subtitle:@"24小时提供最及时，最权威，最客观的新闻资讯"
                                                        image:nil
                                             highlightedImage:nil
                                                       action:^(REMenuItem *item) {
-                                                          [weakSelf loadWebViewUrl:fengNewUrl];
+                                                          typeof(self) __strong strongSelf = weakSelf;
+                                                          if(strongSelf)
+                                                          {
+                                                              [weakSelf loadWebViewUrl:fengNewUrl];
+                                                          }
                                                       }];
     REMenuItem *sinaItem = [[REMenuItem alloc] initWithTitle:@"新浪新闻"
                                                     subtitle:@"最新，最快头条新闻一网打尽"
                                                        image:nil
                                             highlightedImage:nil
                                                       action:^(REMenuItem *item) {
-                                                          [weakSelf loadWebViewUrl:sinaNewUrl];
+                                                          typeof(self) __strong strongSelf = weakSelf;
+                                                          if(strongSelf)
+                                                          {
+                                                              [weakSelf loadWebViewUrl:sinaNewUrl];
+                                                          }
                                                       }];
     REMenuItem *tencenItem = [[REMenuItem alloc] initWithTitle:@"腾讯新闻"
                                                       subtitle:@"中国浏览最大的中文门户网站"
                                                          image:nil
                                               highlightedImage:nil
                                                         action:^(REMenuItem *item) {
-                                                            [weakSelf loadWebViewUrl:tencenNewUrl];
+                                                            typeof(self) __strong strongSelf = weakSelf;
+                                                            if(strongSelf)
+                                                            {
+                                                                [weakSelf loadWebViewUrl:tencenNewUrl];
+                                                            }
                                                         }];
     REMenuItem *wangyiItem = [[REMenuItem alloc] initWithTitle:@"网易新闻"
                                                       subtitle:@"因新闻最快速，评论最犀利而备受推崇"
                                                          image:nil
                                               highlightedImage:nil
                                                         action:^(REMenuItem *item) {
-                                                            //[weakSelf loadWebViewUrl:wangyiNewUrl];
-                                                            //另一种对self的处理方式
                                                             typeof(self) __strong strongSelf = weakSelf;
                                                             if(strongSelf)
                                                                 [strongSelf loadWebViewUrl:wangyiNewUrl];
@@ -170,7 +184,6 @@
     self.webView.delegate = nil;
     [self.webView removeFromSuperview];
     self.webView = nil;
-    
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     NSLog(@"KLNewsViewController dealloc");
 }
@@ -185,6 +198,8 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView;
 {
     [self.indicator stopAnimating];
+    // 网上查到的关于解决webview内存泄露的方法
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
     self.indicator.hidden = YES;
     
 }

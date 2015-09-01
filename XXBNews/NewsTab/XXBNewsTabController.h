@@ -10,7 +10,7 @@
 #import "REMenu.h"
 #import "XXBBaseTabViewController.h"
 
-@interface XXBNewsTabController: XXBBaseTabViewController
+@interface XXBNewsTabController: XXBBaseTabViewController<UIWebViewDelegate>
 
 
 @end

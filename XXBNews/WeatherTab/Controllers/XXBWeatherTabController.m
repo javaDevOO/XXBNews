@@ -314,9 +314,7 @@
              DDLogDebug(@"get weather info error");
              [self.indicator stopAnimating];
          }];
-        
     });
-
 }
 
 

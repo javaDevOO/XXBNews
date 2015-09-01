@@ -69,12 +69,18 @@
 {
     [super viewDidAppear:animated];
     DDLogDebug(@"%@",@"view did appear");
+    // 当block与self互相引用是要用weakSelf，不过此处不需要用
+    typeof(self) __weak weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
         //要等到返回天气数据时才往下执行
         dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self refresh];
-            dispatch_semaphore_signal(getInfoFinishSemaphore);
+            typeof(self) __strong strongSelf = weakSelf;
+            if(strongSelf)
+            {
+                [strongSelf refresh];
+                dispatch_semaphore_signal(getInfoFinishSemaphore);
+            }
         });
     });
 }

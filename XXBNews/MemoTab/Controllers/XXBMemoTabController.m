@@ -37,6 +37,7 @@
         
         [self setupFetchResultsController];
         
+        //输出sqlite文件的路径
         DDLogDebug(@"%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
     }
     return self;

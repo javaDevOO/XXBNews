@@ -97,7 +97,6 @@
     self.lineChart.chartData = @[highData, lowData];
     self.lineChart.showCoordinateAxis = NO;
     self.lineChart.yLabelFormat=@"";
-//    self.lineChart.showLabel = NO;
     self.lineChart.axisColor = [UIColor blackColor];
     [self.lineChart strokeChart];
     [self addSubview:self.lineChart];
@@ -121,13 +120,16 @@
     {
         NSMutableArray *highTempData = [NSMutableArray array];
         NSMutableArray *lowTempData = [NSMutableArray array];
-        
+        NSMutableArray *xLabelArray = [NSMutableArray array];
         for(int i=0; i<[self.weatherInfo.weather_data count]; i++)
         {
             XXBWeatherDetail *weatherData= [self.weatherInfo.weather_data objectAtIndex:i];
             [highTempData addObject:[weatherData getHighTemperature]];
             [lowTempData addObject:[weatherData getLowTemperature]];
+            [xLabelArray addObject:weatherData.date];
         }
+        xLabelArray[0] = @"今天";
+        [self.lineChart setXLabels:xLabelArray];
         
         highData.getData = ^(NSUInteger index) {
             CGFloat yValue = [highTempData[index] floatValue];
