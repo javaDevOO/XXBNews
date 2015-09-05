@@ -36,6 +36,14 @@
 }
 
 
+/**
+ *  苹果建议不要在initializer和dealloc中使用accessor methods，即不要使用self.property=XXX
+ *  最主要的原因是此时对象的状况不确定，尚未完全初始化完毕，而导致一些问题的发生。
+ *  例如这个类或者子类重写了setMethod,里面调用了其他一些数据或方法,而这些数据和方法需要一个已经完全初始化好的对象。
+ *  而在init中,对象的状态是不确定的。
+ *
+ *  @return <#return value description#>
+ */
 - (id) init
 {
     self = [super init];
@@ -59,12 +67,12 @@
             city = @"珠海";
         }
         
-        self.cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
+        _cityArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCities"]];
         
         // 第一次安装，没有城市列表
-        if([self.cityArray count] == 0 || ([self.cityArray count]==1 && [[self.cityArray lastObject] isEqualToString:@"+"]))
+        if([_cityArray count] == 0 || ([_cityArray count]==1 && [[_cityArray lastObject] isEqualToString:@"+"]))
         {
-            self.cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",@"+",nil]];
+            _cityArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:@"深圳",@"珠海",@"汕头",@"+",nil]];
         }
     }
     return self;

@@ -7,6 +7,7 @@
 //
 
 #import "XXBMemoCell.h"
+#import "CircularCollectionViewLayout.h"
 
 @interface XXBMemoCell ()
 @end
@@ -28,12 +29,17 @@
 //        selectedView.backgroundColor = [UIColor yellowColor];
 //        self.selectedBackgroundView = selectedView;
         
-        self.label = [[UILabel alloc] init];
-        self.label.frame = CGRectMake(0,0,self.frame.size.width, self.frame.size.height);
-        self.label.textAlignment = NSTextAlignmentCenter;
-        [self.contentView addSubview:self.label];
+        _label = [[UILabel alloc] init];
+        _label.frame = CGRectMake(0,0,self.frame.size.width, self.frame.size.height);
+        _label.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:_label];
     }
     return self;
+}
+
+- (void) applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
+{
+    [super applyLayoutAttributes:layoutAttributes];
 }
 
 

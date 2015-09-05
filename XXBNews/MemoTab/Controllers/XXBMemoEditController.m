@@ -23,8 +23,8 @@
     if(self)
     {
         self.title = @"编辑备忘";
-        self.memo = memo;
-        self.mode = mode;
+        _memo = memo;
+        _mode = mode;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveMemo)];
     }
     

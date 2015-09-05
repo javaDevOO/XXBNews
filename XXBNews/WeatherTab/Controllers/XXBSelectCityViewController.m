@@ -28,7 +28,7 @@
         if(self.provincesAndCities == nil)
         {
             //加载plist文件中的城市列表
-            self.provincesAndCities = [NSArray arrayWithContentsOfFile:[XXBFileUtilities getFilePathString:@"ProvincesAndCities.plist" ofType:nil]];
+            _provincesAndCities = [NSArray arrayWithContentsOfFile:[XXBFileUtilities getFilePathString:@"ProvincesAndCities.plist" ofType:nil]];
         }
     }
     return self;

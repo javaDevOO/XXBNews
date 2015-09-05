@@ -31,8 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     DDLogDebug(@"%@",@"more tab view did load");
-    self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView];
-    self.manager.style.cellHeight = 40;
+    _manager = [[RETableViewManager alloc] initWithTableView:self.tableView];
+    _manager.style.cellHeight = 40;
     
     [self addShareSection];
     [self addSettingSection];

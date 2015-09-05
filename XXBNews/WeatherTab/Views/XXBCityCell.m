@@ -41,7 +41,7 @@
         
         [self setupContentView];
         
-        self.weatherDetail = [[XXBWeatherDetail alloc] init];
+        _weatherDetail = [[XXBWeatherDetail alloc] init];
         [self.weatherDetail addObserver:self forKeyPath:@"weather" options:NSKeyValueObservingOptionNew context:nil];
         [self.weatherDetail addObserver:self forKeyPath:@"temperature" options:0 context:nil];
         [self.weatherDetail addObserver:self forKeyPath:@"cityName" options:0 context:nil];
@@ -54,27 +54,25 @@
 
 - (void) setupContentView
 {
-    self.descriptionImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height/4, self.bounds.size.width*2/3, self.bounds.size.height/2)];
-    [self.contentView addSubview:self.descriptionImgView];
-    self.descriptionImgView.image = [UIImage imageNamed:@"tabbar_home_selected"];
+    _descriptionImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height/4, self.bounds.size.width*2/3, self.bounds.size.height/2)];
+    [self.contentView addSubview:_descriptionImgView];
+    _descriptionImgView.image = [UIImage imageNamed:@"tabbar_home_selected"];
     
+    _nameLabel = [[UILabel alloc] init];
+    _nameLabel.frame = CGRectMake(0,0,self.frame.size.width, self.frame.size.height/4);
+    _nameLabel.textAlignment = NSTextAlignmentCenter;
     
+    _descriptionLabel = [[UILabel alloc] init];
+    _descriptionLabel.frame = CGRectMake(0,self.bounds.size.height*3/4,self.frame.size.width, self.frame.size.height/4);
+    _descriptionLabel.textAlignment = NSTextAlignmentCenter;
     
-    self.nameLabel = [[UILabel alloc] init];
-    self.nameLabel.frame = CGRectMake(0,0,self.frame.size.width, self.frame.size.height/4);
-    self.nameLabel.textAlignment = NSTextAlignmentCenter;
+    _highTempLabel = [[UILabel alloc] init];
+    _highTempLabel.frame = CGRectMake(self.bounds.size.width*2/3,self.bounds.size.height/4,self.frame.size.width/3, self.frame.size.height/4);
+    _highTempLabel.textAlignment = NSTextAlignmentCenter;
     
-    self.descriptionLabel = [[UILabel alloc] init];
-    self.descriptionLabel.frame = CGRectMake(0,self.bounds.size.height*3/4,self.frame.size.width, self.frame.size.height/4);
-    self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
-    
-    self.highTempLabel = [[UILabel alloc] init];
-    self.highTempLabel.frame = CGRectMake(self.bounds.size.width*2/3,self.bounds.size.height/4,self.frame.size.width/3, self.frame.size.height/4);
-    self.highTempLabel.textAlignment = NSTextAlignmentCenter;
-    
-    self.lowTempLabel = [[UILabel alloc] init];
-    self.lowTempLabel.frame = CGRectMake(self.bounds.size.width*2/3,self.bounds.size.height/2,self.frame.size.width/3, self.frame.size.height/4);
-    self.lowTempLabel.textAlignment = NSTextAlignmentCenter;
+    _lowTempLabel = [[UILabel alloc] init];
+    _lowTempLabel.frame = CGRectMake(self.bounds.size.width*2/3,self.bounds.size.height/2,self.frame.size.width/3, self.frame.size.height/4);
+    _lowTempLabel.textAlignment = NSTextAlignmentCenter;
     
     [self.contentView addSubview:self.nameLabel];
     [self.contentView addSubview:self.descriptionLabel];

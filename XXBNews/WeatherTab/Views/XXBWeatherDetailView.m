@@ -18,8 +18,8 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-        self.weatherInfo = info;
-        self.cellArray = [[NSMutableArray alloc] init];
+        _weatherInfo = info;
+        _cellArray = [[NSMutableArray alloc] init];
         
         [self setupWeatherDetail];
         

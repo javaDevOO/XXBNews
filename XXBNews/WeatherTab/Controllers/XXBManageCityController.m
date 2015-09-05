@@ -42,9 +42,9 @@
         self.title = @"管理城市";
         
         // TODO: 从属性列表中获取已选择的城市
-        self.cityArray = cityArray;
-        if(![[self.cityArray lastObject]  isEqualToString: @"+"])
-            [self.cityArray addObject:@"+"];
+        _cityArray = cityArray;
+        if(![[_cityArray lastObject]  isEqualToString: @"+"])
+            [_cityArray addObject:@"+"];
         
         getInfoFinishSemaphore = dispatch_semaphore_create(1);
     }

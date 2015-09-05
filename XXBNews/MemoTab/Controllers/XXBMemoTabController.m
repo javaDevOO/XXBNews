@@ -33,7 +33,7 @@
         
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMemo)];
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        self.managedObjectContext = [appDelegate managedObjectContext];
+        _managedObjectContext = [appDelegate managedObjectContext];
         
         [self setupFetchResultsController];
         

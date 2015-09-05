@@ -71,7 +71,6 @@
     XXBMoreInfoTabController *moreInfoTab = [[XXBMoreInfoTabController alloc] init];
     self.more = moreInfoTab;
     
-    
     //各个子ViewController的tabbarItem的title等参数在各自的类中定义，减少耦合
     NSArray *viewControllerAry = @[weatherTab, newsTab, memoTab, moreInfoTab];
     

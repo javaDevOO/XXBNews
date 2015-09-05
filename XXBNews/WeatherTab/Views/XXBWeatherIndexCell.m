@@ -25,27 +25,26 @@
 // TODO：布局的参数还要修改，目前无法适配不同大小屏幕
 - (void) setupContentView
 {
-    self.descriptionImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 50, 50)];
-        self.descriptionImgView.image = [UIImage imageNamed:@"tabbar_home_selected"];
+    _descriptionImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 50, 50)];
+    _descriptionImgView.image = [UIImage imageNamed:@"tabbar_home_selected"];
     
-    self.nameLabel = [[UILabel alloc] init];
-    self.nameLabel.frame = CGRectMake(55+5,0,100, 30);
-    self.nameLabel.textAlignment = NSTextAlignmentLeft;
+    _nameLabel = [[UILabel alloc] init];
+    _nameLabel.frame = CGRectMake(55+5,0,100, 30);
+    _nameLabel.textAlignment = NSTextAlignmentLeft;
     
-    self.zsLabel = [[UILabel alloc] init];
-    self.zsLabel.frame = CGRectMake(200,0,[UIDevice currentWidth]-200-10, 30);
-    self.zsLabel.textAlignment = NSTextAlignmentRight;
+    _zsLabel = [[UILabel alloc] init];
+    _zsLabel.frame = CGRectMake(200,0,[UIDevice currentWidth]-200-10, 30);
+    _zsLabel.textAlignment = NSTextAlignmentRight;
 
-    self.desTextView = [[UITextView alloc] init];
-    self.desTextView.scrollEnabled = NO;
-    self.desTextView.frame = CGRectMake(55+5, 30,[UIDevice currentWidth]-60, 50);
-    self.desTextView.editable = NO;
+    _desTextView = [[UITextView alloc] init];
+    _desTextView.scrollEnabled = NO;
+    _desTextView.frame = CGRectMake(55+5, 30,[UIDevice currentWidth]-60, 50);
+    _desTextView.editable = NO;
     
-    [self addSubview:self.nameLabel];
-    [self addSubview:self.zsLabel];
-    [self addSubview:self.desTextView];
-    [self addSubview:self.descriptionImgView];
+    [self addSubview:_nameLabel];
+    [self addSubview:_zsLabel];
+    [self addSubview:_desTextView];
+    [self addSubview:_descriptionImgView];
 
-   
 }
 @end

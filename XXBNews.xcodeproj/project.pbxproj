@@ -77,8 +77,6 @@
 		CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6B81B73476100FE7AA4 /* XXBMoreInfoTabController.m */; };
 		CE7EF6CB1B73476100FE7AA4 /* XXBNewsTabController .m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6BA1B73476100FE7AA4 /* XXBNewsTabController .m */; };
 		CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */; };
-		CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C41B73476100FE7AA4 /* XXBMainTabBarButton.m */; };
-		CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6C61B73476100FE7AA4 /* XXBMainTabBarView.m */; };
 		CE7EF6D31B734ACC00FE7AA4 /* XXBBaseTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF6D21B734ACC00FE7AA4 /* XXBBaseTabViewController.m */; };
 		CE7F66A41B91982800336656 /* XXBManageCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7F669F1B91982800336656 /* XXBManageCityController.m */; };
 		CE7F66A51B91982800336656 /* XXBSelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7F66A11B91982800336656 /* XXBSelectCityViewController.m */; };
@@ -100,6 +98,7 @@
 		CEA143951B880E9900EC6130 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA143941B880E9900EC6130 /* SwipeView.m */; };
 		CEABAB911B8DEBDE00F71912 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEABAB931B8DEBDE00F71912 /* Localizable.strings */; };
 		CEABAB9C1B8DF08000F71912 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEABAB9B1B8DF08000F71912 /* Info.plist */; };
+		CEC1A81D1B9879CE00F51173 /* CircularCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC1A81C1B9879CE00F51173 /* CircularCollectionViewLayout.m */; };
 		CEC5D64B1B76307E00CCCF6E /* XXBWeatherManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */; };
 		CEC5D64E1B763CA600CCCF6E /* XXBHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC5D64D1B763CA600CCCF6E /* XXBHttpTool.m */; };
 		CECF083A1B94566D0038D98D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECF08391B94566D0038D98D /* libicucore.dylib */; };
@@ -254,10 +253,6 @@
 		CE7EF6BB1B73476100FE7AA4 /* XXBNewsTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBNewsTabController.h; sourceTree = "<group>"; };
 		CE7EF6C01B73476100FE7AA4 /* UIDevice+Resolutions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Resolutions.h"; sourceTree = "<group>"; };
 		CE7EF6C11B73476100FE7AA4 /* UIDevice+Resolutions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Resolutions.m"; sourceTree = "<group>"; };
-		CE7EF6C31B73476100FE7AA4 /* XXBMainTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarButton.h; sourceTree = "<group>"; };
-		CE7EF6C41B73476100FE7AA4 /* XXBMainTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarButton.m; sourceTree = "<group>"; };
-		CE7EF6C51B73476100FE7AA4 /* XXBMainTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBMainTabBarView.h; sourceTree = "<group>"; };
-		CE7EF6C61B73476100FE7AA4 /* XXBMainTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBMainTabBarView.m; sourceTree = "<group>"; };
 		CE7EF6D11B734ACC00FE7AA4 /* XXBBaseTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBBaseTabViewController.h; sourceTree = "<group>"; };
 		CE7EF6D21B734ACC00FE7AA4 /* XXBBaseTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBBaseTabViewController.m; sourceTree = "<group>"; };
 		CE7F669E1B91982800336656 /* XXBManageCityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBManageCityController.h; sourceTree = "<group>"; };
@@ -296,6 +291,8 @@
 		CEABAB921B8DEBDE00F71912 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEABAB941B8DEC2200F71912 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CEABAB9B1B8DF08000F71912 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEC1A81B1B9879CE00F51173 /* CircularCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularCollectionViewLayout.h; sourceTree = "<group>"; };
+		CEC1A81C1B9879CE00F51173 /* CircularCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularCollectionViewLayout.m; sourceTree = "<group>"; };
 		CEC5D6491B76307E00CCCF6E /* XXBWeatherManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBWeatherManager.h; sourceTree = "<group>"; };
 		CEC5D64A1B76307E00CCCF6E /* XXBWeatherManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXBWeatherManager.m; sourceTree = "<group>"; };
 		CEC5D64C1B763CA600CCCF6E /* XXBHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXBHttpTool.h; sourceTree = "<group>"; };
@@ -585,17 +582,6 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		CE7EF6C21B73476100FE7AA4 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				CE7EF6C31B73476100FE7AA4 /* XXBMainTabBarButton.h */,
-				CE7EF6C41B73476100FE7AA4 /* XXBMainTabBarButton.m */,
-				CE7EF6C51B73476100FE7AA4 /* XXBMainTabBarView.h */,
-				CE7EF6C61B73476100FE7AA4 /* XXBMainTabBarView.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		CE7EF6C71B73476100FE7AA4 /* WeatherTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +614,8 @@
 				CE7F66A91B91985700336656 /* XXBMemoEditController.m */,
 				CE7F66AA1B91985700336656 /* XXBMemoTabController.h */,
 				CE7F66AB1B91985700336656 /* XXBMemoTabController.m */,
+				CEC1A81B1B9879CE00F51173 /* CircularCollectionViewLayout.h */,
+				CEC1A81C1B9879CE00F51173 /* CircularCollectionViewLayout.m */,
 			);
 			name = Controllers;
 			path = XXBNews/MemoTab/Controllers;
@@ -683,7 +671,6 @@
 				CE7EF6BC1B73476100FE7AA4 /* MemoTab */,
 				CE7EF6B61B73476100FE7AA4 /* MoreInfoTab */,
 				CE7EF6BF1B73476100FE7AA4 /* Utilities */,
-				CE7EF6C21B73476100FE7AA4 /* View */,
 				CE86CF5E1B78D99A00DD54C1 /* Delegate */,
 				CE7EF6D11B734ACC00FE7AA4 /* XXBBaseTabViewController.h */,
 				CE7EF6D21B734ACC00FE7AA4 /* XXBBaseTabViewController.m */,
@@ -964,6 +951,7 @@
 				CE33ACE01B86B20C007DDC7D /* RETableViewCreditCardCell.m in Sources */,
 				CE33ACEE1B86B20C007DDC7D /* REFloatItem.m in Sources */,
 				CE33ACF71B86B20C007DDC7D /* RETextItem.m in Sources */,
+				CEC1A81D1B9879CE00F51173 /* CircularCollectionViewLayout.m in Sources */,
 				CEF8B7B01B8C63D10048699B /* XXBWeatherDetailView.m in Sources */,
 				CE33ACF31B86B20C007DDC7D /* RENumberItem.m in Sources */,
 				CE86CF5D1B78D28E00DD54C1 /* XXBFileUtilities.m in Sources */,
@@ -988,7 +976,6 @@
 				CE33AD301B86BF97007DDC7D /* REPresenceValidator.m in Sources */,
 				CEF8B7A01B8C63C20048699B /* XXBWeatherInfo.m in Sources */,
 				CE33AD121B86B20C007DDC7D /* RETableViewOptionsController.m in Sources */,
-				CE7EF6CE1B73476100FE7AA4 /* XXBMainTabBarButton.m in Sources */,
 				CE7EF6CA1B73476100FE7AA4 /* XXBMoreInfoTabController.m in Sources */,
 				CE33ACE41B86B20C007DDC7D /* RETableViewInlinePickerCell.m in Sources */,
 				CE33ACFA1B86B20C007DDC7D /* REPlaceholderTextView.m in Sources */,
@@ -1025,7 +1012,6 @@
 				CE33ACE81B86B20C007DDC7D /* RETableViewPickerCell.m in Sources */,
 				CE7EF6CD1B73476100FE7AA4 /* UIDevice+Resolutions.m in Sources */,
 				CE33ACF21B86B20C007DDC7D /* REMultipleChoiceItem.m in Sources */,
-				CE7EF6CF1B73476100FE7AA4 /* XXBMainTabBarView.m in Sources */,
 				CE33ACF01B86B20C007DDC7D /* REInlinePickerItem.m in Sources */,
 				CE8659B01B72091600ADD92A /* XXBNavigationViewController.m in Sources */,
 				CEF8B7AF1B8C63D10048699B /* XXBWeatherDetailCell.m in Sources */,

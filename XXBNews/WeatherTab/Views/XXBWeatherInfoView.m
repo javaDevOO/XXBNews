@@ -24,25 +24,25 @@
     self = [super init];
     if(self)
     {
-        self.weatherInfo = info;
+        _weatherInfo = info;
         [self addObserver:self forKeyPath:@"weatherInfo" options:0 context:nil];
         
         self.contentSize = CGSizeMake([UIDevice currentWidth],1050);
 
-        self.headerView = [[XXBWeatherInfoViewHeaderView alloc] initWithFrame:CGRectMake(10, 84, [UIDevice currentWidth]-20,100)];
-        [self addSubview:self.headerView];
+        _headerView = [[XXBWeatherInfoViewHeaderView alloc] initWithFrame:CGRectMake(10, 84, [UIDevice currentWidth]-20,100)];
+        [self addSubview:_headerView];
         [self updateHeaderView];
         
         [self setupChart];
         
-        self.detailView = [[XXBWeatherDetailView alloc] initWithFrame:CGRectMake(10, 400, [UIDevice currentWidth]-20, 100) withWeatherInfo:self.weatherInfo];
-        [self addSubview:self.detailView];
+        _detailView = [[XXBWeatherDetailView alloc] initWithFrame:CGRectMake(10, 400, [UIDevice currentWidth]-20, 100) withWeatherInfo:self.weatherInfo];
+        [self addSubview:_detailView];
         
-        self.indexTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,520,[UIDevice currentHeight], 440)];
-        self.indexTableView.dataSource = self;
-        self.indexTableView.delegate = self;
-        self.indexTableView.scrollEnabled = NO;
-        self.indexTableView.rowHeight = 88.0;
+        _indexTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,520,[UIDevice currentHeight], 440)];
+        _indexTableView.dataSource = self;
+        _indexTableView.delegate = self;
+        _indexTableView.scrollEnabled = NO;
+        _indexTableView.rowHeight = 88.0;
         [self addSubview:self.indexTableView];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,970, [UIDevice currentWidth],30)];
@@ -58,7 +58,7 @@
 - (void) setupChart
 {
     // TODO:去曲线图隐藏坐标轴的时候需要放大
-    self.lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(-50, 200, [UIDevice currentWidth]+100, 200)];
+    _lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(-50, 200, [UIDevice currentWidth]+100, 200)];
     // 两条数据曲线的数据
     NSMutableArray *highTempData = [NSMutableArray array];
     NSMutableArray *lowTempData = [NSMutableArray array];
@@ -72,7 +72,7 @@
         [xLabelArray addObject:weatherData.date];
     }
     xLabelArray[0] = @"今天";
-    [self.lineChart setXLabels:xLabelArray];
+    [_lineChart setXLabels:xLabelArray];
     
     //设置两条曲线的样式和数据源
     highData = [PNLineChartData new];
@@ -94,12 +94,12 @@
     };
     lowData.inflexionPointStyle = PNLineChartPointStyleCircle;
     
-    self.lineChart.chartData = @[highData, lowData];
-    self.lineChart.showCoordinateAxis = NO;
-    self.lineChart.yLabelFormat=@"";
-    self.lineChart.axisColor = [UIColor blackColor];
-    [self.lineChart strokeChart];
-    [self addSubview:self.lineChart];
+    _lineChart.chartData = @[highData, lowData];
+    _lineChart.showCoordinateAxis = NO;
+    _lineChart.yLabelFormat=@"";
+    _lineChart.axisColor = [UIColor blackColor];
+    [_lineChart strokeChart];
+    [self addSubview:_lineChart];
 }
 
 
