@@ -25,6 +25,7 @@
 @property (nonatomic, strong) SwipeView *swipeView;
 @property (nonatomic, strong) UIActivityIndicatorView* indicator;
 @property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -114,6 +115,8 @@
     [self.swipeView reloadData];
     self.pageControl.hidden = NO;
     [self updatePageControl];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+//    [self.timer setFireDate:[NSDAte distantPast]];
 }
 
 
@@ -310,7 +313,8 @@
              NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
              XXBWeatherInfo *info = weatherInfos[0];
              info.date = json[@"date"];
-             [self.weatherInfos replaceObjectAtIndex:index withObject:info];
+             if(info != nil)
+                 [self.weatherInfos replaceObjectAtIndex:index withObject:info];
              DDLogDebug(@"update the weather successfully");
              
              [self.swipeView reloadItemAtIndex:index];
@@ -325,6 +329,18 @@
     });
 }
 
+- (void) timerAction
+{
+    DDLogDebug(@"%@",@"timer action");
+}
+
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.timer invalidate];
+    self.timer = nil;
+//    [self.timer setFireDate:[NSDate distantFuture]];
+}
 
 - (void) dealloc
 {

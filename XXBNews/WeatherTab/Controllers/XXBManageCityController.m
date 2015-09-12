@@ -70,19 +70,19 @@
     [super viewDidAppear:animated];
     DDLogDebug(@"%@",@"view did appear");
     // 当block与self互相引用是要用weakSelf，不过此处不需要用
-    typeof(self) __weak weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
-        //要等到返回天气数据时才往下执行
-        dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            typeof(self) __strong strongSelf = weakSelf;
-            if(strongSelf)
-            {
-                [strongSelf refresh];
-                dispatch_semaphore_signal(getInfoFinishSemaphore);
-            }
-        });
-    });
+//    typeof(self) __weak weakSelf = self;
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
+//        //要等到返回天气数据时才往下执行
+//        dispatch_semaphore_wait(getInfoFinishSemaphore, DISPATCH_TIME_FOREVER);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            typeof(self) __strong strongSelf = weakSelf;
+//            if(strongSelf)
+//            {
+//                [strongSelf refresh];
+//                dispatch_semaphore_signal(getInfoFinishSemaphore);
+//            }
+//        });
+//    });
 }
 
 
@@ -320,7 +320,28 @@
     //清除缓存
     [[SDImageCache sharedImageCache] cleanDisk];
     
-    [self.collectionView reloadData];
+       [XXBWeatherManager getWeatherDataWithCity:self.cityArray
+                                      success:^(id json)
+     {
+         DDLogDebug(@"get the weather successfully");
+         //MJExtention扩展可以将json数据变成model
+         [XXBWeatherInfo setupObjectClassInArray:^NSDictionary *{
+             return [XXBWeatherInfo objectClassInArray];
+         }];
+         NSArray *weatherInfos = [XXBWeatherInfo objectArrayWithKeyValuesArray:json[@"results"]];
+         self.weatherInfos = [NSMutableArray arrayWithArray:weatherInfos];
+         for(int i=0;i<[weatherInfos count];i++)
+         {
+             [self.weatherInfos replaceObjectAtIndex:i withObject:[weatherInfos objectAtIndex:i]];
+             [self.collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:i inSection:0]]];
+             DDLogDebug(@"reload data of cell %d",i);
+         }
+    }
+                                      failure:^(NSError *error)
+     {
+         // TODO:要是没有网络连接时还要处理
+         DDLogDebug(@"get weather info error");
+     }];
 }
 
 
