@@ -33,8 +33,9 @@
         }
     }];
     
-    // 创建一个manager对象，单例
+    // 创建一个manager对象
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringCacheData;
     
     [manager GET:url parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObj)
@@ -52,6 +53,23 @@
             }
          }
      ];
+    
+//    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"GET" URLString:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//
+//    } error:nil];
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        if(success)
+//        {
+//            success(responseObject);
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        if(failure)
+//        {
+//            failure(error);
+//        }
+//    }];
+//    [operation start];
 }
 
 @end

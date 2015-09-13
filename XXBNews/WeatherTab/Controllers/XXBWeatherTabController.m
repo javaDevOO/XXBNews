@@ -115,7 +115,7 @@
     [self.swipeView reloadData];
     self.pageControl.hidden = NO;
     [self updatePageControl];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
 //    [self.timer setFireDate:[NSDAte distantPast]];
 }
 
@@ -337,8 +337,8 @@
 - (void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self.timer invalidate];
-    self.timer = nil;
+//    [self.timer invalidate];
+//    self.timer = nil;
 //    [self.timer setFireDate:[NSDate distantFuture]];
 }
 
