@@ -12,6 +12,7 @@
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import "Memo.h"
 #import <AFNetworking.h>
+#import "AFNetworkActivityIndicatorManager.h"
 
 @implementation AppDelegate
 
@@ -32,6 +33,7 @@
     [self.window makeKeyAndVisible];
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     return YES;
 }

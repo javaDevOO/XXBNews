@@ -324,8 +324,8 @@
     XXBMemoCell* cell = (XXBMemoCell*)[collectionView cellForItemAtIndexPath:indexPath];
     //设置(Highlight)高亮下的颜色
     UIImageView *bgImg = (UIImageView *)cell.backgroundView;
-    bgImg.image = [UIImage imageNamed:@"tabbar_more_selected"];
-    DDLogDebug(@"%@",@"change the background of the cell");
+//    bgImg.image = [UIImage imageNamed:@"tabbar_more_selected"];
+//    DDLogDebug(@"%@",@"change the background of the cell");
 }
 
 
